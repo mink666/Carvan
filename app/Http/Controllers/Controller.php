@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-abstract class Controller
+// Import Laravel's core base controller
+use Illuminate\Routing\Controller as BaseController;
+
+class Controller extends BaseController
 {
     //
 }

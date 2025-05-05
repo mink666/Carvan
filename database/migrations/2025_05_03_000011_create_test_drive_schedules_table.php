@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('test_drive_request_id');
             $table->dateTime('scheduled_date');
             $table->string('location');
-            $table->unsignedBigInteger('updated_by')->nulable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->foreign('test_drive_request_id')->references('id')->on('test_drive_requests')->onDelete('cascade');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null');

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('note')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-             $table->foreign('inventory_id')->references('id')->on('inventory')->onDelete('set null');
+            $table->foreign('inventory_id')->references('id')->on('inventory')->onDelete('set null');
         });
     }
 

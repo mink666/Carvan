@@ -6,6 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\TestDriveRequest;
+use App\Models\TestDriveSchedule;
 
 class User extends Authenticatable
 {
@@ -18,9 +21,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
+        'name',
+        'role',
     ];
 
     /**
@@ -44,5 +49,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function testDriveRequests(): HasMany
+    {
+        return $this->hasMany(TestDriveRequest::class);
+    }
+
+    public function testDriveSchedules(): HasMany
+    {
+        return $this->hasMany(TestDriveSchedule::class, 'updated_by');
     }
 }

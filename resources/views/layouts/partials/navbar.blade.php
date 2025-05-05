@@ -5,7 +5,7 @@
                 Carvan
             </a>
             <div class="hidden sm:flex items-center space-x-4">
-                <a href="{{ route('cars.index') }}" class="text-sm font-bold text-white hover:text-gray-200">
+                <a href="{{ route('cars.index') }}" style="margin-right: 0" class="text-sm font-bold text-white hover:text-gray-200">
                     Cars
                 </a>
                 <a href="{{ route('brands.index') }}" class="text-sm font-bold text-white hover:text-gray-200">

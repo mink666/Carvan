@@ -17,6 +17,11 @@ Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
 
 Route::get('/ranges', [RangeOfCarController::class, 'index'])->name('ranges.index');
 
-Route::get('/Admin', [AdminController::class, 'index'])->name('Admin');
 
+//Route for Admin
+Route::get('/Admin', function () {
+    return redirect('/Admin/Dashboard');
+})->name('Admin.home');
+
+Route::get('/Admin/{section}', [AdminController::class, 'index'])->name('Admin');
 

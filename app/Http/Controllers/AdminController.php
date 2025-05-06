@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     //
-    public function index()
+    public function index($section, Request $request)
     {
-        return view('Admin');
+        $state = $request->query('state' ,'default');
+        return view('Admin', compact('section', 'state'));
     }
 }

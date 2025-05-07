@@ -45,7 +45,7 @@ class BrandController extends Controller
     public function show(Brand $brand)
     {
         $brand->load(['carModels' => function ($query) {
-            $query->withMin('inventories', 'price') // Get the starting price for each car model
+            $query->withMin('inventories', 'price') 
                   ->orderBy('year', 'desc')
                   ->orderBy('name');
         }]);

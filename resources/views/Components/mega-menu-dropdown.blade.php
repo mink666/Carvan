@@ -3,13 +3,9 @@
     'items',
     'itemType',
     'activeTabInitial',
-    // 'align' prop is not really needed if it's full width
-    // 'widthClass' will be overridden by full-width styling
 ])
 
-{{-- Phần tử cha .relative này vẫn quan trọng cho trigger button --}}
 <div class="relative" x-data="{ isOpen: false, activeTab: '{{ $activeTabInitial }}' }">
-    {{-- Trigger Button --}}
     <button type="button"
             @click="isOpen = !isOpen; if(isOpen && !activeTab && {{ $items->count() }} > 0) { activeTab = '{{ $items->first()->id ?? '' }}'; }"
             @keydown.escape.window="isOpen = false"
@@ -22,25 +18,22 @@
         </svg>
     </button>
 
-    {{-- Dropdown Panel - Full Width --}}
     <div x-show="isOpen"
          x-cloak
          @click.outside="isOpen = false"
          x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 -translate-y-2" {{-- Slide down slightly from top --}}
+         x-transition:enter-start="opacity-0 -translate-y-2"
          x-transition:enter-end="opacity-100 translate-y-0"
          x-transition:leave="transition ease-in duration-150"
          x-transition:leave-start="opacity-100 translate-y-0"
          x-transition:leave-end="opacity-0 -translate-y-2"
-         class="fixed inset-x-0 top-15 z-30 pt-[--navbar-height] {{-- Push content below navbar --}}
-                h-screen overflow-y-auto bg-black bg-opacity-25 backdrop-blur-sm" {{-- Overlay full screen --}}
+         class="fixed inset-x-0 top-15 z-30 pt-[--navbar-height]
+                h-screen overflow-y-auto bg-black bg-opacity-25 backdrop-blur-sm"
          style="display: none;">
 
-        {{-- Actual Content Container - This will not be full width, but centered --}}
-        <div class="bg-white shadow-2xl w-full"> {{-- Background and shadow on this inner container --}}
-            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"> {{-- Max width and padding for content --}}
+        <div class="bg-white shadow-2xl w-full">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="relative grid gap-4 py-5 md:py-8 md:grid-cols-3">
-                    {{-- Sidebar for Tabs --}}
                     <div class="md:col-span-1 border-b md:border-b-0 md:border-r border-gray-200 pb-4 md:pb-0 md:pr-6 space-y-1 overflow-y-auto max-h-[calc(100vh-var(--navbar-height)-theme(spacing.20))]"> {{-- Adjusted max-height --}}
                         @forelse ($items as $item)
                             <button @click="activeTab = '{{ $item->id }}'"
@@ -56,8 +49,7 @@
                         @endforelse
                     </div>
 
-                    {{-- Content Area for Car Models --}}
-                    <div class="md:col-span-2 md:pl-6 pt-4 md:pt-0 overflow-y-auto max-h-[calc(100vh-var(--navbar-height)-theme(spacing.20))]">  {{-- Adjusted max-height --}}
+                    <div class="md:col-span-2 md:pl-6 pt-4 md:pt-0 overflow-y-auto max-h-[calc(100vh-var(--navbar-height)-theme(spacing.20))]"> 
                         @if ($items->count() > 0)
                             @foreach ($items as $item)
                                 <div x-show="activeTab == '{{ $item->id }}'" x-cloak class="space-y-3">

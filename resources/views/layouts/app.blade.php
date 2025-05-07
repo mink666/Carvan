@@ -18,7 +18,7 @@
             @yield('content')
         </div>
 
-        <footer>
+        <footer class="bg-black text-white text-center p-6 mt-auto">
             @include('layouts.partials.footer')
         </footer>
     </div>

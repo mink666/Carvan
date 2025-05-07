@@ -2,20 +2,27 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\CarController;
+use App\Http\Controllers\CarModelController;
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\RangeController;
+use App\Http\Controllers\RangeOfCarController;
+use App\Http\Controllers\ContactPageController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TestDriveController;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
-Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
-Route::get('/cars', [CarController::class, 'index'])->name('cars.index');
+Route::get('/contact', [ContactPageController::class, 'showContactForm'])->name('contact');
+Route::get('/contact/submit', [ContactPageController::class, 'handleSubmit'])->name('contact.submit');
+
+Route::get('/car_models', [CarModelController::class, 'index'])->name('car_models.index');
+Route::get('/car_models/{carModel}', [CarModelController::class, 'show'])->name('car_models.show');
 
 Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
+Route::get('/brands/{brand}', [BrandController::class, 'show'])->name('brands.show');
 
-Route::get('/ranges', [RangeController::class, 'index'])->name('ranges.index');
+Route::get('/range_of_car', [RangeOfCarController::class, 'index'])->name('range_of_car.index');
+Route::get('/range_of_car/{rangeOfCar}', [RangeOfCarController::class, 'show'])->name('range_of_car.show');
 
 Route::get('/testDrive', [TestDriveController::class, 'index'])->name('testDrive.index');
 

@@ -3,6 +3,17 @@
 html, body {
     height: 100%;
     margin: 0;
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.65;
+    color: #333;
+    background-color: #f8f9fa;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .wrapper {
@@ -13,4 +24,646 @@ html, body {
 
 .content {
     flex: 1;
+    width: 100%;
+}
+
+.main-content-area {
+     max-width: 960px;
+     margin: 40px auto;
+     padding: 0 15px;
+     box-sizing: border-box;
+}
+
+.hero-banner-section {
+    margin-bottom: 40px;
+}
+
+.hero-banner-slider {
+    position: relative;
+    color: #ffffff;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #212529;
+    width: 100%;
+    height: 400px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.banner-slide {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 30px 40px;
+    text-align: center;
+    width: 100%;
+}
+
+.slide-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+    z-index: 1;
+}
+
+.slide-content {
+    position: relative;
+    z-index: 2;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.banner-slide h2 {
+    font-size: 2.4em !important;
+    color: #ffffff !important;
+    margin: 0 0 15px 0;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    border-bottom: none !important;
+    text-align: center !important;
+    line-height: 1.2;
+}
+
+.banner-slide p {
+    font-size: 1.15em;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #0d6efd;
+    color: #fff !important;
+    padding: 10px 25px;
+    text-decoration: none !important;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-top: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    color: #fff !important;
+}
+
+.hero-banner-slider .swiper-button-next,
+.hero-banner-slider .swiper-button-prev {
+    color: rgba(255, 255, 255, 0.8);
+    --swiper-navigation-size: 28px;
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 50%;
+    width: calc(var(--swiper-navigation-size) + 12px);
+    height: calc(var(--swiper-navigation-size) + 12px);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.hero-banner-slider .swiper-button-next:hover,
+.hero-banner-slider .swiper-button-prev:hover {
+     background-color: rgba(0, 0, 0, 0.6);
+     color: #fff;
+}
+.hero-banner-slider .swiper-button-next::after,
+.hero-banner-slider .swiper-button-prev::after {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.hero-banner-slider .swiper-pagination {
+    bottom: 15px !important;
+}
+.hero-banner-slider .swiper-pagination-bullet {
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 1;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 9px;
+    height: 9px;
+}
+.hero-banner-slider .swiper-pagination-bullet-active {
+    background-color: #ffffff;
+    transform: scale(1.3);
+}
+
+.about-section {
+    padding: 35px;
+    background-color: #fff;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.about-section h1 {
+    font-size: 1.9em !important;
+    margin-top: 0;
+    margin-bottom: 35px;
+    text-align: center;
+    color: #212529;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 15px;
+    font-weight: 600;
+}
+
+.about-section h1,
+.about-section h2,
+.about-section h3 {
+    color: #212529;
+}
+
+.about-section .about-item {
+    border: 1px solid #e9ecef;
+    padding: 20px 25px;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.about-section .about-item:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-color: #ced4da;
+}
+.about-section .about-item:last-child {
+    margin-bottom: 0;
+}
+
+.about-section .about-item h2 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 1.3em;
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.about-section ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.about-section li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+.about-section li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 1px;
+    color: #0d6efd;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.speech-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    border: 1px solid #e9ecef;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.image-column {
+    flex: 1 1 280px;
+    min-width: 220px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+.image-column img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.text-column {
+    flex: 2 1 450px;
+    min-width: 300px;
+}
+.text-column p {
+    margin-bottom: 15px;
+    text-align: justify;
+    line-height: 1.75;
+    color: #495057;
+}
+.signature {
+    margin-top: 25px;
+    text-align: right;
+    font-style: italic;
+    color: #6c757d;
+}
+.signature strong {
+    display: block;
+    margin-bottom: 3px;
+    font-style: normal;
+    font-weight: 600;
+    color: #343a40;
+}
+.signature span {
+     display: block;
+     font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+    .main-content-area {
+         margin: 20px auto;
+         padding: 0 10px;
+    }
+
+    .hero-banner-slider { height: 320px; border-radius: 6px; }
+    .banner-slide { min-height: 320px; padding: 25px 15px; }
+    .banner-slide h2 { font-size: 1.8em !important; margin-bottom: 10px; }
+    .banner-slide p { font-size: 1.0em; margin-bottom: 20px; }
+    .cta-button { padding: 9px 18px; font-size: 0.9em; }
+    .hero-banner-slider .swiper-button-next,
+    .hero-banner-slider .swiper-button-prev { display: none; }
+    .hero-banner-slider .swiper-pagination { bottom: 10px !important; }
+     .hero-banner-slider .swiper-pagination-bullet { width: 8px; height: 8px; }
+
+    .about-section, .speech-container { padding: 20px; margin-bottom: 25px; border-radius: 6px;}
+    .about-section .about-item { padding: 15px 20px; }
+    .about-section h1 { font-size: 1.6em !important; margin-bottom: 25px; }
+    .about-section .about-item h2 { font-size: 1.15em; margin-bottom: 12px;}
+    .about-section li { padding-left: 18px; }
+    .about-section li::before { top: 3px; font-size: 0.8em; }
+
+    .image-column { margin-right: 0; flex-basis: 100%; }
+    .text-column p { text-align: left; }
+    .signature { text-align: left; margin-top: 20px; }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 15px; }
+    .hero-banner-slider { height: 280px; }
+    .banner-slide { min-height: 280px; padding: 20px 10px; }
+    .banner-slide h2 { font-size: 1.6em !important; }
+    .banner-slide p { font-size: 0.95em; margin-bottom: 15px; }
+    .cta-button { padding: 8px 15px; font-size: 0.85em; }
+
+    .about-section, .speech-container { padding: 15px; }
+     .about-section h1 { font-size: 1.4em !important; margin-bottom: 20px; }
+     .about-section .about-item h2 { font-size: 1.1em;}
+}
+
+.hero-banner-section {
+    margin-bottom: 40px;
+}
+
+
+.hero-banner-slider {
+    position: relative;
+    color: #ffffff;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #212529; /* Màu nền khi ảnh chưa load */
+    width: 100%;  /* Chiếm toàn bộ chiều rộng của .main-content-area */
+    height: 400px; /* Chiều cao CỐ ĐỊNH cho banner */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Style cho từng slide (áp dụng cho slide trên trang Contact) */
+.banner-slide {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 30px 40px;
+    text-align: center;
+    width: 100%;
+}
+
+.slide-background-image { /* Dùng cho ảnh nền của slide trên trang Contact */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.slide-overlay { /* Lớp phủ cho slide trên trang Contact */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+    z-index: 1;
+}
+
+.slide-content { /* Nội dung trong slide trên trang Contact */
+    position: relative;
+    z-index: 2;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+/* H2 và P trong slide banner của trang Contact */
+.banner-slide h2 {
+    font-size: 2.4em !important; /* Có thể ghi đè style chung nếu cần */
+    color: #ffffff !important;
+    margin: 0 0 15px 0;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    border-bottom: none !important; /* Ghi đè nếu có style h2 chung */
+    text-align: center !important;
+    line-height: 1.2;
+}
+
+.banner-slide p {
+    font-size: 1.15em;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.banner-slide .cta-button { /* Thêm .banner-slide để cụ thể hơn nếu cần */
+    display: inline-block;
+    background-color: #0d6efd;
+    color: #fff !important;
+    padding: 10px 25px;
+    text-decoration: none !important;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-top: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.banner-slide .cta-button:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    color: #fff !important;
+}
+
+/* Swiper Navigation/Pagination Styles (Nếu bạn muốn chúng có style này trên trang Contact) */
+/* Đây là các style chung cho Swiper, có thể đặt ở file chung */
+.hero-banner-slider .swiper-button-next,
+.hero-banner-slider .swiper-button-prev {
+    color: rgba(255, 255, 255, 0.8);
+    --swiper-navigation-size: 28px;
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 50%;
+    width: calc(var(--swiper-navigation-size) + 12px);
+    height: calc(var(--swiper-navigation-size) + 12px);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.hero-banner-slider .swiper-button-next:hover,
+.hero-banner-slider .swiper-button-prev:hover {
+     background-color: rgba(0, 0, 0, 0.6);
+     color: #fff;
+}
+.hero-banner-slider .swiper-button-next::after,
+.hero-banner-slider .swiper-button-prev::after {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.hero-banner-slider .swiper-pagination {
+    bottom: 15px !important;
+}
+.hero-banner-slider .swiper-pagination-bullet {
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 1;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 9px;
+    height: 9px;
+}
+.hero-banner-slider .swiper-pagination-bullet-active {
+    background-color: #ffffff;
+    transform: scale(1.3);
+}
+
+/* === Contact Page Specific Content Styles === */
+.contact-container {
+    background-color: #fff;
+    padding: 35px 30px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.contact-container .section-title { /* Đảm bảo .section-title áp dụng đúng trong contact-container */
+    font-size: 1.9em;
+    font-weight: 600;
+    color: #212529;
+    margin-top: 0;
+    margin-bottom: 30px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #dee2e6;
+    text-align: left;
+}
+
+/* --- Overview Section (Map & Details) --- */
+.contact-overview {
+    margin-bottom: 45px;
+}
+
+.contact-overview-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+}
+
+.contact-map {
+    flex: 1 1 50%;
+    min-width: 280px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.contact-map iframe {
+    display: block;
+    width: 100%;
+    height: 450px; /* Lấy theo thuộc tính height của iframe hoặc set cứng ở đây */
+    border-radius: 8px;
+}
+
+.contact-details {
+    flex: 1 1 45%;
+    min-width: 280px;
+    padding-left: 10px;
+}
+
+.contact-details h3 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #0d6efd;
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+.contact-details .address {
+    font-style: normal;
+    margin-bottom: 18px;
+    line-height: 1.6;
+    color: #495057;
+}
+
+.contact-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+}
+
+.contact-details ul li {
+    margin-bottom: 10px;
+    color: #495057;
+    font-size: 0.95em;
+    display: flex;
+    align-items: flex-start;
+}
+
+.contact-details ul li strong {
+    color: #212529;
+    min-width: 75px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.contact-details .map-button { /* Kế thừa từ .cta-button, chỉ ghi đè màu nếu cần */
+    background-color: #5c636a;
+    font-size: 0.9em;
+    padding: 9px 20px;
+    /* Các thuộc tính khác của .cta-button sẽ được áp dụng */
+}
+.contact-details .map-button:hover {
+    background-color: #495057;
+}
+
+/* --- Keep In Touch Form Section --- */
+.contact-form-container {
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    margin-top: 30px;
+}
+
+.contact-form .form-group { /* Thêm .contact-form để cụ thể hơn */
+    margin-bottom: 22px;
+}
+
+.contact-form .form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #343a40;
+    font-size: 0.9em;
+}
+
+.contact-form .form-group input[type="text"],
+.contact-form .form-group input[type="email"],
+.contact-form .form-group input[type="tel"],
+.contact-form .form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: #fff;
+}
+
+.contact-form .form-group input[type="text"]:focus,
+.contact-form .form-group input[type="email"]:focus,
+.contact-form .form-group input[type="tel"]:focus,
+.contact-form .form-group textarea:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.contact-form .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form .submit-button { /* Kế thừa .cta-button, ghi đè nếu cần */
+    width: auto;
+    min-width: 150px;
+    /* Nếu muốn màu khác cho nút submit này so với .cta-button chung: */
+    /* background-color: #198754; */ /* Ví dụ màu xanh lá */
+}
+/* .contact-form .submit-button:hover {
+    background-color: #157347;
+} */
+
+
+/* === Responsive Adjustments FOR CONTACT PAGE ELEMENTS === */
+@media (max-width: 768px) {
+    /* Banner adjustments for contact page banner */
+    .hero-banner-slider { height: 320px; border-radius: 6px; }
+    .banner-slide { min-height: 320px; padding: 25px 15px; } /* Áp dụng cho slide trong banner của contact */
+    .banner-slide h2 { font-size: 1.8em !important; margin-bottom: 10px; }
+    .banner-slide p { font-size: 1.0em; margin-bottom: 20px; }
+    .hero-banner-slider .swiper-button-next,
+    .hero-banner-slider .swiper-button-prev { display: none; }
+    .hero-banner-slider .swiper-pagination { bottom: 10px !important; }
+    .hero-banner-slider .swiper-pagination-bullet { width: 8px; height: 8px; }
+
+    /* Contact container and its children responsive adjustments */
+    .contact-container { padding: 20px 15px; margin-bottom: 25px; border-radius: 6px;}
+    .contact-container .section-title { font-size: 1.5em; margin-bottom: 20px; }
+    .contact-overview-content { gap: 20px; }
+    .contact-map,
+    .contact-details { flex-basis: 100%; }
+    .contact-map iframe { min-height: 300px; }
+    .contact-details { padding-left: 0; margin-top:20px;}
+    .contact-details h3 { font-size: 1.3em; }
+    .contact-form .form-group input[type="text"],
+    .contact-form .form-group input[type="email"],
+    .contact-form .form-group input[type="tel"],
+    .contact-form .form-group textarea { padding: 10px 12px; font-size: 0.95em; }
+    .contact-form-container { margin-top:20px; padding-top:15px; }
+}
+
+@media (max-width: 480px) {
+    /* Banner adjustments for contact page banner */
+    .hero-banner-slider { height: 280px; }
+    .banner-slide { min-height: 280px; padding: 20px 10px; }
+    .banner-slide h2 { font-size: 1.6em !important; }
+    .banner-slide p { font-size: 0.95em; margin-bottom: 15px; }
+
+    /* Contact container and its children responsive adjustments */
+    .contact-container { padding: 15px; }
+    .contact-container .section-title { font-size: 1.3em; }
+    .contact-map iframe { min-height: 250px; }
+    .contact-details h3 { font-size: 1.2em; }
 }

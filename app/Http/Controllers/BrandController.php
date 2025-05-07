@@ -11,7 +11,7 @@ class BrandController extends Controller
 
     public function index()
     {
-        $brands = Brand::all();
+        $brands = Brand::orderBy('name')->get();
         return view('brands.index', compact('brands'));
     }
 
@@ -42,9 +42,14 @@ class BrandController extends Controller
     }
 
 
-    public function show(string $id)
+    public function show(Brand $brand)
     {
-
+        $brand->load(['carModels' => function ($query) {
+            $query->withMin('inventories', 'price') 
+                  ->orderBy('year', 'desc')
+                  ->orderBy('name');
+        }]);
+        return view('brands.show', compact('brand'));
     }
 
 

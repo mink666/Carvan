@@ -37,8 +37,7 @@ class RangeOfCarController extends Controller
 
     public function show(RangeOfCar $rangeOfCar)
     {
-        $range = RangeOfCar::findOrFail($id);
-        return view('range_of_car.show', compact('range'));
+        return view('range_of_car.show', compact('rangeOfCar'));
     }
 
     public function edit(string $id)

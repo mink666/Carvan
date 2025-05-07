@@ -49,7 +49,7 @@
                         @endforelse
                     </div>
 
-                    <div class="md:col-span-2 md:pl-6 pt-4 md:pt-0 overflow-y-auto max-h-[calc(100vh-var(--navbar-height)-theme(spacing.20))]"> 
+                    <div class="md:col-span-2 md:pl-6 pt-4 md:pt-0 overflow-y-auto max-h-[calc(100vh-var(--navbar-height)-theme(spacing.20))]">
                         @if ($items->count() > 0)
                             @foreach ($items as $item)
                                 <div x-show="activeTab == '{{ $item->id }}'" x-cloak class="space-y-3">

@@ -12,6 +12,7 @@ class RangeOfCarController extends Controller
     public function index()
     {
         $ranges = RangeOfCar::all();
+        $ranges = RangeOfCar::paginate(10);
         return view('range_of_car.index', compact('ranges'));
     }
 
@@ -37,13 +38,20 @@ class RangeOfCarController extends Controller
 
     public function show(RangeOfCar $rangeOfCar)
     {
+        $rangeOfCar->load(['carModels' => function ($query) {
+            $query->with(['brand'])
+                  ->withMin('inventories', 'price')
+                  ->orderBy('brand_id')
+                  ->orderBy('year', 'desc')
+                  ->orderBy('name');
+        }]);
         return view('range_of_car.show', compact('rangeOfCar'));
     }
 
     public function edit(string $id)
     {
         $range = RangeOfCar::findOrFail($id);
-        return view('range_of_car.edit', compact('range'));
+        return view('range_of_car.edit', compact('rangeOfCar'));
     }
 
 

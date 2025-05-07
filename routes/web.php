@@ -6,13 +6,14 @@ use App\Http\Controllers\CarModelController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\RangeOfCarController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ContactPageController;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\NewsController as UserNewsController;
+use App\Http\Controllers\EventController as UserEventController;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
-
-Route::get('/contact', [ContactPageController::class, 'showContactForm'])->name('contact');
-Route::get('/contact/submit', [ContactPageController::class, 'handleSubmit'])->name('contact.submit');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
 Route::get('/car_models', [CarModelController::class, 'index'])->name('car_models.index');
 Route::get('/car_models/{carModel}', [CarModelController::class, 'show'])->name('car_models.show');
@@ -23,7 +24,6 @@ Route::get('/brands/{brand}', [BrandController::class, 'show'])->name('brands.sh
 Route::get('/range_of_car', [RangeOfCarController::class, 'index'])->name('range_of_car.index');
 Route::get('/range_of_car/{rangeOfCar}', [RangeOfCarController::class, 'show'])->name('range_of_car.show');
 
-
 //Route for Admin
 Route::get('/Admin', function () {
     return redirect('/Admin/Dashboard');
@@ -31,7 +31,21 @@ Route::get('/Admin', function () {
 
 Route::get('/Admin/{section}', [AdminController::class, 'index'])->name('Admin');
 
-Route::get('/Admin/CarMgr', [CarModelController::class, 'index'])->name('Admin.CarMgr');
-Route::get('/Admin/CarMgr/create', [CarModelController::class, 'create'])->name('Admin.CarMgr.create');
-//Route::get('/Admin/CarMgr/{id}/edit', [CarModelController::class, 'edit'])->name('Admin.CarMgr.edit');
+// Admin routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('news', NewsController::class);
+    Route::resource('events', EventController::class);
+});
 
+// User routes
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('/news', [UserNewsController::class, 'index'])->name('news.index');
+    Route::get('/news/{news}', [UserNewsController::class, 'show'])->name('news.show');
+    Route::get('/events', [UserEventController::class, 'index'])->name('events.index');
+    Route::get('/events/{event}', [UserEventController::class, 'show'])->name('events.show');
+});
+
+// News & Events page
+Route::get('/news-events', function () {
+    return view('news_events.index');
+})->name('news_events.index');

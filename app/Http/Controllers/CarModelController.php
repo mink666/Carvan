@@ -14,8 +14,12 @@ class CarModelController extends Controller
 
     public function index()
     {
-        $carModels = CarModel::with(['brand'])->get();
-        return view('car_models.index', compact('carModels'));
+        $carModels = CarModel::with(['brand', 'rangeOfCars'])
+        ->orderBy('brand_id')
+        ->orderBy('name')
+        ->paginate(12);
+
+    return view('car_models.index', compact('carModels'));
     }
 
     public function create()
@@ -58,7 +62,8 @@ class CarModelController extends Controller
     public function show(CarModel $carModel)
     {
         $carModel->load(['brand', 'rangeOfCars', 'inventories' => function($query){
-            $query->orderBy('price'); 
+            $query->where('is_active', true)
+                  ->orderBy('price');
         }]);
         return view('car_models.show', compact('carModel'));
     }

@@ -55,9 +55,12 @@ class CarModelController extends Controller
     }
 
 
-    public function show(string $id)
+    public function show(CarModel $carModel)
     {
-
+        $carModel->load(['brand', 'rangeOfCars', 'inventories' => function($query){
+            $query->orderBy('price'); // Order inventories by price, for example
+        }]);
+        return view('car_models.show', compact('carModel'));
     }
 
 

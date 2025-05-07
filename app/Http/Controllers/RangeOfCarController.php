@@ -35,9 +35,10 @@ class RangeOfCarController extends Controller
         return redirect()->route('range_of_car.index')->with('success', 'Range of car created successfully.');
     }
 
-    public function show(string $id)
+    public function show(RangeOfCar $rangeOfCar)
     {
-
+        $range = RangeOfCar::findOrFail($id);
+        return view('range_of_car.show', compact('range'));
     }
 
     public function edit(string $id)

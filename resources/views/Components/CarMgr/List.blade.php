@@ -28,7 +28,43 @@
         </tr>
       </thead>
       <tbody>
-
+        @foreach($carModels as $carModel)
+        <tr>
+            <td class="p-3"><input type="checkbox" /></td>
+            <td class="p-3">
+                <span>{{ $carModel->id }}</span>
+            </td>
+            <td class="p-3">
+                <span>{{ $carModel->brand->name }}</span>
+            </td>
+            <td class="p-3">
+                <span>{{ $carModel->rangeOfCars->name }}</span>
+            </td>
+            <td class="p-3">
+                <span>{{ $carModel->name }}</span>
+            </td>
+            <td class="p-3">
+                <span>{{ $carModel->year }}</span>
+            </td>
+            <td class="p-3">
+                <span>{{ $carModel->description }}</span>
+            </td>
+            <td class="p-3">
+                <img src="{{ asset('' . $carModel->image) }}" alt="{{ $carModel->name }}" class="w-30 h-12 object-contain mx-auto">
+            </td>
+            <td class="p-3">
+                <span>{{ $carModel->created_at->format('d M Y') }}</span>
+            </td>
+            <td>
+                <a href="/car_models/{{ $carModel->id }}/edit">Edit</a>
+                <form action="/car_models/{{ $carModel->id }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
       </tbody>
     </table>
 

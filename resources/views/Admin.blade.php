@@ -19,10 +19,10 @@
             <img src="{{ asset('images/CarVanlogo.png') }}" alt="CarVan Icon" class="h-24 w-24 mx-auto mt-4">
           <nav class="mt-4 text-gray-600">
             <a href="/Admin/Dashboard" class="block px-6 py-3 hover:bg-indigo-100 hover:text-indigo-600 transition font-medium">Dashboard</a>
-            <a href="/Admin/UserMgr" class="block px-6 py-3 hover:bg-indigo-100 transition">
+            <a href="/Admin/UserMgr?state=list" class="block px-6 py-3 hover:bg-indigo-100 transition">
                 User management
             </a>
-            <a href="/Admin/CarMgr" class="block px-6 py-3 hover:bg-indigo-100 transition">
+            <a href="/Admin/CarMgr?state=list" class="block px-6 py-3 hover:bg-indigo-100 transition">
                 Car management
             </a>
             <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Forms</a>
@@ -34,15 +34,28 @@
 
         <!-- Content -->
         <main class="flex-1 p-6 overflow-y-auto">
-            @if($section === 'Dashboard')
-                @include('Components/Dashboard')
-            @elseif($section === 'CarMgr')
-                @include('Components/CarMgr')
-            @elseif($section === 'UserMgr')
-                @include('Components/UserMgr')
-            @else
-            <h1 class="text-2xl font-semibold text-gray-700 mb-6">Page Not Found</h1>
-            @endif
+            <main class="flex-1 p-6 overflow-y-auto">
+                @if($section === 'Dashboard')
+                    @include('Components/Dashboard')
+                @elseif($section === 'CarMgr')
+                    @if($state === 'list')
+                        @include('Components/CarMgr/List', $data)
+                    @elseif($state === 'create')
+                        @include('Components/CarMgr/Create', $data)
+                    @elseif($state === 'edit')
+                        @include('Components/CarMgr/Edit', $data)
+                    @endif
+                @elseif($section === 'UserMgr')
+                    @if($state === 'list')
+                        @include('Components/UserMgr/List', $data)
+                    @elseif($state === 'create')
+                        @include('Components/UserMgr/Create', $data)
+                    @elseif($state === 'edit')
+                        @include('Components/UserMgr/Edit', $data)
+                    @endif
+                @else
+                    <h1 class="text-2xl font-semibold text-gray-700 mb-6">Page Not Found</h1>
+                @endif
         </main>
       </div>
 </body>

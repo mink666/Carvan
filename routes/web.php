@@ -30,3 +30,8 @@ Route::get('/Admin', function () {
 })->name('Admin.home');
 
 Route::get('/Admin/{section}', [AdminController::class, 'index'])->name('Admin');
+
+Route::get('/Admin/CarMgr', [CarModelController::class, 'index'])->name('Admin.CarMgr');
+Route::get('/Admin/CarMgr/create', [CarModelController::class, 'create'])->name('Admin.CarMgr.create');
+//Route::get('/Admin/CarMgr/{id}/edit', [CarModelController::class, 'edit'])->name('Admin.CarMgr.edit');
+

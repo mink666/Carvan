@@ -11,9 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('role', ['user', 'admin', 'sale'])->change();
-        });
+        if (Schema::hasColumn('users', 'role')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->enum('role', ['user', 'admin', 'sale'])->change();
+            });
+        } else {
+            // Optional: Add the column if it doesn't exist
+            Schema::table('users', function (Blueprint $table) {
+                $table->enum('role', ['user', 'admin', 'sale'])->default('user');
+            });
+        }
     }
 
     /**
@@ -22,7 +29,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('role', 255)->change(); 
+            $table->string('role', 255)->change();
         });
     }
 };

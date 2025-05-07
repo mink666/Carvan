@@ -18,14 +18,14 @@ class BrandSeeder extends Seeder
                     'name' => 'Toyota',
                     'year' => '1937',
                     'description' => 'Toyota is a Japanese multinational automotive manufacturer headquartered in Toyota City, Aichi, Japan.',
-                    'logo' => 'images/logos/toyota_logo.jpg',
+                    'logo' => 'images/logos/toyota_logo.png',
                     'location' => 'Aichi, Japan',
                 ],
                 [
                     'name' => 'Honda',
                     'year' => '1948',
                     'description' => 'Honda is a Japanese public multinational conglomerate known for manufacturing automobiles, motorcycles, and power equipment.',
-                    'logo' => 'images/logos/honda_logo.jpg',
+                    'logo' => 'images/logos/honda_logo.png',
                     'location' => 'Tokyo, Japan',
                 ],
                 [
@@ -39,7 +39,7 @@ class BrandSeeder extends Seeder
                     'name' => 'Hyundai',
                     'year' => '1967',
                     'description' => 'Hyundai Motor Company is a South Korean multinational automotive manufacturer headquartered in Seoul.',
-                    'logo' => 'images/logos/hyundai_logo.jpg',
+                    'logo' => 'images/logos/hyundai_logo.png',
                     'location' => 'Seoul, South Korea',
                 ],
         ];

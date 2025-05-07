@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,42 +12,48 @@
 
     <title>Carvan Admin</title>
 </head>
+
 <body>
     <div class="min-h-screen flex bg-gray-100">
 
         <!-- Sidebar -->
         <aside class="w-64 bg-white shadow-md flex-shrink-0">
             <img src="{{ asset('images/CarVanlogo.png') }}" alt="CarVan Icon" class="h-24 w-24 mx-auto mt-4">
-          <nav class="mt-4 text-gray-600">
-            <a href="/Admin/Dashboard" class="block px-6 py-3 hover:bg-indigo-100 hover:text-indigo-600 transition font-medium">Dashboard</a>
-            <a href="/Admin/UserMgr" class="block px-6 py-3 hover:bg-indigo-100 transition">
-                User management
-            </a>
-            <a href="/Admin/CarMgr" class="block px-6 py-3 hover:bg-indigo-100 transition">
-                Car management
-            </a>
-            <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Forms</a>
-            <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Report</a>
-            <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Charts</a>
-            <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Icons</a>
-          </nav>
+            <nav class="mt-4 text-gray-600">
+                <a href="/Admin/Dashboard"
+                    class="block px-6 py-3 hover:bg-indigo-100 hover:text-indigo-600 transition font-medium">Dashboard</a>
+                <a href="/Admin/UserMgr" class="block px-6 py-3 hover:bg-indigo-100 transition">
+                    User management
+                </a>
+                <a href="/Admin/CarMgr" class="block px-6 py-3 hover:bg-indigo-100 transition">
+                    Car management
+                </a>
+                <a href="/Admin/NewsMgr" class="block px-6 py-3 hover:bg-indigo-100 transition">News management</a>
+                <a href="/Admin/EventMgr" class="block px-6 py-3 hover:bg-indigo-100 transition">Events management</a>
+                <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Forms</a>
+                <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Report</a>
+                <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Charts</a>
+                <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Icons</a>
+            </nav>
         </aside>
 
         <!-- Content -->
         <main class="flex-1 p-6 overflow-y-auto">
-            @if($section === 'Dashboard')
+            @if ($section === 'Dashboard')
                 @include('Components/Dashboard')
             @elseif($section === 'CarMgr')
                 @include('Components/CarMgr')
             @elseif($section === 'UserMgr')
                 @include('Components/UserMgr')
+            @elseif($section === 'NewsMgr')
+                @include('Components/NewsMgr')
+            @elseif($section === 'EventMgr')
+                @include('Components/EventMgr')
             @else
-            <h1 class="text-2xl font-semibold text-gray-700 mb-6">Page Not Found</h1>
+                <h1 class="text-2xl font-semibold text-gray-700 mb-6">Page Not Found</h1>
             @endif
         </main>
-      </div>
+    </div>
 </body>
+
 </html>
-
-
-

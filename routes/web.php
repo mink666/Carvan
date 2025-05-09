@@ -10,10 +10,14 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\NewsController as UserNewsController;
 use App\Http\Controllers\EventController as UserEventController;
+use App\Http\Controllers\ContactPageController;
+use App\Http\Controllers\PreOwnedController;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
+
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::get('/contact/submit', [ContactPageController::class, 'handleSubmit'])->name('contact.submit');
 
 Route::get('/car_models', [CarModelController::class, 'index'])->name('car_models.index');
 Route::get('/car_models/{carModel}', [CarModelController::class, 'show'])->name('car_models.show');
@@ -23,6 +27,8 @@ Route::get('/brands/{brand}', [BrandController::class, 'show'])->name('brands.sh
 
 Route::get('/range_of_car', [RangeOfCarController::class, 'index'])->name('range_of_car.index');
 Route::get('/range_of_car/{rangeOfCar}', [RangeOfCarController::class, 'show'])->name('range_of_car.show');
+
+Route::get('/preOwned', [PreOwnedController::class, 'index'])->name('preOwned.index');
 
 //Route for Admin
 Route::get('/Admin', function () {

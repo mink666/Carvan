@@ -5,7 +5,7 @@
         <span class="text-indigo-600">3</span>
         {{-- Projects: <span class="text-indigo-600">884</span> --}}
       </h2>
-        <a href="" class="text-white">
+        <a href="/Admin/CarMgr?state=create" class="text-white">
             <button class="bg-[#ff3131] hover:bg-[#B20710] text-white px-4 py-2 rounded-md text-sm font-semibold">
                 + Add new Car
             </button>
@@ -55,13 +55,39 @@
             <td class="p-3">
                 <span>{{ $carModel->created_at->format('d M Y') }}</span>
             </td>
-            <td>
-                <a href="/car_models/{{ $carModel->id }}/edit">Edit</a>
-                <form action="/car_models/{{ $carModel->id }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Delete</button>
-                </form>
+
+            <td class="p-3 text-center relative">
+                    <div x-data="{ open: false }" class="relative inline-block text-left">
+                      <button @click="open = !open" class="text-gray-600 hover:text-black focus:outline-none">
+                        <i class="fas fa-ellipsis"></i>
+                      </button>
+
+                      <!-- Dropdown -->
+                      <div
+                        x-show="open"
+                        @click.away="open = false"
+                        x-transition
+                        class="origin-top-right absolute right-0 mt-2 w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
+                      >
+                        <div class="py-1 text-sm text-gray-700">
+                          <a href="{{ route('Admin.CarMgr.edit', $carModel->id) }}"
+                             class="block px-4 py-2 hover:bg-gray-100">
+                             <i class="fa fa-edit"></i>
+                             Edit
+                            </a>
+
+                          <form action="/car_models/{{ $carModel->id }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="w-full text-left px-4 py-2 hover:bg-red-100 text-red-600">
+                                    <i class="fa fa-trash"></i>
+                              Delete
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
             </td>
         </tr>
         @endforeach

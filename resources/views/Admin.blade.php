@@ -67,26 +67,6 @@
                     <span>Icons</span>
                 </a>
             </nav>
-        <aside class="w-64 bg-white shadow-md flex-shrink-0">
-            <img src="{{ asset('images/CarVanlogo.png') }}" alt="CarVan Icon" class="h-24 w-24 mx-auto mt-4">
-            <nav class="mt-4 text-gray-600">
-                <a href="/Admin/Dashboard"
-                    class="block px-6 py-3 hover:bg-indigo-100 hover:text-indigo-600 transition font-medium">Dashboard</a>
-                <a href="/Admin/UserMgr" class="block px-6 py-3 hover:bg-indigo-100 transition">
-                    User management
-                </a>
-                <a href="/Admin/CarMgr" class="block px-6 py-3 hover:bg-indigo-100 transition">
-                    Car management
-                </a>
-                <a href="{{ route('Admin', ['section' => 'NewsMgr']) }}"
-                    class="block px-6 py-3 hover:bg-indigo-100 transition">News management</a>
-                <a href="{{ route('Admin', ['section' => 'EventMgr']) }}"
-                    class="block px-6 py-3 hover:bg-indigo-100 transition">Events management</a>
-                <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Forms</a>
-                <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Report</a>
-                <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Charts</a>
-                <a href="#" class="block px-6 py-3 hover:bg-indigo-100 transition">Icons</a>
-            </nav>
         </aside>
 
         <!-- Content -->

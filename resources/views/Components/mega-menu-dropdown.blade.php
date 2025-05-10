@@ -3,15 +3,25 @@
     'items',
     'itemType',
     'activeTabInitial',
+    'dropdownId' => $triggerText
 ])
 
-<div class="relative" x-data="{ isOpen: false, activeTab: '{{ $activeTabInitial }}' }">
+<div class="relative"
+     x-data="{
+         isOpen: false,
+         activeTab: '{{ $activeTabInitial }}'
+     }"
+     @dropdown-open.window="if($event.detail.openId !== '{{ $dropdownId }}') { isOpen = false; }">
     <button type="button"
-            @click="isOpen = !isOpen; if(isOpen && !activeTab && {{ $items->count() }} > 0) { activeTab = '{{ $items->first()->id ?? '' }}'; }"
+            @click="isOpen = !isOpen;
+                    if(isOpen) {
+                        $dispatch('dropdown-open', { openId: '{{ $dropdownId }}' });
+                        if(!activeTab && {{ $items->count() }} > 0) { activeTab = '{{ $items->first()->id ?? '' }}'; }
+                    }"
             @keydown.escape.window="isOpen = false"
-            class="flex items-center text-sm font-bold text-white hover:underline transform transition duration-300 ease-in-out hover:scale-105 focus:outline-none">
+            class="flex items-center text-sm font-bold text-black hover:underline transform transition duration-300 ease-in-out hover:scale-105 focus:outline-none">
         {{ $triggerText }}
-        <svg class="ml-1 h-4 w-4 fill-current text-white transition-transform duration-200 ease-in-out"
+        <svg class="ml-1 h-4 w-4 fill-current text-black transition-transform duration-200 ease-in-out"
              :class="{ 'rotate-90': isOpen }"
              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />

@@ -25,11 +25,13 @@ class CarModelController extends Controller
     public function create()
     {
         $brands = Brand::all();
-        $range = RangeOfCar::all();
+        $ranges = RangeOfCar::all();
+        // Lấy ID lớn nhất hiện tại và cộng thêm 1
+        $nextId = \App\Models\CarModel::max('id') + 1;
         return view('Admin', [
             'section' => 'CarMgr',
             'state' => 'create',
-            'data' => compact('brands', 'ranges'),
+            'data' => compact('brands', 'ranges', 'nextId'),
         ]);
     }
 
@@ -77,7 +79,7 @@ class CarModelController extends Controller
     {
         $carModel = CarModel::findOrFail($id);
         $brands = Brand::all();
-        $range = RangeOfCar::all();
+        $ranges = RangeOfCar::all();
         return view('Admin', [
             'section' => 'CarMgr',
             'state' => 'edit',

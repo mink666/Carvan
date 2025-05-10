@@ -14,6 +14,9 @@ class AdminController extends Controller
 
         // Xử lý từng section
         if ($section === 'CarMgr') {
+            if ($state === 'create') {
+                return redirect()->route('Admin.CarMgr.create');
+            }
             $data['carModels'] = \App\Models\CarModel::with('brand')->get();
         } elseif ($section === 'UserMgr') {
             $data['users'] = \App\Models\User::all();

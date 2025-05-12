@@ -103,7 +103,7 @@
                     The best way to know if a car is right for you is to get behind the wheel. <br class="hidden sm:block">
                     Submit your test drive request today!
                 </p>
-                <a href="#"
+                <a href="{{ route('test_drive.index')}}"
                    class="inline-block bg-white text-red-600 font-bold py-3 px-10 rounded-lg hover:bg-gray-100 text-lg transition-colors duration-300 transform hover:scale-105">
                     Request a Test Drive
                 </a>

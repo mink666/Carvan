@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('test_drive_requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('inventory_id')->nullable();
+            $table->unsignedBigInteger('car_model_id')->nullable();
             $table->dateTime('request_date')->nullable();
             $table->enum('status', ['pending', 'processed', 'cancelled'])->default('pending');
             $table->text('note')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('inventory_id')->references('id')->on('inventory')->onDelete('set null');
+            $table->foreign('car_model_id')->references('id')->on('car_models')->onDelete('set null');
         });
     }
 

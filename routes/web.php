@@ -24,5 +24,6 @@ Route::get('/brands/{brand}', [BrandController::class, 'show'])->name('brands.sh
 Route::get('/range_of_car', [RangeOfCarController::class, 'index'])->name('range_of_car.index');
 Route::get('/range_of_car/{rangeOfCar}', [RangeOfCarController::class, 'show'])->name('range_of_car.show');
 
-Route::get('/testDrive', [TestDriveController::class, 'index'])->name('testDrive.index');
+Route::get('/test_drive', [TestDriveController::class, 'index'])->name('test_drive.index');
+Route::post('/test_drive', [TestDriveController::class, 'store'])->name('test_drive.store');
 

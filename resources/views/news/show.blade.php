@@ -1,17 +1,27 @@
 @extends('layouts.app')
 
-@section('title', $news->title)
+@section('title', $latestNews->title)
 
 @section('content')
-    <div class="container mx-auto py-8 max-w-2xl">
-        <h1 class="text-3xl font-bold mb-4">{{ $news->title }}</h1>
-        <div class="text-gray-500 text-sm mb-4">{{ $news->date }}</div>
-        @if ($news->image)
-            <img src="{{ asset('storage/' . $news->image) }}" alt="Image"
-                class="mb-4 rounded-lg w-full max-h-96 object-cover">
-        @endif
-        <div class="prose max-w-none">{!! $news->content !!}</div>
-        <a href="{{ route('user.news.index') }}" class="inline-block mt-6 text-blue-600 hover:underline">&larr; Back to
-            News</a>
+    <div class="news-show-page modern-show">
+        <div class="show-image">
+            @if ($latestNews->image)
+                <img src="{{ asset('storage/' . $latestNews->image) }}" alt="{{ $latestNews->title }}">
+            @else
+                <img src="{{ asset('images/no-image.png') }}" alt="No image">
+            @endif
+        </div>
+        <div class="show-header">
+            <div class="show-meta">
+                <span class="show-date"><i class="far fa-calendar"></i> {{ $latestNews->date->format('d M Y') }}</span>
+            </div>
+            <h1 class="show-title">{{ $latestNews->title }}</h1>
+        </div>
+        <div class="show-content">
+            {!! $latestNews->content !!}
+        </div>
+        <div class="show-back">
+            <a href="{{ route('news.index') }}" class="vertical-link">Back to News</a>
+        </div>
     </div>
 @endsection

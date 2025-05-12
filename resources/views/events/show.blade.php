@@ -1,13 +1,55 @@
 @extends('layouts.app')
 
-@section('title', $event->title)
+@section('title', $latestEvents->title)
 
 @section('content')
-    <div class="container mx-auto py-8 max-w-2xl">
-        <h1 class="text-3xl font-bold mb-4">{{ $event->title }}</h1>
-        <div class="text-gray-500 text-sm mb-4">{{ $event->start_date }} - {{ $event->end_date }}</div>
-        <div class="prose max-w-none">{!! $event->content !!}</div>
-        <a href="{{ route('user.events.index') }}" class="inline-block mt-6 text-blue-600 hover:underline">&larr; Back to
-            Events</a>
+    <div class="events-show-page modern-show">
+        <div class="show-image">
+            @if ($latestEvents->image)
+                <img src="{{ asset('storage/' . $latestEvents->image) }}" alt="{{ $latestEvents->title }}">
+            @else
+                <img src="{{ asset('images/no-image.png') }}" alt="No image">
+            @endif
+        </div>
+        <div class="show-header">
+            <div class="show-meta">
+                <span class="show-date"><i class="far fa-calendar"></i>
+                    {{ \Carbon\Carbon::parse($latestEvents->start_date)->format('d M Y') }} -
+                    {{ \Carbon\Carbon::parse($latestEvents->end_date)->format('d M Y') }}
+                </span>
+            </div>
+            <h1 class="show-title">{{ $latestEvents->title }}</h1>
+        </div>
+        <div class="show-content">
+            {!! $latestEvents->content !!}
+        </div>
+        <div class="show-back">
+            <a href="{{ route('events.index') }}" class="vertical-link">Back to Events</a>
+        </div>
     </div>
+
+    @push('scripts')
+        <script>
+            function shareOnFacebook() {
+                const url = encodeURIComponent(window.location.href);
+                const title = encodeURIComponent('{{ $latestEvents->title }}');
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`, 'facebook-share',
+                    'width=580,height=296');
+            }
+
+            function shareOnTwitter() {
+                const url = encodeURIComponent(window.location.href);
+                const title = encodeURIComponent('{{ $latestEvents->title }}');
+                window.open(`https://twitter.com/intent/tweet?text=${title}&url=${url}`, 'twitter-share',
+                    'width=580,height=296');
+            }
+
+            function shareOnLinkedIn() {
+                const url = encodeURIComponent(window.location.href);
+                const title = encodeURIComponent('{{ $latestEvents->title }}');
+                window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}`, 'linkedin-share',
+                    'width=580,height=296');
+            }
+        </script>
+    @endpush
 @endsection

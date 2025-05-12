@@ -10,10 +10,12 @@ use App\Http\Controllers\TestDriveController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\EventController;
-use App\Http\Controllers\NewsController as UserNewsController;
-use App\Http\Controllers\EventController as UserEventController;
+// use App\Http\Controllers\NewsController as UserNewsController;
+// use App\Http\Controllers\EventController as UserEventController;
+use App\Http\Controllers\NewsEventsController;
 use App\Http\Controllers\ContactPageController;
 use App\Http\Controllers\PreOwnedController;
+use App\Http\Controllers\ProductController;
 
 
 Route::get('/', [PageController::class, 'home'])->name('home');
@@ -56,15 +58,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('events', EventController::class);
 });
 
-// User routes
-Route::prefix('user')->name('user.')->group(function () {
-    Route::get('/news', [UserNewsController::class, 'index'])->name('news.index');
-    Route::get('/news/{news}', [UserNewsController::class, 'show'])->name('news.show');
-    Route::get('/events', [UserEventController::class, 'index'])->name('events.index');
-    Route::get('/events/{event}', [UserEventController::class, 'show'])->name('events.show');
-});
+Route::get('/news', [NewsEventsController::class, 'newsIndex'])->name('news.index');
+Route::get('/news/{news}', [NewsEventsController::class, 'newsShow'])->name('news.show');
+Route::get('/events', [NewsEventsController::class, 'eventsIndex'])->name('events.index');
+Route::get('/events/{event}', [NewsEventsController::class, 'eventsShow'])->name('events.show');
+Route::get('/news-events', [NewsEventsController::class, 'index'])->name('news_events.index');
+//products
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
 // News & Events page
-Route::get('/news-events', function () {
-    return view('news_events.index');
-})->name('news_events.index');
+// Route::get('/news-events', function () {
+//     return view('news_events.index');
+// })->name('news_events.index');
+

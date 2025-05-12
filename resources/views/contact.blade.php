@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Contact') {{-- ĐÃ SỬA TIÊU ĐỀ --}}
+@section('title', 'Contact - Carvan') {{-- ĐÃ SỬA TIÊU ĐỀ --}}
 
 @section('content')
     {{-- <main class="content"> --}} {{-- Giả sử class="content" đến từ layout app.blade.php --}}

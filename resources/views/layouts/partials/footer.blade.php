@@ -28,7 +28,6 @@
         <div class="text-xs text-gray-400 space-y-2 text-left">
             <p>Copyright &copy; {{ date('Y') }} Carvan Online Marketplace.</p>
             <p>All rights reserved.</p>
-            <p>All rights reserved.</p>
         </div>
     </div>
 

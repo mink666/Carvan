@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Our Car Brands - Carvan')
+@section('title', 'Car Brands - Carvan')
 
 @section('content')
 <div class="bg-gray-50 min-h-screen">

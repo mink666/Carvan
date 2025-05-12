@@ -1,6 +1,6 @@
 @extends('layouts.app') {{-- Hoặc layout chính của bạn --}}
 
-@section('title', 'Explore Car Ranges - Carvan')
+@section('title', 'Car Ranges - Carvan')
 
 @section('content')
 <div class="bg-gray-50 min-h-screen">

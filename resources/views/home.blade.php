@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Welcome to Carvan - Your Premier Car Destination')
+@section('title', 'Home - Carvan')
 
 @section('content')
 

@@ -7,26 +7,32 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\CarModel;
 use App\Models\Brand;
-use App\Models\RangeOfCars;
+use App\Models\RangeOfCar;
 
 class CarModelController extends Controller
 {
 
     public function index()
     {
-        $carModels = CarModel::with(['brand', 'rangeOfCars'])
-        ->orderBy('brand_id')
-        ->orderBy('name')
-        ->paginate(12);
-
-    return view('car_models.index', compact('carModels'));
+        $carModels = CarModel::with(['brand','rangeOfCars'])->get();
+        return view('Admin', [
+            'section' => 'CarMgr',
+            'state' => 'list',
+            'data' => compact('carModels'),
+        ]);
     }
 
     public function create()
     {
         $brands = Brand::all();
-        $ranges = RangeOfCars::all();
-        return view('car_models.create');
+        $ranges = RangeOfCar::all();
+        // Lấy ID lớn nhất hiện tại và cộng thêm 1
+        $nextId = \App\Models\CarModel::max('id') + 1;
+        return view('Admin', [
+            'section' => 'CarMgr',
+            'state' => 'create',
+            'data' => compact('brands', 'ranges', 'nextId'),
+        ]);
     }
 
 
@@ -62,8 +68,7 @@ class CarModelController extends Controller
     public function show(CarModel $carModel)
     {
         $carModel->load(['brand', 'rangeOfCars', 'inventories' => function($query){
-            $query->where('is_active', true)
-                  ->orderBy('price');
+            $query->orderBy('price');
         }]);
         return view('car_models.show', compact('carModel'));
     }
@@ -73,7 +78,13 @@ class CarModelController extends Controller
 
     {
         $carModel = CarModel::findOrFail($id);
-        return view('car_models.edit', compact('carModel'));
+        $brands = Brand::all();
+        $ranges = RangeOfCar::all();
+        return view('Admin', [
+            'section' => 'CarMgr',
+            'state' => 'edit',
+            'data' => compact('carModel', 'brands', 'ranges'),
+        ]);
     }
 
 

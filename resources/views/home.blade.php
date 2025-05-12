@@ -1,36 +1,64 @@
 @extends('layouts.app')
 
-@section('title', 'Welcome to Carvan - Your Premier Car Destination')
+@section('title', 'Home - Carvan')
 
 @section('content')
 
     {{-- 1. Slideshow Section --}}
-    <section id="hero-slideshow" class="w-full h-[60vh] md:h-[80vh] bg-gray-300 text-white flex items-center justify-center">
-        {{--
-            PLACEHOLDER FOR YOUR SLIDESHOW COMPONENT
-        --}}
-        <div class="text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 text-gray-800">Carvan Slideshow</h1>
-            <p class="text-xl md:text-2xl text-gray-600">Your awesome car images will appear here.</p>
+    <section id="#top" class="hero-banner-section "> {{-- Thêm class để bao bọc slider --}}
+        <div class="swiper hero-banner-slider"> {{-- Class cho Swiper và định kiểu banner --}}
+            <div class="swiper-wrapper">
+                {{-- Slide 1 --}}
+                <div class="swiper-slide">
+                     <div class="banner-slide"> {{-- Class style cho nội dung slide --}}
+                          <img src="https://wallpapercat.com/w/full/f/2/6/1452770-1920x1080-desktop-full-hd-vinfast-background.jpg" class="slide-background-image" alt="Company Values">
+                          <div class="slide-overlay"></div>
+                          <div class="slide-content">
+                               <h2>Leading Innovation in Mobility</h2>
+                               <p>Discover our commitment to quality and customer satisfaction.</p>
+                          </div>
+                     </div>
+                </div>
+                {{-- Slide 2 --}}
+                <div class="swiper-slide">
+                    <div class="banner-slide">
+                          <img src="https://images6.alphacoders.com/115/1154171.jpg" class="slide-background-image" alt="Our Vision">
+                          <div class="slide-overlay"></div>
+                          <div class="slide-content">
+                               <h2>Driving Towards a Sustainable Future</h2>
+                               <p>Explore our goals for eco-friendly practices and community growth.</p>
+                          </div>
+                     </div>
+                </div>
+                {{-- Thêm các slide khác nếu cần --}}
+            </div>
+            {{-- Pagination (dấu chấm) --}}
+            <div class="swiper-pagination"></div>
+            {{-- Navigation (mũi tên) --}}
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
     </section>
 
     {{-- Container chung cho nội dung bên dưới slideshow --}}
-    <div class="container mx-auto px-4 py-8 md:py-12">
+    <div class="container mx-auto px-4 py-6 md:py-8">
 
         {{-- 2. Welcome Message / Short Introduction --}}
         <section id="welcome" class="text-center mb-12 md:mb-16">
-            <h2 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-4">Welcome to Carvan</h2>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                Discover a wide range of new and certified pre-owned vehicles from the world's leading brands.
-                At Carvan, we are committed to providing you with the best car buying experience and exceptional customer service.
+            <h2 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-4">Welcome to Carvan: Your Journey Begins Here.</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto font-light">
+                From the moment you dream of a new ride to the exhilarating feel of the steering wheel in your hands, Carvan is dedicated to making your car discovery seamless and exciting. We are more than just an online car marketplace; we are a collective of passionate automotive enthusiasts and tech innovators, committed to bringing you an unparalleled selection from the world's most trusted brands.
+            </p>
+            </br>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto font-light">
+            At Carvan, we are constantly looking forward, embracing new technologies to enhance your experience and simplify your path to ownership. Explore our diverse collection, discover automotive innovations, and let us help you find the car that not only moves you but also reflects who you are. Your next great drive starts with Carvan.
             </p>
         </section>
 
         {{-- 3. Featured Brands Section --}}
         @if(isset($featuredBrands) && $featuredBrands->count() > 0)
-        <section id="featured-brands" class="mb-12 md:mb-16">
-            <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">Our Prestigious Brands</h2>
+        <section id="featured-brands" class="mb-12 md:mb-16 bg-black py-10 px-6 rounded-lg">
+            <h2 class="text-2xl md:text-3xl font-semibold text-white mb-6 text-center">Our Prestigious Brands</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
                 @foreach($featuredBrands as $brand)
                     <a href="{{ route('brands.show', $brand->id) }}"
@@ -55,8 +83,82 @@
         </section>
         @endif
 
+        {{-- 6. Popular Models / New Arrivals --}}
+        @if(isset($popularModels) && $popularModels->count() > 0)
+        <section id="popular-models" class="mb-12 md:mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2 text-center">Featured Vehicles</h2>
+            <p class="text-sm font-semibold text-gry-800 tracking-wider text-center mb-10">Explore our popular models</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                @foreach($popularModels as $model)
+                    @if($model->displayInventory) {{-- Chỉ hiển thị nếu có inventory để lấy thông tin --}}
+                        @php $inventory = $model->displayInventory; @endphp
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col group">
+                            <div class="relative">
+                                <a href="{{ route('car_models.show', $model->id) }}" class="block">
+                                    <img src="{{ $model->image ? asset($model->image) : asset('assets/images/default-car-large.jpg') }}"
+                                         alt="{{ $model->brand->name ?? '' }} {{ $model->name }}"
+                                         class=" w-full h-56 md:h-64 object-contain transition-transform duration-300 ease-in-out group-hover:scale-105">
+                                </a>
+                            </div>
+
+                            <div class="p-5 md:p-6 flex flex-col flex-grow">
+                                <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
+                                    <span>{{ $model->year }}</span>
+                                    {{-- <span>{{ number_format($inventory->mileage ?? 0, 0, ',', '.') }} KM</span> --}}
+                                    {{-- Bạn cần thêm trường 'mileage' vào Inventory nếu muốn hiển thị --}}
+                                    @if($inventory->status)
+                                    <span class="px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full {{ $inventory->status === 'sale' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                                        For {{ ucfirst($inventory->status) }}
+                                    </span>
+                                    @endif
+                                </div>
+
+                                <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-1 truncate" title="{{ $model->brand->name ?? '' }} {{ $model->name }}">
+                                    <a href="{{ route('car_models.show', $model->id) }}" class="hover:text-red-700 transition-colors">
+                                        {{ strtoupper($model->brand->name ?? '') }} {{ strtoupper($model->name) }}
+                                    </a>
+                                </h3>
+
+                                <p class="text-2xl lg:text-xl font-medium text-red-500 mb-4">
+                                    {{ number_format($inventory->price, 0, ',', '.') }} VND
+                                </p>
+
+                                <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
+                                    <div>
+                                        <p class="text-gray-500 uppercase tracking-wider text-xs">Exterior Color</p>
+                                        <p class="font-semibold text-gray-700">{{ $inventory->color ?? 'N/A' }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-500 uppercase tracking-wider text-xs">Interior Color</p>
+                                        <p class="font-semibold text-gray-700">{{ $inventory->interior_color ?? 'N/A' }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="mb-5 text-sm">
+                                    <p class="text-gray-500 uppercase tracking-wider text-xs">Available At</p>
+                                    <p class="font-semibold text-gray-700">Carvan Showroom</p> {{-- Thay bằng thông tin thực tế nếu có --}}
+                                </div>
+
+                                <div class="mt-auto grid grid-cols-2 gap-3">
+                                    <a href="{{ route('preOwned.index', ['car_model_id' => $model->id, 'inventory_id' => $inventory->id]) }}" {{-- Truyền inventory_id nếu form cần biết phiên bản cụ thể --}}
+                                       class="block w-full text-center bg-red-600 text-white font-semibold py-3 px-4 rounded-md hover:bg-red-700 transition-colors duration-300 text-sm">
+                                        INQUIRE
+                                    </a>
+                                    <a href="{{ route('car_models.show', $model->id) }}"
+                                       class="block w-full text-center bg-white text-gray-700 font-semibold py-3 px-4 rounded-md border border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-colors duration-300 text-sm">
+                                        MORE DETAILS
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        </section>
+        @endif
+
         {{-- 4. How It Works / Our Services (Focus on Test Drive) --}}
-        <section id="how-it-works" class="mb-12 md:mb-16 bg-gray-50 py-10 px-6 rounded-lg">
+        <section id="how-it-works" class=" mb-12 md:mb-16 py-10 px-6 rounded-lg">
             <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-8 text-center">Experience Your Dream Car</h2>
             <div class="grid md:grid-cols-3 gap-8 text-center">
                 <div class="flex flex-col items-center">
@@ -96,7 +198,7 @@
         </section>
 
         {{-- 5. Call to Action - Test Drive Form --}}
-        <section id="cta-test-drive" class="text-center mb-12 md:mb-16 py-10 bg-cover bg-center rounded-lg" style="background-image: url('https://images.unsplash.com/photo-1553531889-0c9089521a24?q=80&w=1920&auto=format&fit=crop');">
+        <section id="cta-test-drive" class="text-center mb-12 md:mb-6 py-10 bg-cover bg-center rounded-lg" style="background-image: url('https://images.unsplash.com/photo-1614609953905-baeff400aab3?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c3RlZXJpbmclMjB3aGVlbHxlbnwwfHwwfHx8MA%3D%3D');">
             <div class="bg-black bg-opacity-50 py-12 px-6 rounded-lg">
                 <h2 class="text-3xl md:text-4xl font-semibold text-white mb-4">Ready to Find Your Perfect Car?</h2>
                 <p class="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
@@ -110,46 +212,119 @@
             </div>
         </section>
 
-        {{-- 6. Popular Models / New Arrivals (Optional) --}}
-        @if(isset($popularModels) && $popularModels->count() > 0)
-        <section id="popular-models" class="mb-12 md:mb-16">
-            <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-6 text-center">Popular Models</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($popularModels as $model)
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                    <a href="{{ route('car_models.show', $model->id) }}" class="block">
-                        @if($model->image)
-                            <img src="{{ asset($model->image) }}" alt="{{ $model->name }}" class="w-full h-48 object-cover group-hover:opacity-80 transition-opacity duration-300">
-                        @else
-                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                                <span class="text-gray-400">No Image</span>
+        {{-- 7. News Section --}}
+        <section id="carvan-news" class="py-12 md:py-16">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-10 md:mb-16">
+                    <p class="text-sm font-semibold text-red-600 uppercase tracking-wider">LATEST UPDATES</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mt-1">Carvan World News</h2>
+                </div>
+            </div>
+
+            {{-- Danh sách các bài viết --}}
+            <div class="news-items-container rounded-lg shadow-lg overflow-hidden">
+                @php
+                    $sampleNews = [
+                        [
+                            'image' => 'https://xedoisong.vn/uploads/20221030/xedoisong_debut_new_lamborghini_aventador_lp_780_4_ultimae_coupe_roadster_final_v12_supercar_h1_vedq.jpg',
+                            'date' => \Carbon\Carbon::now()->subDays(2)->format('j M Y'),
+                            'category' => 'Performance Insights',
+                            'title' => 'Unleashing Peak Performance: A New Era for Carvan Test Drives',
+                            'excerpt' => 'Experience the thrill like never before. Carvan introduces an advanced test drive program focusing on dynamic capabilities and real-world performance metrics for our top models.',
+                            'link' => '#'
+                        ],
+                        [
+                            'image' => 'https://static-www.adweek.com/wp-content/uploads/files/tesla-hed-2016.png?w=652',
+                            'date' => \Carbon\Carbon::now()->subDays(5)->format('j M Y'),
+                            'category' => 'SUSTAINABILITY',
+                            'title' => 'Carvan Commits to a Greener Future with Expanded EV Lineup',
+                            'excerpt' => 'Discover our latest initiatives and partnerships aimed at promoting sustainable mobility and reducing environmental impact across our diverse vehicle offerings.',
+                            'link' => '#'
+                        ],
+                        [
+                            'image' => 'https://media.arcadis.com/-/media/project/arcadiscom/com/blogs/global/david-aimable-lina/2022/how-to-deliver-automotive-manufacturing-for-the-future/how-to-deliver-automotive-manufacturing-for-the-future-header.png?rev=-1',
+                            'date' => \Carbon\Carbon::now()->subDays(8)->format('j M Y'),
+                            'category' => 'Luxury & Design',
+                            'title' => 'Inside Carvan: Craftsmanship and Innovation in Modern Automotive Design',
+                            'excerpt' => 'A closer look at the meticulous design processes and premium materials that define the luxury experience offered by Carvan’s curated collection of vehicles.',
+                            'link' => '#'
+                        ],
+                        [
+                            'image' => 'https://wallpapers.com/images/hd/1920x1080-ferrari-6474xw68qqc0t4g1.jpg',
+                            'date' => \Carbon\Carbon::now()->subDays(10)->format('j M Y'),
+                            'category' => 'Tech Review',
+                            'title' => 'Next-Gen Infotainment Systems: A Carvan Exclusive',
+                            'excerpt' => 'Exploring the features and benefits of the latest infotainment technology available in select Carvan models, enhancing your driving pleasure and connectivity.',
+                            'link' => '#'
+                        ],
+                    ];
+                @endphp
+
+                @foreach($sampleNews as $index => $newsItem)
+                {{-- Mỗi article giờ sẽ có padding và màu nền riêng, không còn bo góc và shadow của "card" --}}
+                <article class="news-item-full-width group
+                                {{ $loop->index % 2 === 0 ? 'bg-black text-white' : 'bg-white text-gray-800' }}">
+                    <div class="container mx-auto px-4"> {{-- Đưa container vào trong để giới hạn chiều rộng nội dung --}}
+                        <div class="md:flex md:items-center {{ $loop->index % 2 === 1 ? 'md:flex-row-reverse' : '' }}
+                                    py-10 md:py-16 {{-- Padding dọc cho mỗi item --}}
+                                    md:space-x-reverse md:space-x-8 lg:space-x-12">
+                            {{-- Cột Ảnh --}}
+                            <div class="md:w-1/2 lg:w-3/5 mb-6 md:mb-0">
+                                <a href="{{ $newsItem['link'] }}" class="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                                    <img src="{{ $newsItem['image'] }}"
+                                         alt="{{ $newsItem['title'] }}"
+                                         class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-105 aspect-[16/9]">
+                                </a>
                             </div>
-                        @endif
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-800 group-hover:text-red-600">{{ $model->name }} {{ $model->year ? '('.$model->year.')' : '' }}</h3>
-                            @if($model->brand)
-                                <p class="text-sm text-gray-500">{{ $model->brand->name }}</p>
-                            @endif
-                            {{-- Sử dụng inventories_min_price đã được xử lý trong controller --}}
-                            @if(isset($model->inventories_min_price) && $model->inventories_min_price > 0)
-                                <p class="text-md font-semibold text-red-600 mt-1">
-                                    Price from: {{ number_format($model->inventories_min_price, 0, ',', '.') }} VND
+
+                            {{-- Cột Nội dung Text --}}
+                            <div class="md:w-1/2 lg:w-2/5 flex flex-col justify-center">
+                                <p class="text-xs {{ $loop->index % 2 === 0 ? 'text-gray-400' : 'text-gray-500' }} mb-2">
+                                    <span>{{ $newsItem['date'] }}</span>
                                 </p>
-                            @else
-                                <p class="text-md text-gray-600 mt-1">
-                                    Price unavailable
+                                @if($newsItem['category'])
+                                <p class="text-xs font-semibold {{ $loop->index % 2 === 0 ? 'text-red-400' : 'text-red-500' }} uppercase tracking-wider mb-2">
+                                    {{ $newsItem['category'] }}
                                 </p>
-                            @endif
-                            <span class="mt-2 inline-block text-red-500 group-hover:text-red-700 text-sm">View Details &rarr;</span>
+                                @endif
+                                <h3 class="text-2xl md:text-3xl font-bold {{ $loop->index % 2 === 0 ? 'text-white group-hover:text-red-300' : 'text-gray-900 group-hover:text-red-700' }} mb-3 leading-tight transition-colors">
+                                    <a href="{{ $newsItem['link'] }}">{{ $newsItem['title'] }}</a>
+                                </h3>
+                                <p class="{{ $loop->index % 2 === 0 ? 'text-gray-300' : 'text-gray-700' }} mb-6 leading-relaxed text-base">
+                                    {{ Str::limit($newsItem['excerpt'], 150) }}
+                                </p>
+                                <a href="{{ $newsItem['link'] }}"
+                                   class="self-start inline-block font-semibold py-2.5 px-6 rounded-md text-sm
+                                          @if($loop->index % 2 === 0) {{-- Nền đen, chữ trắng cho item chẵn --}}
+                                            bg-white text-black hover:bg-gray-400 focus:ring-2 focus:ring-gray-300
+                                          @else {{-- Nền trắng, chữ đen cho item lẻ --}}
+                                            border border-gray-700 text-gray-800 hover:bg-gray-800 hover:text-white hover:border-gray-800 focus:ring-2 focus:ring-gray-600
+                                          @endif
+                                          transition-all duration-300">
+                                    READ MORE
+                                </a>
+                            </div>
                         </div>
+                    </div>
+                </article>
+                @endforeach
+
+
+            </div>
+            <div class="container mx-auto px-4">
+                <div class="text-center pt-10 md:pt-16">
+                    <a href="news-events"
+                       class="inline-block border border-black bg-black text-white font-semibold py-3 px-10 hover:bg-white hover:text-black transition-all duration-300 text-base rounded-md">
+                        See All
                     </a>
                 </div>
-                @endforeach
             </div>
         </section>
-        @endif
-
+<a href="#top" class="fixed bottom-5 right-5 bg-white text-black rounded-full p-3 shadow-lg hover:bg-gray-400 transition duration-300 z-50">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+    </svg>
+</a>
     </div> {{-- End of main container --}}
-
 @endsection
 

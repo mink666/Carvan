@@ -11,8 +11,7 @@ class RangeOfCarController extends Controller
 
     public function index()
     {
-        $ranges = RangeOfCar::all();
-        $ranges = RangeOfCar::paginate(10);
+        $range = RangeOfCar::all();
         return view('range_of_car.index', compact('ranges'));
     }
 

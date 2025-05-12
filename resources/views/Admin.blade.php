@@ -29,19 +29,24 @@
                 <a href="/Admin/UserMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-user-cog"></i>
-                    <span>User management</span>
+                    <span>User</span>
                 </a>
                 <a href="/Admin/CarMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-car-side"></i>
-                    <span>Car management</span>
+                    <span>Car</span>
                 </a>
-                <a href=""
+                <a href="/Admin/BrandMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-building"></i>
-                    <span>Brand management</span>
+                    <span>Brand</span>
                 </a>
-                <a href="#"
+                <a href="/Admin/EventMgr?state=list"
+                class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Event</span>
+                </a>
+                <a href="/Admin/RangesMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-car"></i>
                     <span>Range</span>
@@ -88,6 +93,30 @@
                         @include('Components/UserMgr/Create', $data)
                     @elseif($state === 'edit')
                         @include('Components/UserMgr/Edit', $data)
+                    @endif
+                @elseif($section === 'BrandMgr')
+                    @if($state === 'list')
+                        @include('Components/BrandMgr/List', $data)
+                    @elseif($state === 'create')
+                        @include('Components/BrandMgr/Create', $data)
+                    @elseif($state === 'edit')
+                        @include('Components/BrandMgr/Edit', $data)
+                    @endif
+                @elseif($section === 'RangesMgr')
+                    @if($state === 'list')
+                        @include('Components/RangesMgr/List', $data)
+                    @elseif($state === 'create')
+                        @include('Components/RangesMgr/Create', $data)
+                    @elseif($state === 'edit')
+                        @include('Components/RangesMgr/Edit', $data)
+                    @endif
+                @elseif($section === 'EventMgr')
+                    @if($state === 'list')
+                        @include('Components/EventMgr', $data)
+                    @elseif($state === 'create')
+                        @include('Components/EventMgr/Create', $data)
+                    @elseif($state === 'edit')
+                        @include('Components/EventMgr/Edit', $data)
                     @endif
                 @else
                     <h1 class="text-2xl font-semibold text-gray-700 mb-6">Page Not Found</h1>

@@ -19,7 +19,20 @@ class AdminController extends Controller
             }
             $data['carModels'] = \App\Models\CarModel::with('brand')->get();
         } elseif ($section === 'UserMgr') {
+            if ($state === 'create') {
+                return redirect()->route('Admin.UserMgr.create');
+            }
             $data['users'] = \App\Models\User::all();
+        } elseif ($section === 'BrandMgr') {
+            if ($state === 'create') {
+                return redirect()->route('Admin.BrandMgr.create');
+            }
+            $data['brands'] = \App\Models\Brand::all();
+        } elseif ($section === 'RangesMgr') {
+            if ($state === 'create') {
+                return redirect()->route('Admin.RangesMgr.create');
+            }
+            $data['ranges'] = \App\Models\RangeOfCar::all();
         }
 
         return view('Admin', compact('section', 'state','data'));

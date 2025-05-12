@@ -15,6 +15,16 @@ class RangeOfCarController extends Controller
         return view('range_of_car.index', compact('ranges'));
     }
 
+    public function list()
+    {
+        $ranges = RangeOfCar::orderBy('name')->get();
+        return view('Admin', [
+            'section' => 'RangesMgr',
+            'state' => 'list',
+            'data' => compact('ranges'),
+        ]);
+    }
+
 
     public function create()
     {

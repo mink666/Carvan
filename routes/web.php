@@ -50,6 +50,14 @@ Route::get('/Admin/CarMgr', [CarModelController::class, 'index'])->name('Admin.C
 Route::get('/Admin/CarMgr/create', [CarModelController::class, 'create'])->name('Admin.CarMgr.create');
 Route::get('/Admin/CarMgr/edit/{id}', [CarModelController::class, 'edit'])->name('Admin.CarMgr.edit');
 
+Route::get('/Admin/BrandMgr', [BrandController::class, 'list'])->name('Admin.BrandMgr');
+Route::get('/Admin/BrandMgr/create', [BrandController::class, 'create'])->name('Admin.BrandMgr.create');
+Route::get('/Admin/BrandMgr/edit/{id}', [BrandController::class, 'edit'])->name('Admin.BrandMgr.edit');
+
+Route::get('/Admin/RangesMgr', [RangeOfCarController::class, 'list'])->name('Admin.RangesMgr');
+Route::get('/Admin/RangesMgr/create', [RangeOfCarController::class, 'create'])->name('Admin.RangesMgr.create');
+Route::get('/Admin/RangesMgr/edit/{id}', [RangeOfCarController::class, 'edit'])->name('Admin.RangesMgr.edit');
+
 Route::get('/Admin/UserMgr', [AdminController::class, 'userIndex'])->name('Admin.UserMgr');
 
 // Admin routes

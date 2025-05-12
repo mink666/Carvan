@@ -5,6 +5,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\CarModelController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\RangeOfCarController;
+
+use App\Http\Controllers\TestDriveController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\EventController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\NewsController as UserNewsController;
 use App\Http\Controllers\EventController as UserEventController;
 use App\Http\Controllers\ContactPageController;
 use App\Http\Controllers\PreOwnedController;
+
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
@@ -27,6 +30,10 @@ Route::get('/brands/{brand}', [BrandController::class, 'show'])->name('brands.sh
 
 Route::get('/range_of_car', [RangeOfCarController::class, 'index'])->name('range_of_car.index');
 Route::get('/range_of_car/{rangeOfCar}', [RangeOfCarController::class, 'show'])->name('range_of_car.show');
+
+
+Route::get('/test_drive', [TestDriveController::class, 'index'])->name('test_drive.index');
+Route::post('/test_drive', [TestDriveController::class, 'store'])->name('test_drive.store');
 
 Route::get('/preOwned', [PreOwnedController::class, 'index'])->name('preOwned.index');
 

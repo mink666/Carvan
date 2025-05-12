@@ -1,5 +1,6 @@
 @import 'tailwindcss';
-
+@import './news-events.css';
+@import './products.css';
 html, body {
     height: 100%;
     margin: 0;

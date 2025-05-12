@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\CarModel;
 use App\Models\Preowned;
 use App\Models\TestDriveRequest;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Inventory extends Model
 {
+    use HasFactory;
     protected $table = 'inventory';
 
     protected $fillable = [

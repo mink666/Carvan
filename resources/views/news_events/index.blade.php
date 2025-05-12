@@ -3,76 +3,108 @@
 @section('title', 'News & Events')
 
 @section('content')
-    <div class="container mx-auto py-10 px-2 md:px-0">
-        <h1 class="text-4xl font-extrabold mb-10 text-center text-gray-800 tracking-tight">News & Events</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <!-- News Section -->
-            <div>
-                <h2 class="text-2xl font-bold mb-6 text-blue-700 flex items-center gap-2">
-                    <svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M19 21H5a2 2 0 01-2-2V7a2 2 0 012-2h2l2-2h6l2 2h2a2 2 0 012 2v12a2 2 0 01-2 2z" />
-                    </svg>
-                    Latest News
-                </h2>
-                @php $latestNews = \App\Models\News::orderBy('date', 'desc')->take(4)->get(); @endphp
-                <div class="space-y-6">
-                    @forelse($latestNews as $item)
-                        <div
-                            class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow flex flex-col md:flex-row overflow-hidden">
-                            @if ($item->image)
-                                <img src="{{ asset('storage/' . $item->image) }}" alt="Image"
-                                    class="w-full md:w-40 h-40 object-cover md:rounded-l-xl md:rounded-r-none rounded-t-xl md:rounded-t-none">
-                            @endif
-                            <div class="flex-1 p-5 flex flex-col">
-                                <h3 class="text-lg font-bold mb-1 text-gray-800">{{ $item->title }}</h3>
-                                <div class="text-gray-400 text-xs mb-2">{{ $item->date }}</div>
-                                <div class="mb-3 text-gray-600 line-clamp-3">
-                                    {{ Str::limit(strip_tags($item->content), 100) }}</div>
-                                <a href="{{ route('user.news.show', $item->id) }}"
-                                    class="mt-auto inline-block text-blue-600 font-semibold hover:underline">Read more
-                                    &rarr;</a>
-                            </div>
-                        </div>
-                    @empty
-                        <div class="text-gray-500">No news found.</div>
-                    @endforelse
-                </div>
-                <a href="{{ route('user.news.index') }}"
-                    class="inline-block mt-6 text-blue-700 font-semibold hover:underline">View all News &rarr;</a>
+    <div class="news-events-page">
+        <!-- Banner Section -->
+        <div class="banner-section">
+            <img src="{{ asset('images/pngtree-sporty-red-lamborghini-road-image_2913570.jpg') }}" alt="News & Events">
+            <div class="banner-overlay">
+                <p>Stay updated with our latest news and upcoming events</p>
             </div>
-            <!-- Events Section -->
-            <div>
-                <h2 class="text-2xl font-bold mb-6 text-pink-700 flex items-center gap-2">
-                    <svg class="w-7 h-7 text-pink-500" fill="none" stroke="currentColor" stroke-width="2"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    Upcoming Events
-                </h2>
-                @php $latestEvents = \App\Models\Event::orderBy('start_date', 'desc')->take(4)->get(); @endphp
-                <div class="space-y-6">
-                    @forelse($latestEvents as $item)
-                        <div
-                            class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow flex flex-col md:flex-row overflow-hidden">
-                            <div class="flex-1 p-5 flex flex-col">
-                                <h3 class="text-lg font-bold mb-1 text-gray-800">{{ $item->title }}</h3>
-                                <div class="text-gray-400 text-xs mb-2">{{ $item->start_date }} - {{ $item->end_date }}
-                                </div>
-                                <div class="mb-3 text-gray-600 line-clamp-3">
-                                    {{ Str::limit(strip_tags($item->content), 100) }}</div>
-                                <a href="{{ route('user.events.show', $item->id) }}"
-                                    class="mt-auto inline-block text-pink-600 font-semibold hover:underline">Read more
-                                    &rarr;</a>
-                            </div>
+        </div>
+
+        <div class="news-events-container">
+            <h1 class="main-title">News & Events</h1>
+
+            <!-- Latest News Section -->
+            <div class="section-header">
+                <h2>Latest News</h2>
+            </div>
+
+            <div class="vertical-list">
+                @forelse($latestNews as $news)
+                    <div class="vertical-item">
+                        <div class="vertical-img">
+                            @if ($news->image)
+                                <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->title }}">
+                            @else
+                                <img src="{{ asset('images/neon-car.jpg') }}" alt="No image">
+                            @endif
                         </div>
-                    @empty
-                        <div class="text-gray-500">No events found.</div>
-                    @endforelse
+                        <div class="vertical-content">
+                            <div class="vertical-meta">
+                                <span class="vertical-date">{{ $news->date->format('d M Y') }}</span>
+                                <span class="vertical-type">NEWS</span>
+                            </div>
+                            <h3 class="vertical-title">{{ $news->title }}</h3>
+                            <p class="vertical-desc">{{ Str::limit(strip_tags($news->content), 150) }}</p>
+                            <a href="{{ route('news.show', $news->id) }}" class="vertical-link">Read More</a>
+                        </div>
+                    </div>
+                @empty
+                    <div class="empty-state">
+                        <i class="far fa-newspaper"></i>
+                        <p>No news available at the moment.</p>
+                    </div>
+                @endforelse
+            </div>
+
+            <div class="view-all-container">
+                <a href="{{ route('news.index') }}" class="view-all-link">
+                    View All News <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- CTA Block -->
+            <div class="cta-block">
+                <div class="cta-icon">
+                    <i class="fab fa-facebook"></i>
                 </div>
-                <a href="{{ route('user.events.index') }}"
-                    class="inline-block mt-6 text-pink-700 font-semibold hover:underline">View all Events &rarr;</a>
+                <div class="cta-content">
+                    <div class="cta-title">CARVAN</div>
+                    <div class="cta-desc">FOLLOW US ON FACEBOOK</div>
+                </div>
+            </div>
+
+            <!-- Upcoming Events Section -->
+            <div class="section-header">
+                <h2>Upcoming Events</h2>
+            </div>
+
+            <div class="vertical-list">
+                @forelse($latestEvents as $event)
+                    <div class="vertical-item">
+                        <div class="vertical-img">
+                            @if ($event->image)
+                                <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}">
+                            @else
+                                <img src="{{ asset('images/car-event.jpg') }}" alt="No image">
+                            @endif
+                        </div>
+                        <div class="vertical-content">
+                            <div class="vertical-meta">
+                                <span class="vertical-date">
+                                    {{ \Carbon\Carbon::parse($event->start_date)->format('d M Y') }} -
+                                    {{ \Carbon\Carbon::parse($event->end_date)->format('d M Y') }}
+                                </span>
+                                <span class="vertical-type">EVENT</span>
+                            </div>
+                            <h3 class="vertical-title">{{ $event->title }}</h3>
+                            <p class="vertical-desc">{{ Str::limit(strip_tags($event->content), 150) }}</p>
+                            <a href="{{ route('events.show', $event->id) }}" class="vertical-link">View Details</a>
+                        </div>
+                    </div>
+                @empty
+                    <div class="empty-state">
+                        <i class="far fa-calendar-alt"></i>
+                        <p>No upcoming events at the moment.</p>
+                    </div>
+                @endforelse
+            </div>
+
+            <div class="view-all-container">
+                <a href="{{ route('events.index') }}" class="view-all-link">
+                    View All Events <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>

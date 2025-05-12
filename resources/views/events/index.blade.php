@@ -1,23 +1,53 @@
 @extends('layouts.app')
 
-@section('title', 'Events')
+@section('title', 'Upcoming Events')
 
 @section('content')
-    <div class="container mx-auto py-8">
-        <h1 class="text-2xl font-bold mb-6">Events</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @forelse($events as $item)
-                <div class="bg-white shadow rounded-lg p-4 flex flex-col">
-                    <h2 class="text-lg font-semibold mb-2">{{ $item->title }}</h2>
-                    <div class="text-gray-500 text-sm mb-2">{{ $item->start_date }} - {{ $item->end_date }}</div>
-                    <div class="mb-2 line-clamp-3">{{ Str::limit(strip_tags($item->content), 100) }}</div>
-                    <a href="{{ route('user.events.show', $item->id) }}" class="mt-auto text-blue-600 hover:underline">Read
-                        more</a>
-                </div>
-            @empty
-                <div class="col-span-3 text-center text-gray-500">No events found.</div>
-            @endforelse
+    <div class="news-events-page">
+        <!-- Banner Section -->
+        <div class="banner-section">
+            <img src="{{ asset('images/events-banner.jpg') }}" alt="Upcoming Events">
+            <div class="banner-overlay">
+                <p>Join us at our upcoming events and activities</p>
+            </div>
         </div>
-        <div class="mt-6">{{ $events->links() }}</div>
+
+        <div class="news-events-container">
+            <h1 class="main-title">Upcoming Events</h1>
+
+            <div class="vertical-list">
+                @forelse($latestEvents as $event)
+                    <div class="vertical-item">
+                        <div class="vertical-img">
+                            @if ($event->image)
+                                <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}">
+                            @else
+                                <img src="{{ asset('images/car-event.jpg') }}" alt="No image">
+                            @endif
+                        </div>
+                        <div class="vertical-content">
+                            <div class="vertical-meta">
+                                <span class="vertical-date">{{ \Carbon\Carbon::parse($event->start_date)->format('d M Y') }}
+                                    - {{ \Carbon\Carbon::parse($event->end_date)->format('d M Y') }}</span>
+                                <span class="vertical-type">EVENT</span>
+                            </div>
+                            <h3 class="vertical-title">{{ $event->title }}</h3>
+                            <p class="vertical-desc">{{ Str::limit(strip_tags($event->content), 150) }}</p>
+                            <a href="{{ route('events.show', $event->id) }}" class="vertical-link">View Details</a>
+                        </div>
+                    </div>
+                @empty
+                    <div class="empty-state">
+                        <i class="far fa-calendar-alt"></i>
+                        <p>No upcoming events at the moment.</p>
+                    </div>
+                @endforelse
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                {{ $latestEvents->links() }}
+            </div>
+        </div>
     </div>
 @endsection

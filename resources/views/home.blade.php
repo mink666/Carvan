@@ -313,7 +313,7 @@
             </div>
             <div class="container mx-auto px-4">
                 <div class="text-center pt-10 md:pt-16">
-                    <a href="news-events"
+                    <a href="{{ route('news_events.index') }}" "news-events"
                        class="inline-block border border-black bg-black text-white font-semibold py-3 px-10 hover:bg-white hover:text-black transition-all duration-300 text-base rounded-md">
                         See All
                     </a>

@@ -1,13 +1,13 @@
 
 <div class="p-6 bg-white rounded-lg shadow-md">
     <div class="flex items-center justify-between mb-4">
-      <h2 class="text-lg font-bold">All Car:
-        <span class="text-indigo-600">{{$carModels->count()}}</span>
+      <h2 class="text-lg font-bold">All Ranges:
+        <span class="text-indigo-600"></span>
         {{-- Projects: <span class="text-indigo-600">884</span> --}}
       </h2>
         <a href="/Admin/CarMgr?state=create" class="text-white">
             <button class="bg-[#ff3131] hover:bg-[#B20710] text-white px-4 py-2 rounded-md text-sm font-semibold">
-                + Add new Car
+                + Add Brand
             </button>
         </a>
     </div>
@@ -17,43 +17,27 @@
         <tr>
           <th class="p-3"><input type="checkbox" /></th>
           <th class="p-3">ID</th>
-          <th class="p-3">Brand</th>
-          <th class="p-3">Range</th>
           <th class="p-3">Name</th>
-          <th class="p-3">Year</th>
           <th class="p-3">Description</th>
-          <th class="p-3">Image</th>
-          <th class="p-3">Last update</th>
+          <th class="p-3">Last create</th>
           <th class="p-3 text-center">Status</th>
         </tr>
       </thead>
       <tbody>
-        @foreach($carModels as $carModel)
+        @foreach($ranges as $range)
         <tr>
             <td class="p-3"><input type="checkbox" /></td>
             <td class="p-3">
-                <span>{{ $carModel->id }}</span>
+                <span>{{ $range->id }}</span>
             </td>
             <td class="p-3">
-                <span>{{ $carModel->brand->name }}</span>
+                <span>{{ $range->name }}</span>
             </td>
             <td class="p-3">
-                <span>{{ $carModel->rangeOfCars->name }}</span>
+                <span>{{ $range->description }}</span>
             </td>
             <td class="p-3">
-                <span>{{ $carModel->name }}</span>
-            </td>
-            <td class="p-3">
-                <span>{{ $carModel->year }}</span>
-            </td>
-            <td class="p-3">
-                <span>{{ $carModel->description }}</span>
-            </td>
-            <td class="p-3">
-                <img src="{{ asset('' . $carModel->image) }}" alt="{{ $carModel->name }}" class="w-30 h-12 object-contain mx-auto">
-            </td>
-            <td class="p-3">
-                <span>{{ $carModel->created_at->format('d M Y') }}</span>
+                <span>{{ $range->updated_at->format('d M Y') }}</span>
             </td>
 
             <td class="p-3 text-center relative">
@@ -70,13 +54,13 @@
                         class="origin-top-right absolute right-0 mt-2 w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
                       >
                         <div class="py-1 text-sm text-gray-700">
-                          <a href="{{ route('Admin.CarMgr.edit', $carModel->id) }}"
+                          <a href=""
                              class="block px-4 py-2 hover:bg-gray-100">
                              <i class="fa fa-edit"></i>
                              Edit
                             </a>
 
-                          <form action="/car_models/{{ $carModel->id }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                          <form action="/car_models/{{ $range->id }}" method="POST" onsubmit="return confirm('Are you sure?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit"

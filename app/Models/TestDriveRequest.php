@@ -13,17 +13,15 @@ use App\Models\TestDriveReview;
 class TestDriveRequest extends Model
 {
     protected $fillable = [
-        'user_id',
         'car_model_id',
         'request_date',
         'status',
         'note',
+        'firstname',
+        'lastname',
+        'emailaddress',
+        'phonenumber',
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function carModel(): BelongsTo
     {

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Carvan Admin</title>
 </head>
 
@@ -77,7 +78,7 @@
         <!-- Content -->
             <main class="flex-1 p-6 overflow-y-auto">
                 @if($section === 'Dashboard')
-                    @include('Components/Dashboard')
+                    @include('Components/Dashboard', $data)
                 @elseif($section === 'CarMgr')
                     @if($state === 'list')
                         @include('Components/CarMgr/List', $data)

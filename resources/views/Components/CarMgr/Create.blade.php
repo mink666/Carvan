@@ -1,6 +1,6 @@
 <div class="max-w-8xl w-full mx-auto bg-white shadow-xl rounded-xl overflow-hidden flex">
 
-    <form action="" method="POST" enctype="multipart/form-data" class="flex w-full">
+    <form action="{{route('Admin.CarMgr.store')}}" method="POST" enctype="multipart/form-data" class="flex w-full">
         @csrf
 
         <!-- Bên trái: Upload Image -->
@@ -54,7 +54,7 @@
                 <!-- Range -->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Range</label>
-                    <select name="range_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                    <select name="range_of_cars_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
                         <option value="" disabled selected>Select a Range</option>
                         @foreach($ranges as $range)
                             <option value="{{ $range->id }}">{{ $range->name }}</option>
@@ -62,14 +62,18 @@
                     </select>
                 </div>
 
-                <!-- Description -->
                 <div>
-                    <label class="block text-base font-medium text-gray-700 mb-1">Year</label>
-                    <input type="text" name="review" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                    <label class="block text-base font-medium text-gray-700 mb-1">Name</label>
+                    <input type="text" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
 
                 </div>
 
-                <!-- Review -->
+                <div>
+                    <label class="block text-base font-medium text-gray-700 mb-1">Year</label>
+                    <input type="text" name="year" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+
+                </div>
+
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Description</label>
                     <textarea name="description" class="w-full h-36 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]"></textarea>
@@ -103,7 +107,7 @@
             };
             reader.readAsDataURL(file); // Đọc file dưới dạng Data URL
         } else {
-            previewImage.src = "{{ asset('images/placeholder.png') }}"; // Nếu không có file, hiển thị ảnh mặc định
+            previewImage.src = "{{ asset('images/placeholder.png') }}"; 
         }
     });
 </script>

@@ -49,7 +49,9 @@ class CarModelController extends Controller
 
         $path = null;
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('car_models');
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images/car_models'), $imageName);
+            $path = 'images/car_models/' . $imageName;
         }
 
         CarModel::create([
@@ -61,7 +63,7 @@ class CarModelController extends Controller
             'image' => $path,
         ]);
 
-        return redirect()->route('car_models.index')->with('success', 'Car model created successfully.');
+        return redirect()->route('Admin.CarMgr')->with('success', 'Car model created successfully.');
     }
 
 

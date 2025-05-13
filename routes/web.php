@@ -48,6 +48,7 @@ Route::get('/Admin/{section}', [AdminController::class, 'index'])->name('Admin')
 
 Route::get('/Admin/CarMgr', [CarModelController::class, 'index'])->name('Admin.CarMgr');
 Route::get('/Admin/CarMgr/create', [CarModelController::class, 'create'])->name('Admin.CarMgr.create');
+Route::post('/Admin/CarMgr/store', [CarModelController::class, 'store'])->name('Admin.CarMgr.store');
 Route::get('/Admin/CarMgr/edit/{id}', [CarModelController::class, 'edit'])->name('Admin.CarMgr.edit');
 
 Route::get('/Admin/BrandMgr', [BrandController::class, 'list'])->name('Admin.BrandMgr');

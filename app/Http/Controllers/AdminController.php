@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -33,8 +34,33 @@ class AdminController extends Controller
                 return redirect()->route('Admin.RangesMgr.create');
             }
             $data['ranges'] = \App\Models\RangeOfCar::all();
-        }
+        } elseif ($section === 'Dashboard') {
+            $data['userCount'] = \App\Models\User::count();
+            $data['carCount'] = \App\Models\CarModel::count();
+            $data['brandCount'] = \App\Models\Brand::count();
+            $data['rangeCount'] = \App\Models\RangeOfCar::count();
+            $data['carCountsByBrand'] = \App\Models\CarModel::select('brand_id', DB::raw('count(*) as total'))
+                ->groupBy('brand_id')
+                ->with('brand')
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'brand' => $item->brand->name ?? 'Không xác định',
+                        'total' => $item->total,
+                    ];
+                });
+            $data['carCountsByRange'] = \App\Models\CarModel::select('range_of_cars_id', DB::raw('count(*) as total'))
+                ->groupBy('range_of_cars_id')
+                ->with('RangeOfCars')
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'range' => $item->RangeOfCars->name ?? 'Không xác định',
+                        'total' => $item->total,
+                    ];
+                });
 
+        }
         return view('Admin', compact('section', 'state','data'));
     }
 }

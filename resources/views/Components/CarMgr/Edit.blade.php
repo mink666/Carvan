@@ -46,7 +46,7 @@
                     <select name="brand_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                         <option value="" disabled selected>Select a Brand</option>
                         @foreach($brands as $brand)
-                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                            <option value="{{ $brand->id }}" {{ $carModel->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -57,7 +57,7 @@
                     <select name="range_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                         <option value="" disabled selected>Select a Range</option>
                         @foreach($ranges as $range)
-                            <option value="{{ $range->id }}">{{ $range->name }}</option>
+                            <option value="{{ $range->id }}" {{ $carModel->range_of_cars_id == $range->id ? 'selected' : '' }}>{{ $range->name }}</option>
                         @endforeach
                     </select>
                 </div>

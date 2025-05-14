@@ -168,74 +168,94 @@ body {
     transform: scale(1.3);
 }
 
+/* Giữ lại style cho .about-section và .about-section h1 như cũ nếu bạn thấy ổn */
 .about-section {
-    padding: 35px;
-    background-color: #fff;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    padding: 40px 35px; /* Tăng padding một chút */
+    background-color: #f8f9fa; /* Có thể đổi màu nền section một chút */
     border-radius: 8px;
     margin-bottom: 40px;
 }
 
 .about-section h1 {
-    font-size: 1.9em !important;
+    font-size: 2.2em !important; /* Tăng kích thước H1 */
     margin-top: 0;
-    margin-bottom: 35px;
+    margin-bottom: 40px; /* Tăng khoảng cách dưới H1 */
     text-align: center;
     color: #212529;
     border-bottom: 1px solid #dee2e6;
-    padding-bottom: 15px;
-    font-weight: 600;
+    padding-bottom: 20px;
+    font-weight: 700; /* Đậm hơn */
 }
 
-.about-section h1,
-.about-section h2,
-.about-section h3 {
-    color: #212529;
+/* Bỏ style cũ cho .about-item, ul, li, li::before */
+/* Thay vào đó là style cho grid và card */
+
+.about-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Tạo lưới responsive */
+    gap: 30px; /* Khoảng cách giữa các card */
 }
 
-.about-section .about-item {
-    border: 1px solid #e9ecef;
-    padding: 20px 25px;
-    margin-bottom: 25px;
-    border-radius: 6px;
-    background-color: #fff;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
-}
-.about-section .about-item:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    border-color: #ced4da;
-}
-.about-section .about-item:last-child {
-    margin-bottom: 0;
+.about-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px; /* Bo góc nhiều hơn */
+    padding: 30px 25px; /* Padding bên trong card */
+    text-align: center; /* Căn giữa nội dung card */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Đổ bóng nhẹ */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Sử dụng flex để căn chỉnh nội dung bên trong card tốt hơn */
+    flex-direction: column; /* Các phần tử xếp chồng lên nhau */
+    align-items: center; /* Căn giữa theo chiều ngang */
 }
 
-.about-section .about-item h2 {
+.about-card:hover {
+    transform: translateY(-8px); /* Hiệu ứng nhấc lên khi hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.about-card-icon {
+    font-size: 2.8em; /* Kích thước icon */
+    color: #0d6efd;   /* Màu icon (màu primary của Bootstrap) */
+    margin-bottom: 20px;
+    line-height: 1; /* Đảm bảo icon không chiếm quá nhiều chiều cao */
+    /* Nếu dùng ảnh/SVG, bạn có thể đặt width/height ở đây */
+    /* width: 50px; height: 50px; */
+}
+/* .about-card-icon img, .about-card-icon svg { width: 100%; height: 100%; } */
+
+
+.about-card h2 {
+    font-size: 1.4em; /* Kích thước tiêu đề card */
+    color: #343a40;  /* Màu tiêu đề đậm hơn */
     margin-top: 0;
-    margin-bottom: 18px;
-    font-size: 1.3em;
-    color: #0d6efd;
+    margin-bottom: 15px;
     font-weight: 600;
 }
 
-.about-section ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.about-card p {
+    font-size: 0.95em;
+    color: #555e68; /* Màu chữ mô tả */
+    line-height: 1.7; /* Giãn dòng dễ đọc hơn */
+    flex-grow: 1; /* Để đoạn text cố gắng lấp đầy không gian nếu các card có chiều cao khác nhau */
 }
 
-.about-section li {
-    margin-bottom: 10px;
-    padding-left: 20px;
-    position: relative;
-}
-.about-section li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    top: 1px;
-    color: #0d6efd;
-    font-weight: bold;
-    font-size: 0.9em;
+/* Responsive cho Grid (nếu cần điều chỉnh thêm ngoài auto-fit) */
+@media (max-width: 600px) {
+    .about-grid-container {
+        grid-template-columns: 1fr; /* 1 cột trên màn hình nhỏ */
+        gap: 20px;
+    }
+    .about-card {
+        padding: 25px 20px;
+    }
+    .about-card-icon {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+    }
+    .about-card h2 {
+        font-size: 1.3em;
+    }
 }
 
 .speech-container {
@@ -522,7 +542,30 @@ body {
     min-width: 280px;
     padding-left: 10px;
 }
+.contact-details li:last-child a {
+    color: #333;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+  }
 
+  .contact-details li:last-child a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #d93025;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .contact-details li:last-child a:focus::after,
+  .contact-details li:last-child a:hover::after {
+    transform: scaleX(1);
+  }
 .contact-details h3 {
     font-size: 1.5em;
     font-weight: 600;

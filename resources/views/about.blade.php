@@ -48,44 +48,49 @@
             </section>
 
             {{-- 2. About Section --}}
-            <section id="about" class="about-section"> {{-- Thêm ID nếu cần anchor link --}}
+            <section id="about" class="about-section">
                 <h1>ABOUT CARVAN</h1>
 
-                <div id="mission" class="about-item"> {{-- Thêm ID tương ứng với link nút banner --}}
-                    <h2>1. OUR MISSION</h2>
-                    <ul>
-                        <li>CARVAN's mission is simple: build trust and enrich the car buying and selling experience for everyone. We are committed to building a transparent, reliable, and new car buying and selling environment where customers can easily find a car that suits their needs and budget. Through providing quality vehicles that have undergone rigorous inspection and transparent services, CARVAN aims to become a trusted companion on your journey, turning car buying from a transaction into a memorable milestone.</li>
-                    </ul>
-                </div>
+                <div class="about-grid-container"> {{-- Container mới cho các thẻ --}}
 
-                <div id="goals" class="about-item">
-                    <h2>2. GOALS</h2>
-                    <ul>
-                        <li>Expand the network: Continue to expand the network strongly and quickly across provinces and key areas across the country, helping customers easily access products and services.</li>
-                        <li>Improve service quality: Continuously improve service quality, invest in training a team of professional staff to bring the best experience to customers.</li>
-                        <li>Enhance customer value: Put customer satisfaction at the highest level, listen to feedback and meet customer needs.</li>
-                        <li>Build a strong brand reputation: Build CARVAN into a strong brand, trusted by customers as the top choice when it comes to buying and selling used cars, based on high quality, transparency, and competitive prices.</li>
-                        <li>Sustainable growth: Achieve stable growth in revenue and market share, ensuring long-term and sustainable development for the brand.</li>
-                    </ul>
-                </div>
+                    {{-- Thẻ Sứ mệnh --}}
+                    <div class="about-card" id="mission">
+                        <div class="about-card-icon">
+                            <i class="fas fa-bullseye"></i> {{-- Ví dụ dùng Font Awesome, bạn cần tích hợp thư viện này hoặc dùng SVG/ảnh --}}
+                        </div>
+                        <h2>OUR MISSION</h2>
+                        <p>Building trust and enriching the car buying/selling experience with transparency and reliability for every customer.</p>
+                    </div>
 
-                <div id="history" class="about-item">
-                    <h2>3. HISTORY OF FORMATION AND DEVELOPMENT</h2>
-                    <ul>
-                        <li>CARVAN was born from a passion for cars and the desire to create a reliable and transparent used car buying and selling location, especially different from traditional models. Starting from a small showroom [possibly established in the late 201X, but the founding years need to be reviewed for accuracy], CARVAN has quickly established its position in the market thanks to its focus on quality and customer trust. The important initial milestone was the successful launch of the first branch, marking a significant step forward, creating momentum for future expansion strategies. Over the years, CARVAN has continuously expanded its network, strongly developed, and deployed many branches in strategic locations, diversifying product categories and building a professional, dedicated, and knowledgeable team, always putting customer benefits first. CARVAN's history is a continuous effort to bring value to the car-loving community.</li>
-                    </ul>
-                </div>
+                    {{-- Thẻ Mục tiêu --}}
+                    <div class="about-card" id="goals">
+                        <div class="about-card-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h2>OUR GOALS</h2>
+                        <p>Expanding our network, enhancing service quality, maximizing customer value, building a strong brand, and ensuring sustainable growth.</p>
+                    </div>
 
-                <div id="responsibility" class="about-item">
-                    <h2>4. RESPONSIBILITY</h2>
-                    <ul>
-                        <li>At CARVAN, we understand that the success of a business is closely linked to its responsibility towards customers, employees, and the community.</li>
-                        <li>With customers: CARVAN is committed to providing transparent product information, clarifying the vehicle's origin and usage history (if any). We ensure a clear buying and selling process, quick procedures, and protection of customer rights. All vehicles undergo thorough inspection, maintenance, and are built on ensuring peace of mind for customers after purchase.</li>
-                        <li>With employees: Build a professional working environment, dynamic, fair, and create development opportunities for all members.</li>
-                        <li>With society and the community: CARVAN makes continuous efforts in business ethics, contributing positively to social development and coordinating efforts to develop the local economy not only for profit. We always comply with environmental protection regulations and find ways to optimize operations to minimize negative environmental impacts (e.g., waste sorting regulations, chemical treatment).</li>
-                    </ul>
-                </div>
-            </section> {{-- Kết thúc about-section --}}
+                    {{-- Thẻ Lịch sử --}}
+                    <div class="about-card" id="history">
+                        <div class="about-card-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h2>OUR HISTORY</h2>
+                        <p>Born from passion, CARVAN quickly established its mark with a focus on quality, evolving into a trusted name in the auto community.</p>
+                    </div>
+
+                    {{-- Thẻ Trách nhiệm --}}
+                    <div class="about-card" id="responsibility">
+                        <div class="about-card-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h2>OUR RESPONSIBILITY</h2>
+                        <p>Committed to our customers with transparent dealings, to our employees with a dynamic environment, and to society with ethical practices.</p>
+                    </div>
+
+                </div> {{-- Kết thúc about-grid-container --}}
+            </section>
 
             {{-- 3. Speech Section --}}
             <section class="speech-container">

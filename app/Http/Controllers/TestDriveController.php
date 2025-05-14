@@ -21,14 +21,14 @@ class TestDriveController extends Controller
             'car_model_id' => 'required|exists:car_models,id',
             'request_date' => 'required|date|after:now',
             'note' => 'nullable|string',
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'emailaddress' => 'required|email|max:255',
-            'phonenumber' => 'required|string|max:20',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email_address' => 'required|email|max:255',
+            'phone_number' => 'required|string|max:20',
         ]);
 
-        TestDriveRequest::create($validatedData);
-
+        $test = TestDriveRequest::create($validatedData);
+        // dd($test);
         return redirect()->route('test_drive.index')->with('success', 'Request for test drive submitted successfully.');
     }
 

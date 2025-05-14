@@ -16,6 +16,8 @@ use App\Http\Controllers\NewsEventsController;
 use App\Http\Controllers\ContactPageController;
 use App\Http\Controllers\PreOwnedController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\BrandController as AdminBrandController;
+use App\Http\Controllers\Admin\CarModelController as AdminCarModelController;
 
 
 Route::get('/', [PageController::class, 'home'])->name('home');

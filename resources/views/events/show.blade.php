@@ -3,28 +3,41 @@
 @section('title', $latestEvents->title)
 
 @section('content')
-    <div class="events-show-page modern-show">
-        <div class="show-image">
-            @if ($latestEvents->image)
-                <img src="{{ asset('storage/' . $latestEvents->image) }}" alt="{{ $latestEvents->title }}">
-            @else
-                <img src="{{ asset('images/no-image.png') }}" alt="No image">
-            @endif
-        </div>
-        <div class="show-header">
-            <div class="show-meta">
-                <span class="show-date"><i class="far fa-calendar"></i>
-                    {{ \Carbon\Carbon::parse($latestEvents->start_date)->format('d M Y') }} -
-                    {{ \Carbon\Carbon::parse($latestEvents->end_date)->format('d M Y') }}
-                </span>
+    <div class="events-show-page">
+        <!-- Hero Banner Section -->
+        <section class="ne-hero-section">
+            <div class="ne-hero-banner">
+                <div class="ne-slide">
+                    @if ($latestEvents->image)
+                        <img src="{{ asset('storage/' . $latestEvents->image) }}" class="ne-slide-image"
+                            alt="{{ $latestEvents->title }}">
+                    @else
+                        <img src="{{ asset('images/no-image.png') }}" class="ne-slide-image" alt="No image">
+                    @endif
+                    <div class="ne-slide-overlay"></div>
+                </div>
             </div>
-            <h1 class="show-title">{{ $latestEvents->title }}</h1>
+        </section>
+
+        <div class="show-header-full-width">
+            <div class="show-header-content">
+                <div class="show-meta">
+                    <span class="show-date"><i class="far fa-calendar"></i>
+                        {{ \Carbon\Carbon::parse($latestEvents->start_date)->format('d M Y') }} -
+                        {{ \Carbon\Carbon::parse($latestEvents->end_date)->format('d M Y') }}
+                    </span>
+                </div>
+                <h1 class="show-title">{{ $latestEvents->title }}</h1>
+            </div>
         </div>
-        <div class="show-content">
-            {!! $latestEvents->content !!}
-        </div>
-        <div class="show-back">
-            <a href="{{ route('events.index') }}" class="vertical-link">Back to Events</a>
+
+        <div class="container">
+            <div class="show-content">
+                {!! $latestEvents->content !!}
+            </div>
+            <div class="show-back">
+                <a href="{{ route('events.index') }}" class="vertical-link">Back to Events</a>
+            </div>
         </div>
     </div>
 

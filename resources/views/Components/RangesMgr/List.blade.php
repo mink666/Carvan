@@ -3,11 +3,11 @@
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg font-bold">All Ranges:
         <span class="text-indigo-600"></span>
-        {{-- Projects: <span class="text-indigo-600">884</span> --}}
+        <span class="text-blue-500">{{ $ranges->count() }}</span>
       </h2>
-        <a href="/Admin/CarMgr?state=create" class="text-white">
+        <a href="/Admin/RangesMgr?state=create" class="text-white">
             <button class="bg-[#ff3131] hover:bg-[#B20710] text-white px-4 py-2 rounded-md text-sm font-semibold">
-                + Add Brand
+                + Add Ranges
             </button>
         </a>
     </div>
@@ -54,7 +54,7 @@
                         class="origin-top-right absolute right-0 mt-2 w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
                       >
                         <div class="py-1 text-sm text-gray-700">
-                          <a href=""
+                          <a href="{{ route('Admin.RangesMgr.edit', $range->id) }}"
                              class="block px-4 py-2 hover:bg-gray-100">
                              <i class="fa fa-edit"></i>
                              Edit

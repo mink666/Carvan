@@ -13,6 +13,15 @@
     <div class="wrapper">
         <header>
             @include('layouts.partials.navbar')
+            <div x-data="{ navbarHeight: 0 }"
+                x-init="
+                    const navbarEl = document.querySelector('nav.fixed.z-50'); // Selector chính xác của navbar
+                    if (navbarEl) {
+                        navbarHeight = navbarEl.offsetHeight;
+                        document.documentElement.style.setProperty('--navbar-height', `${navbarHeight}px`);}"
+                :style="`height: ${navbarHeight}px`"
+                style="display: block;"
+            ></div>
         </header>
 
         <div class="content">

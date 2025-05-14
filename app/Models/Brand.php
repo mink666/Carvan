@@ -10,10 +10,21 @@ class Brand extends Model
 {
     protected $fillable = [
         'name',
+        'company_full_name',
         'year',
+        'founder',
         'description',
         'logo',
+        'motto',
+        'website_url',
+        'cover_image',
+        'key_achievements',
         'location',
+    ];
+
+    protected $casts = [
+        'key_achievements' => 'array', // Convert JSON to array but currently doesnt work
+        'year' => 'integer',
     ];
 
     public function carModels(): HasMany

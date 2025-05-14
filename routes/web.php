@@ -38,6 +38,7 @@ Route::get('/test_drive', [TestDriveController::class, 'index'])->name('test_dri
 Route::post('/test_drive', [TestDriveController::class, 'store'])->name('test_drive.store');
 
 Route::get('/preOwned', [PreOwnedController::class, 'index'])->name('preOwned.index');
+Route::get('/preOwned/{preOwned}', [PreOwnedController::class, 'show'])->name('preOwned.show');
 
 //Route for Admin
 Route::get('/Admin', function () {

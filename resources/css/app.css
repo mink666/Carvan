@@ -668,3 +668,13 @@ body {
     .contact-map iframe { min-height: 250px; }
     .contact-details h3 { font-size: 1.2em; }
 }
+
+.nav.hidden {
+    opacity: 0;              /* Hidden state */
+    transform: translateY(-100%);
+    pointer-events: none;    /* Optional: disable clicks when hidden */
+}
+
+header .nav {
+    transition: all 0.5s ease !important;
+}

@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
             RangeOfCarSeeder::class,
             BrandSeeder::class,
             CarModelSeeder::class,
+            PreownedVehicleSeeder::class,
             NewsSeeder::class,
             EventSeeder::class,
-            InventorySeeder::class,
         ]);
     }
 }

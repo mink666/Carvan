@@ -122,7 +122,6 @@
     display: flex;
     justify-content: center;
     align-items: stretch;
-    padding: 10px;
 }
 
 /* Override Swiper's default navigation styles */

@@ -74,9 +74,11 @@ Route::get('/events/{event}', [NewsEventsController::class, 'eventsShow'])->name
 Route::get('/news-events', [NewsEventsController::class, 'index'])->name('news_events.index');
 //products
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{carModel}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/get-ranges-by-brand/{brandId}', [ProductController::class, 'getRangesByBrand'])->name('get.ranges.by.brand');
+Route::get('/get-origins-by-brand/{brandId}', [ProductController::class, 'getOriginsByBrand'])->name('get.origins.by.brand');
 
 // News & Events page
 // Route::get('/news-events', function () {
 //     return view('news_events.index');
 // })->name('news_events.index');
-

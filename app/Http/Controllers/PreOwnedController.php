@@ -9,21 +9,26 @@ class PreOwnedController extends Controller
 {
     public function index()
     {
-        // Fetch all pre-owned cars; adjust the query as needed.
-        $preOwnedCars = PreOwned::all();
+        $preownedCars = Preowned::with(['inventory.carModel.brand', 'inventory.carModel.rangeOfCars'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
+            dd($preownedCars);
 
-        // Return a view (create resources/views/preOwned/index.blade.php) and pass the data.
-        return view('preOwned.index', compact('preOwnedCars'));
+        return view('preowned.index', compact('preownedCars'));
     }
 
     public function show(PreOwned $preOwned)
     {
-        // Eager load related models
-        $preOwned->load(['brand', 'rangeOfCars', 'inventories' => function($query) {
-            $query->orderBy('price');
-        }]);
+         // Eager load các thông tin cần thiết
+        $preownedCar->load(['inventory.carModel.brand', 'inventory.carModel.rangeOfCars']);
 
-        // Pass the fetched preOwned model to the view (adjust variable name if needed)
-        return view('preOwned.show', compact('preOwned'));
+        // Lấy các xe pre-owned khác để gợi ý (ví dụ)
+        $relatedPreownedCars = Preowned::with(['inventory.carModel.brand'])
+            ->where('id', '!=', $preownedCar->id) // Loại trừ xe hiện tại
+            ->inRandomOrder()
+            ->take(4) // Lấy 4 xe ngẫu nhiên
+            ->get();
+
+        return view('preowned.show', compact('preownedCar', 'relatedPreownedCars'));
     }
 }

@@ -11,7 +11,7 @@ class PageController extends Controller
 {
     public function home(): View
     {
-        $featuredBrands = Brand::take(4)->inRandomOrder()->get();
+        $featuredBrands = Brand::take(10)->inRandomOrder()->get();
         $popularModels = CarModel::with([
             'brand',
             'rangeOfCars',

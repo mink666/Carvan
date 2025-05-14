@@ -3,7 +3,7 @@
     'items',
     'itemType',
     'activeTabInitial',
-    'dropdownId' => $triggerText
+    'dropdownId' => \Illuminate\Support\Str::slug($triggerText . '-' . rand()),
 ])
 
 <div class="relative"
@@ -37,14 +37,11 @@
          x-transition:leave="transition ease-in duration-150"
          x-transition:leave-start="opacity-100 translate-y-0"
          x-transition:leave-end="opacity-0 -translate-y-2"
-         class="fixed inset-x-0 top-15 z-30 pt-[--navbar-height]
-                h-screen overflow-y-auto bg-black bg-opacity-25 backdrop-blur-sm"
-         style="display: none;">
-
+         class="fixed inset-x-0 top-15 z-30 h-screen overflow-y-auto bg-black bg-opacity-25 backdrop-blur-sm">
         <div class="bg-white shadow-2xl w-full">
             <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="relative grid gap-4 py-5 md:py-8 md:grid-cols-3">
-                    <div class="md:col-span-1 border-b md:border-b-0 md:border-r border-gray-200 pb-4 md:pb-0 md:pr-6 space-y-1 overflow-y-auto max-h-[calc(100vh-var(--navbar-height)-theme(spacing.20))]"> {{-- Adjusted max-height --}}
+                    <div class="md:col-span-1 border-b md:border-b-0 md:border-r border-gray-200 pb-4 md:pb-0 md:pr-4 space-y-1 overflow-y-auto max-h-[60vh]">
                         @forelse ($items as $item)
                             <button @click="activeTab = '{{ $item->id }}'"
                                     :class="{
@@ -52,7 +49,15 @@
                                         'text-gray-700 hover:bg-gray-100 hover:text-red-600': activeTab != '{{ $item->id }}'
                                     }"
                                     class="w-full text-left block rounded-md p-3 text-sm md:text-base font-medium transition ease-in-out duration-150 focus:outline-none">
-                                {{ $item->name }}
+                                <span class="flex items-center">
+                                    @if ($itemType === 'brand' && !empty($item->logo))
+                                        <span class="inline-flex items-center justify-center w-12 h-12 md:w-10 md:h-10 mr-3 flex-shrink-0">
+                                            <img src="{{ asset($item->logo) }}" alt="{{ $item->name }} logo"
+                                                 class="max-w-full max-h-full object-contain">
+                                        </span>
+                                    @endif
+                                    <span class="flex-grow">{{ $item->name }}</span>
+                                </span>
                             </button>
                         @empty
                             <p class="text-gray-500 p-3 text-sm">No {{ Str::plural($itemType) }} available.</p>
@@ -69,13 +74,13 @@
                                         </h3>
                                         @if ($itemType === 'brand')
                                             <a href="{{ route('brands.show', ['brand' => $item->id]) }}"
-                                               class="text-xs md:text-sm font-medium text-red-600 hover:text-red-800 transition ease-in-out duration-150 whitespace-nowrap">
-                                                View all {{ $item->name }} &rarr;
+                                               class="text-xs md:text-sm font-medium text-red-600 hover:text-red-800 transition ease-in-out duration地将150 whitespace-nowrap">
+                                                View all {{ $item->name }} →
                                             </a>
                                         @elseif ($itemType === 'range')
                                             <a href="{{ route('range_of_car.show', ['rangeOfCar' => $item->id]) }}"
                                                 class="text-xs md:text-sm font-medium text-red-600 hover:text-red-800 transition ease-in-out duration-150 whitespace-nowrap">
-                                                View all {{ $item->name }} &rarr;
+                                                View all {{ $item->name }} →
                                             </a>
                                         @endif
                                     </div>
@@ -98,12 +103,12 @@
                                                             @endif
                                                         </p>
                                                         @if(isset($model->inventories_min_price) && $model->inventories_min_price > 0)
-                                                        <p class="text-xs md:text-sm text-red-500 font-medium">
-                                                            Price from: {{ number_format($model->inventories_min_price, 0, ',', '.') }} VNĐ
-                                                        </p>
+                                                            <p class="text-xs md:text-sm text-red-500 font-medium">
+                                                                Price from: {{ number_format($model->inventories_min_price, 0, ',', '.') }} VNĐ
+                                                            </p>
                                                         @endif
                                                         <p class="mt-1 text-xs text-gray-500 group-hover:text-red-500">
-                                                            View details &rarr;
+                                                            View details →
                                                         </p>
                                                     </div>
                                                 </div>

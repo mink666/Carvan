@@ -1,47 +1,46 @@
 @extends('layouts.app')
 
-@section('title', $brand->name . ' - Car Models and Information')
+@section('title', $brand->name . ' - Brand Profile & Models')
 
 @section('content')
 <div class="bg-gray-100">
 
-    {{-- 1. Brand Hero Section (Banner/Thông tin nổi bật) --}}
-    <section class="brand-hero bg-gradient-to-r from-gray-700 via-gray-800 to-black text-white py-12 md:py-20">
-        <div class="container mx-auto px-4 text-center">
+    {{-- 1. Brand Banner Section --}}
+    <section class="brand-banner relative text-white py-20 md:py-32 text-center bg-gray-700">
+        {{-- Cover Image --}}
+        @if($brand->cover_image)
+            <div class="absolute inset-0 opacity-70">
+                <img src="{{ asset($brand->cover_image) }}" alt="{{ $brand->name }} Cover Image"
+                     class="w-full h-full object-cover opacity-40"> {{-- Điều chỉnh opacity --}}
+            </div>
+        @else
+            {{-- Fallback gradient if no cover image --}}
+            <div class="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-800 to-gray-900"></div>
+        @endif
+
+        <div class="container mx-auto px-4 relative z-10">
             @if($brand->logo)
-                <img src="{{ asset($brand->logo) }}" alt="{{ $brand->name }} Logo" class="h-20 md:h-28 mx-auto mb-6 object-contain filter drop-shadow-lg">
+                <img src="{{ asset($brand->logo) }}" alt="{{ $brand->name }} Logo"
+                     class="h-20 md:h-28 lg:h-32 mx-auto mb-6 object-contain filter drop-shadow-xl">
             @else
-                {{-- Placeholder nếu không có logo, hiển thị chữ cái đầu của tên hãng --}}
-                <div class="w-24 h-24 md:w-32 md:h-32 bg-gray-600 flex items-center justify-center mx-auto mb-6 rounded-full shadow-lg">
+                <div class="w-24 h-24 md:w-32 md:h-32 bg-gray-600 bg-opacity-50 flex items-center justify-center mx-auto mb-6 rounded-full shadow-lg">
                     <span class="text-4xl md:text-5xl font-semibold text-white">{{ Str::substr($brand->name, 0, 1) }}</span>
                 </div>
             @endif
-            <h1 class="text-4xl md:text-5xl font-bold mb-3">{{ $brand->name }}</h1>
-            {{-- Hiển thị một phần ngắn của description ở đây nếu có, nếu không thì có thể là một tagline chung --}}
-            <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-                @if($brand->description)
-                    {{ Str::limit($brand->description, 150) }}
-                @else
-                    Discover the an_array_of_finest collection of an_array_of_vehicles from {{ $brand->name }}.
-                @endif
-            </p>
-            @if($brand->year || $brand->location)
-                <div class="mt-4 text-sm text-gray-400">
-                    @if($brand->year)
-                        <span>Established: {{ $brand->year }}</span>
-                    @endif
-                    @if($brand->year && $brand->location)
-                        <span class="mx-2">|</span>
-                    @endif
-                    @if($brand->location)
-                        <span>Headquarters: {{ $brand->location }}</span>
-                    @endif
-                </div>
+
+            @if($brand->motto)
+                <p class="text-xl md:text-2xl lg:text-3xl font-light text-gray-100 italic max-w-3xl mx-auto shadow-text">
+                    "{{ $brand->motto }}"
+                </p>
+            @elseif($brand->description)
+                 <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto shadow-text">
+                    {{ Str::words(strip_tags($brand->description), 15, '...') }}
+                </p>
             @endif
         </div>
     </section>
 
-    <div class="container mx-auto px-4 py-8 md:py-12">
+    <div class="container mx-auto px-4 py-10 md:py-12">
 
         {{-- Breadcrumbs --}}
         <nav class="text-sm mb-8 md:mb-12" aria-label="Breadcrumb">
@@ -60,35 +59,97 @@
             </ol>
         </nav>
 
-        {{-- 2. Brand Description Section (Simpler Styling) --}}
-        @if($brand->description)
-        <section id="brand-description" class="mb-10 md:mb-16 bg-white p-6 md:p-10 rounded-xl shadow-xl">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4 border-b border-gray-200 pb-4">
-                About {{ $brand->name }}
-            </h2>
-            {{-- Styling cho khối văn bản mô tả --}}
-            <div class="text-gray-700 text-base md:text-lg leading-relaxed space-y-5">
-                {{-- nl2br(e($brand->description)) sẽ chuyển \n thành <br> và escape HTML entities --}}
-                {{-- Nếu description đã là HTML an toàn từ admin, bạn có thể dùng {!! $brand->description !!} nhưng CẨN THẬN XSS --}}
-                {!! nl2br(e($brand->description)) !!}
+        {{-- 2. Brand Profile Section --}}
+        <section id="brand-profile" class="mb-12 md:mb-16 bg-white p-6 md:p-10 rounded-xl shadow-2xl">
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+                <div class="lg:col-span-1 space-y-5">
+                    <h2 class="text-3xl font-bold text-gray-900 leading-tight border-b border-gray-200 pb-3">
+                        {{ $brand->company_full_name ?? $brand->name }}
+                    </h2>
+                    @if($brand->founder)
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Founder</p>
+                        <p class="text-lg text-gray-800">{{ $brand->founder }}</p>
+                    </div>
+                    @endif
+                    @if($brand->year)
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Established</p>
+                        <p class="text-lg text-gray-800">{{ $brand->year }}</p>
+                    </div>
+                    @endif
+                    @if($brand->location)
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Headquarters</p>
+                        <p class="text-lg text-gray-800">{{ $brand->location }}</p>
+                    </div>
+                    @endif
+                    @if($brand->website_url)
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Available at:</p>
+                        <a href="{{ $brand->website_url }}" target="_blank" rel="noopener noreferrer"
+                           class="text-lg text-red-600 hover:text-red-800 hover:underline break-all">
+                           {{$brand->name}} Official Website &rarr;
+                        </a>
+                    </div>
+                    @endif
+                </div>
+
+                <div class="lg:col-span-2">
+                    @if($brand->description)
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-3">Our Story</h3>
+                            <div class="text-gray-700 text-base leading-relaxed space-y-4">
+                                {!! nl2br(e($brand->description)) !!}
+                            </div>
+                        </div>
+                    @endif
+
+                    @php
+                        $achievements = [];
+                        if (!is_null($brand->key_achievements)) {
+                            if (is_array($brand->key_achievements)) {
+                                $achievements = $brand->key_achievements;
+                            } else {
+                                $decoded = json_decode($brand->key_achievements, true);
+                                if (is_array($decoded)) {
+                                    $achievements = $decoded;
+                                }
+                            }
+                        }
+                    @endphp
+
+                    @if(count($achievements) > 0)
+                        <div class="mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-3">Key Milestones & Achievements</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-2 pl-1">
+                                @foreach($achievements as $achievement)
+                                    <li class="text-base">{{ $achievement }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @else
+                        <p>No achievements to display.</p>
+                    @endif
+                </div>
             </div>
         </section>
-        @endif
 
         {{-- 3. Car Models Section --}}
         <section id="car-models" class="pt-8">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">
-                Models from <span class="text-red-600">{{ $brand->name }}</span>
+             <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">
+                Explore Our <span class="text-red-600">{{ $brand->name }}</span> Collection
             </h2>
             @if($brand->carModels && $brand->carModels->count() > 0)
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
                     @foreach($brand->carModels as $model)
+                        {{-- Card mẫu xe (sử dụng code card mẫu xe đã có của bạn) --}}
                         <div class="bg-white rounded-xl shadow-lg overflow-hidden group flex flex-col hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1.5">
                             <a href="{{ route('car_models.show', $model->id) }}" class="block overflow-hidden">
                                 @if($model->image)
                                     <img src="{{ asset($model->image) }}" alt="{{ $model->name }}" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out">
                                 @else
-                                    <div class="w-full h-56 bg-gray-200 flex items-center justify-center rounded-t-xl"> {{-- Thêm rounded-t-xl --}}
+                                    <div class="w-full h-56 bg-gray-200 flex items-center justify-center rounded-t-xl">
                                         <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                     </div>
                                 @endif
@@ -102,11 +163,9 @@
                                 @if($model->rangeOfCars)
                                     <p class="text-xs text-gray-500 mb-2 bg-gray-100 px-2 py-0.5 rounded-full self-start">{{ $model->rangeOfCars->name }}</p>
                                 @endif
-
                                 <p class="text-gray-600 text-sm mb-4 flex-grow">
                                     {{ Str::limit($model->description, 80) }}
                                 </p>
-
                                 @if(isset($model->inventories_min_price) && $model->inventories_min_price > 0)
                                     <p class="text-lg font-semibold text-red-600 mb-4">
                                         Price from: {{ number_format($model->inventories_min_price, 0, ',', '.') }} VND
@@ -128,14 +187,18 @@
                 <div class="bg-white p-8 rounded-lg shadow-md text-center">
                      <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     <p class="text-xl text-gray-500">There are currently no models listed for {{ $brand->name }}.</p>
-                    <p class="text-gray-400 mt-2">Please check back later or explore other brands.</p>
-                     <a href="{{ route('brands.index') }}"
-                       class="mt-6 inline-block bg-red-500 text-white font-semibold py-2 px-6 rounded-md hover:bg-red-600 transition-colors duration-300">
-                        Explore Other Brands
-                    </a>
                 </div>
             @endif
         </section>
+
     </div>
 </div>
 @endsection
+
+@push('styles')
+<style>
+    .shadow-text {
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+</style>
+@endpush

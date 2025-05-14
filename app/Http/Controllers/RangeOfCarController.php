@@ -28,7 +28,14 @@ class RangeOfCarController extends Controller
 
     public function create()
     {
-        return view('range_of_car.create');
+        $range = RangeOfCar::all();
+        // Lấy ID lớn nhất hiện tại và cộng thêm 1
+        $nextId = \App\Models\RangeOfCar::max('id') + 1;
+        return view('Admin', [
+            'section' => 'RangesMgr',
+            'state' => 'create',
+            'data' => compact('range', 'nextId'),
+        ]);
     }
 
 
@@ -60,7 +67,11 @@ class RangeOfCarController extends Controller
     public function edit(string $id)
     {
         $range = RangeOfCar::findOrFail($id);
-        return view('range_of_car.edit', compact('rangeOfCar'));
+        return view('Admin', [
+            'section' => 'RangesMgr',
+            'state' => 'edit',
+            'data' => compact('range'),
+            ]);
     }
 
 

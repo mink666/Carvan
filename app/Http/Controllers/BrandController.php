@@ -28,7 +28,14 @@ class BrandController extends Controller
 
     public function create()
     {
-        return view('brands.create');
+        $brands = Brand::all();
+        // Lấy ID lớn nhất hiện tại và cộng thêm 1
+        $nextId = \App\Models\Brand::max('id') + 1;
+        return view('Admin', [
+            'section' => 'BrandMgr',
+            'state' => 'create',
+            'data' => compact('brands', 'nextId'),
+        ]);
     }
 
     public function store(Request $request)
@@ -66,7 +73,11 @@ class BrandController extends Controller
     public function edit(string $id)
     {
         $brand = Brand::findOrFail($id);
-        return view('brands.edit', compact('brand'));
+        return view('Admin', [
+            'section' => 'BrandMgr',
+            'state' => 'edit',
+            'data' => compact('brand'),
+            ]);
     }
 
 

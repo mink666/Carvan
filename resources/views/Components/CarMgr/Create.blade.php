@@ -38,12 +38,12 @@
                 <!-- Book Name -->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">ID</label>
-                    <input type="text" name="id" value="{{ $nextId }}" readonly class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                    <input type="text" name="id" value="{{ $nextId }}" readonly class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                 </div>
                 <!-- Brand -->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Brand</label>
-                    <select name="brand_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                    <select name="brand_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                         <option value="" disabled selected>Select a Brand</option>
                         @foreach($brands as $brand)
                             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -54,7 +54,7 @@
                 <!-- Range -->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Range</label>
-                    <select name="range_of_cars_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                    <select name="range_of_cars_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                         <option value="" disabled selected>Select a Range</option>
                         @foreach($ranges as $range)
                             <option value="{{ $range->id }}">{{ $range->name }}</option>
@@ -64,19 +64,19 @@
 
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Name</label>
-                    <input type="text" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                    <input type="text" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
 
                 </div>
 
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Year</label>
-                    <input type="text" name="year" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                    <input type="text" name="year" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
 
                 </div>
 
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Description</label>
-                    <textarea name="description" class="w-full h-36 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]"></textarea>
+                    <textarea name="description" class="w-full h-36 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"></textarea>
                 </div>
             </div>
 
@@ -107,7 +107,7 @@
             };
             reader.readAsDataURL(file); // Đọc file dưới dạng Data URL
         } else {
-            previewImage.src = "{{ asset('images/placeholder.png') }}"; 
+            previewImage.src = "{{ asset('images/placeholder.png') }}";
         }
     });
 </script>

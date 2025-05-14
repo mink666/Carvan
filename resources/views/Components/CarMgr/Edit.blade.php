@@ -35,15 +35,15 @@
 
             <!-- Form fields -->
             <div class="space-y-4 flex-grow">
-                <!-- Book Name -->
+                <!-- Car Id -->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">ID</label>
-                    <input type="text" name="id" value="{{$carModel ->id}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                    <input type="text" name="id" value="{{$carModel ->id}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                 </div>
-                <!-- Brand -->
+                <!-- Car Name-->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Brand</label>
-                    <select name="brand_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                    <select name="brand_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                         <option value="" disabled selected>Select a Brand</option>
                         @foreach($brands as $brand)
                             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -54,7 +54,7 @@
                 <!-- Range -->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Range</label>
-                    <select name="range_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                    <select name="range_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                         <option value="" disabled selected>Select a Range</option>
                         @foreach($ranges as $range)
                             <option value="{{ $range->id }}">{{ $range->name }}</option>
@@ -65,14 +65,14 @@
                 <!-- Year -->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Year</label>
-                    <input type="text" value="{{$carModel->year}}" name="review"  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b] ">
+                    <input type="text" value="{{$carModel->year}}" name="review"  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black ">
 
                 </div>
 
                 <!-- Description -->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Description</label>
-                    <textarea name="description"  class="w-full h-36 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]" >{{$carModel->description}}</textarea>
+                    <textarea name="description"  class="w-full h-36 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black" >{{$carModel->description}}</textarea>
                 </div>
             </div>
 

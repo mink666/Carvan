@@ -1,4 +1,30 @@
-<nav class="z-50 w-full bg-white">
+<nav x-data="{
+        showNavbar: true,
+        lastScrollTop: 0,
+        scrollThreshold: 100
+     }"
+     x-init="
+    lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let timeout;
+    window.addEventListener('scroll', () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                showNavbar = false;
+            } else if (scrollTop < lastScrollTop || scrollTop <= scrollThreshold) {
+                showNavbar = true;
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, 50);
+    }, { passive: true });
+    "
+     class="fixed top-0 left-0 w-full z-50 bg-white shadow-md transition-transform duration-700 ease-in-out"
+     :class="{
+        'translate-y-0 opacity-100': showNavbar,
+        '-translate-y-full opacity-0': !showNavbar
+     }"
+     >
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
         <div class="flex-shrink-0">
             <a href="{{ route('home') }}">
@@ -6,7 +32,12 @@
             </a>
         </div>
 
-        <div class="hidden sm:flex items-center space-x-6 md:space-x-8 lg:space-x-10 xl:space-x-12 2xl:space-x-20">
+        <div class="sm:flex items-center space-x-4 md:space-x-8 lg:space-x-10 xl:space-x-12 2xl:space-x-20">
+            <a href="{{ route('car_models.index') }}"
+                class="mr-0 text-sm font-bold text-black hover:underline transform transition duration-300 ease-in-out hover:scale-105">
+                New Products
+            </a>
+
             <a href="{{ route('preOwned.index') }}"
                 class="mr-0 text-sm font-bold text-black hover:underline transform transition duration-300 ease-in-out hover:scale-105">
                 Pre-Owned Cars
@@ -49,6 +80,5 @@
         <div class="flex items-center space-x-3 flex-shrink-0">
             {{-- place holder --}}
         </div>
-
     </div>
 </nav>

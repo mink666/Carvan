@@ -5,7 +5,7 @@
 @section('content')
 
     {{-- 1. Slideshow Section --}}
-    <section id="#top" class="hero-banner-section "> {{-- Thêm class để bao bọc slider --}}
+    <section id="#top" class="hero-banner-section"> {{-- Thêm class để bao bọc slider --}}
         <div class="swiper hero-banner-slider"> {{-- Class cho Swiper và định kiểu banner --}}
             <div class="swiper-wrapper">
                 {{-- Slide 1 --}}
@@ -74,10 +74,15 @@
                     </a>
                 @endforeach
             </div>
-            <div class="text-center mt-8">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 mt-8">
                 <a href="{{ route('brands.index') }}"
                    class="inline-block bg-red-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-red-700 transition-colors duration-300">
                     View All Brands
+                </a>
+                <span class="mx-2 font-semibold text-white">OR</span>
+                <a href="{{ route('range_of_car.index') }}"
+                   class="inline-block bg-red-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-red-700 transition-colors duration-300">
+                    Explore All Ranges
                 </a>
             </div>
         </section>

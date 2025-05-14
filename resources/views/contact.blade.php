@@ -70,7 +70,12 @@
                                 <li><strong>Hotline:</strong> 1800 888 861</li>
                                 <li><strong>Tel:</strong> +84 (0) 28 39 118 008</li>
                                 <li><strong>Fax:</strong> +84 (0) 28 39 243 961</li>
-                                <li><strong>Email:</strong> contact@carvan.vn</li>
+                                <li>
+                                    <strong>Email:</strong>
+                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@carvan.vn" target="_blank">
+                                      contact@carvan.vn
+                                    </a>
+                                </li>
                             </ul>
                             {{-- THAY THẾ bằng link Google Maps thực tế của bạn --}}
                             <a href="https://maps.google.com/?q=68+Ton+Duc+Thang+Street,+Ben+Nghe+Ward,+District+1,+Ho+Chi+Minh+City" class="cta-button map-button" target="_blank" rel="noopener noreferrer">View Map</a>
@@ -87,33 +92,6 @@
                             {{ session('success') }}
                         </div>
                     @endif
-
-                    <form action="{{ route('contact.submit') }}" method="POST" class="contact-form">
-                        @csrf
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your name" value="{{ old('name') }}" required>
-                            @error('name') <span class="error-message" style="color: red; font-size: 0.875em;">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email" value="{{ old('email') }}" required>
-                            @error('email') <span class="error-message" style="color: red; font-size: 0.875em;">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" value="{{ old('phone') }}">
-                            @error('phone') <span class="error-message" style="color: red; font-size: 0.875em;">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Your message" required>{{ old('message') }}</textarea>
-                            @error('message') <span class="error-message" style="color: red; font-size: 0.875em;">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="cta-button submit-button">Send Message</button>
-                        </div>
-                    </form>
                 </div>
 
             </section> {{-- Kết thúc contact-container --}}

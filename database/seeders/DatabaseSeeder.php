@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             PreownedVehicleSeeder::class,
             NewsSeeder::class,
             EventSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

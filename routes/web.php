@@ -18,6 +18,9 @@ use App\Http\Controllers\PreOwnedController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\BrandController as AdminBrandController;
 use App\Http\Controllers\Admin\RangeOfCarController as AdminRangeOfCarController;
+use App\Http\Middleware\CheckAdminRole;
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', [PageController::class, 'home'])->name('home');
@@ -43,9 +46,14 @@ Route::get('/preOwned', [PreOwnedController::class, 'index'])->name('preOwned.in
 Route::get('/preOwned/{preOwned}', [PreOwnedController::class, 'show'])->name('preOwned.show');
 
 //Route for Admin
-Route::get('/Admin', function () {
-    return redirect('/Admin/Dashboard');
-})->name('Admin.home');
+
+
+Route::middleware([CheckAdminRole::class])->group(function () {
+    Route::get('/Admin', function () {
+        return redirect('/Admin/Dashboard');
+    })->name('Admin.home');
+});
+
 
 Route::get('/Admin/{section}', [AdminController::class, 'index'])->name('Admin');
 
@@ -85,3 +93,6 @@ Route::get('/get-origins-by-brand/{brandId}', [ProductController::class, 'getOri
 // Route::get('/news-events', function () {
 //     return view('news_events.index');
 // })->name('news_events.index');
+
+Route::get('/LoginAdmin', [AuthController::class, 'showLogin'])->name('AdminLogin');
+Route::post('/LoginAdmin', [AuthController::class, 'login'])->name('login');

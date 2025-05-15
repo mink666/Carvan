@@ -18,7 +18,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             if (Auth::user()->role === 'admin') {
-                return redirect()->route('Admin.home');
+                return redirect('/Admin/Dashboard');
             } else {
                 Auth::logout();
                 return redirect()->back()->withErrors(['email' => 'Access denied for non-admin user.']);

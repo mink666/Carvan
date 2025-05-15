@@ -54,6 +54,10 @@ Route::middleware([CheckAdminRole::class])->group(function () {
     })->name('Admin.home');
 });
 
+Route::get('/Admin', function () {
+        return redirect()->route('AdminLogin');
+    })->name('Admin.login');
+
 
 Route::get('/Admin/{section}', [AdminController::class, 'index'])->name('Admin');
 

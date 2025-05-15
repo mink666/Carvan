@@ -107,7 +107,7 @@
         data: {
             labels: rangeLabels,
             datasets: [{
-                label: 'Số lượng xe theo thương hiệu',
+                label: 'Ranges by Var',
                 data: rangeData,
                 backgroundColor: [
                     '#FF6384',
@@ -136,7 +136,7 @@
                         label: function (context) {
                             let label = context.label || '';
                             let value = context.raw;
-                            return `${label}: ${value} xe`;
+                            return `${label}: ${value} Cars`;
                         }
                     }
                 }

@@ -10,6 +10,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Carvan Admin</title>
 </head>
 
@@ -123,6 +125,17 @@
                     <h1 class="text-2xl font-semibold text-gray-700 mb-6">Page Not Found</h1>
                 @endif
             </main>
+            @if(session('success') || session('error'))
+            <div
+                x-data="{ show: true }"
+                x-init="setTimeout(() => show = false, 3000)"
+                x-show="show"
+                x-transition
+                class="fixed bottom-5 right-5 z-50 px-4 py-2 rounded shadow text-white
+                    {{ session('success') ? 'bg-green-500' : 'bg-red-500' }}">
+                {{ session('success') ?? session('error') }}
+            </div>
+            @endif
       </div>
 </body>
 

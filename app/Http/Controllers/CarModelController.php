@@ -12,14 +12,15 @@ use App\Models\RangeOfCar;
 class CarModelController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $carModels = CarModel::with(['brand','rangeOfCars'])->get();
+        $carModels = CarModel::with(['brand', 'rangeOfCars'])->get();
+
         return view('Admin', [
             'section' => 'CarMgr',
             'state' => 'list',
             'data' => compact('carModels'),
-        ]);
+            ]);
     }
 
     public function create()

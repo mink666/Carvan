@@ -17,10 +17,10 @@ class TestDriveRequest extends Model
         'request_date',
         'status',
         'note',
-        'firstname',
-        'lastname',
-        'emailaddress',
-        'phonenumber',
+        'first_name',
+        'last_name',
+        'email_address',
+        'phone_number',
     ];
 
     public function carModel(): BelongsTo

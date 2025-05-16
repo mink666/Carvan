@@ -39,6 +39,7 @@ class AdminController extends Controller
             $data['carCount'] = \App\Models\CarModel::count();
             $data['brandCount'] = \App\Models\Brand::count();
             $data['rangeCount'] = \App\Models\RangeOfCar::count();
+            $data['NewsCount'] = \App\Models\News::count();
             $data['carCountsByBrand'] = \App\Models\CarModel::select('brand_id', DB::raw('count(*) as total'))
                 ->groupBy('brand_id')
                 ->with('brand')

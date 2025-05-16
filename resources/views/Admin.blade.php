@@ -59,21 +59,27 @@
                     <i class="fas fa-edit"></i>
                     <span>Forms</span>
                 </a>
+                @admin
                 <a href="#"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-file-alt"></i>
                     <span>Report</span>
                 </a>
+                @endadmin
                 <a href="#"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-chart-line"></i>
                     <span>Charts</span>
                 </a>
-                <a href="#"
-                class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
-                    <i class="fas fa-icons"></i>
-                    <span>Icons</span>
-                </a>
+                <div class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" >
+                            <i class="fas fa-sign-out-alt pr-2"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                </div>
             </nav>
         </aside>
 

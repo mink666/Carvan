@@ -3,28 +3,28 @@
         <div class="bg-orange-500 text-white p-6 rounded shadow flex items-center justify-between">
             <div>
                 <h3 class="text-sl">Total Cars</h3>
-                <p class="text-2xl font-bold">{{$carCountsByBrand->count()}}</p>
+                <p class="text-2xl font-bold">{{ $carCount }}</p>
             </div>
             <i class="fas fa-car-side text-4xl"></i>
         </div>
         <div class="bg-green-500 text-white p-6 rounded shadow flex items-center justify-between">
             <div>
                 <h3 class="text-sm">Brand</h3>
-                <p class="text-2xl font-bold">1697+</p>
+                <p class="text-2xl font-bold">{{$carCountsByBrand->count()}}</p>
             </div>
             <i class="fas fa-building text-4xl"></i>
         </div>
         <div class="bg-purple-500 text-white p-6 rounded shadow flex items-center justify-between">
             <div>
                 <h3 class="text-sm">Ranges</h3>
-                <p class="text-2xl font-bold">85k+</p>
+                <p class="text-2xl font-bold">{{$carCountsByRange->count()}}</p>
             </div>
             <i class="fas fa-car text-4xl"></i>
         </div>
         <div class="bg-blue-500 text-white p-6 rounded shadow flex items-center justify-between">
             <div>
                 <h3 class="text-sm">News</h3>
-                <p class="text-2xl font-bold">2167+</p>
+                <p class="text-2xl font-bold">{{$NewsCount}}</p>
             </div>
             <i class="fas fa-newspaper text-4xl"></i>
         </div>

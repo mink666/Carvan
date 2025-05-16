@@ -21,9 +21,13 @@ class UserController extends Controller
 
     public function create()
     {
+        $users = User::all();
+        // Lấy ID lớn nhất hiện tại và cộng thêm 1
+        $nextId = \App\Models\User::max('id') + 1;
         return view('Admin', [
             'section' => 'UserMgr',
             'state' => 'create',
+            'data' => compact('users', 'nextId'),
         ]);
     }
 

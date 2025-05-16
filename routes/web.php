@@ -20,7 +20,7 @@ use App\Http\Controllers\Admin\BrandController as AdminBrandController;
 use App\Http\Controllers\Admin\RangeOfCarController as AdminRangeOfCarController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
 
 
 Route::get('/', [PageController::class, 'home'])->name('home');
@@ -74,7 +74,9 @@ Route::get('/Admin/RangesMgr', [AdminRangeOfCarController::class, 'list'])->name
 Route::get('/Admin/RangesMgr/create', [AdminRangeOfCarController::class, 'create'])->name('Admin.RangesMgr.create');
 Route::get('/Admin/RangesMgr/edit/{id}', [AdminRangeOfCarController::class, 'edit'])->name('Admin.RangesMgr.edit');
 
-Route::get('/Admin/UserMgr', [AdminController::class, 'userIndex'])->name('Admin.UserMgr');
+Route::get('/Admin/UserMgr', [UserController::class, 'index'])->name('Admin.UserMgr');
+Route::get('/Admin/UserMgr/create', [UserController::class, 'create'])->name('Admin.UserMgr.create');
+Route::get('/Admin/UserMgr/edit/{id}', [UserController::class, 'edit'])->name('Admin.UserMgr.edit');
 
 // Admin routes
 Route::prefix('admin')->name('admin.')->group(function () {

@@ -3,7 +3,7 @@
         <div class="bg-orange-500 text-white p-6 rounded shadow flex items-center justify-between">
             <div>
                 <h3 class="text-sl">Total Cars</h3>
-                <p class="text-2xl font-bold">750+</p>
+                <p class="text-2xl font-bold">{{$carCountsByBrand->count()}}</p>
             </div>
             <i class="fas fa-car-side text-4xl"></i>
         </div>

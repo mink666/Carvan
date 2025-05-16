@@ -60,4 +60,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(TestDriveSchedule::class, 'updated_by');
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+    public function isSale(): bool
+    {
+        return $this->role === 'sale';
+    }
 }

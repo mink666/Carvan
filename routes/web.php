@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\RangeOfCarController as AdminRangeOfCarController
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
@@ -103,3 +103,8 @@ Route::get('/get-origins-by-brand/{brandId}', [ProductController::class, 'getOri
 
 Route::get('/LoginAdmin', [AuthController::class, 'showLogin'])->name('AdminLogin');
 Route::post('/LoginAdmin', [AuthController::class, 'login'])->name('login');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('LoginAdmin');
+})->name('logout');

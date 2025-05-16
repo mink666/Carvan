@@ -27,8 +27,8 @@ class TestDriveController extends Controller
             'phone_number' => 'required|string|max:20',
         ]);
 
+        // dd($validatedData);
         $test = TestDriveRequest::create($validatedData);
-        // dd($test);
         return redirect()->route('test_drive.index')->with('success', 'Request for test drive submitted successfully.');
     }
 

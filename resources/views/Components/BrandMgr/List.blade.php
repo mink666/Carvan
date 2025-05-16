@@ -91,15 +91,82 @@
     </table>
 
     <!-- Pagination -->
-    <div class="flex justify-between items-center mt-4">
-      <div class="text-sm text-gray-500">Showing 1-10 of 100</div>
-      <div class="space-x-1">
-        <button class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">&laquo;</button>
-        <button class="px-2 py-1 bg-blue-600 text-white rounded">1</button>
-        <button class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">2</button>
-        <button class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">3</button>
-        <button class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">&raquo;</button>
-      </div>
+    <div class="flex justify-between items-center mt-4" id="pagination-wrapper">
+    <div id="pagination-info" class="text-sm text-gray-500">Showing 1–10</div>
+    <div id="pagination-buttons" class="space-x-1"></div>
     </div>
-  </div>
+<script>
+$(document).ready(function () {
+    const rowsPerPage = 10;
+    const $rows = $('tbody tr');
+    const rowsCount = $rows.length;
+    const pageCount = Math.ceil(rowsCount / rowsPerPage);
+    let currentPage = 1;
+
+    function showPage(page) {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+
+        $rows.hide().slice(start, end).show();
+
+        // Cập nhật text: Showing x–y of z
+        const from = start + 1;
+        const to = Math.min(end, rowsCount);
+        $('#pagination-info').text(`Showing ${from}–${to} of ${rowsCount}`);
+    }
+
+    function renderPagination() {
+        $('#pagination-buttons').empty();
+
+        // Nút Prev
+        const $prev = $('<button class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">&laquo;</button>');
+        if (currentPage === 1) $prev.prop('disabled', true).addClass('opacity-50');
+        $prev.click(() => {
+            if (currentPage > 1) {
+                currentPage--;
+                update();
+            }
+        });
+        $('#pagination-buttons').append($prev);
+
+        // Các nút trang
+        for (let i = 1; i <= pageCount; i++) {
+            const $btn = $('<button class="px-2 py-1 rounded"></button>');
+            $btn.text(i);
+
+            if (i === currentPage) {
+                $btn.addClass('bg-blue-600 text-white');
+            } else {
+                $btn.addClass('bg-gray-200 hover:bg-gray-300');
+            }
+
+            $btn.click(() => {
+                currentPage = i;
+                update();
+            });
+
+            $('#pagination-buttons').append($btn);
+        }
+
+        // Nút Next
+        const $next = $('<button class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">&raquo;</button>');
+        if (currentPage === pageCount) $next.prop('disabled', true).addClass('opacity-50');
+        $next.click(() => {
+            if (currentPage < pageCount) {
+                currentPage++;
+                update();
+            }
+        });
+        $('#pagination-buttons').append($next);
+    }
+
+    function update() {
+        showPage(currentPage);
+        renderPagination();
+    }
+
+    update();
+});
+</script>
+
 

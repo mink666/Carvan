@@ -78,6 +78,10 @@ Route::get('/Admin/UserMgr', [UserController::class, 'index'])->name('Admin.User
 Route::get('/Admin/UserMgr/create', [UserController::class, 'create'])->name('Admin.UserMgr.create');
 Route::post('/Admin/UserMgr/store', [UserController::class, 'store'])->name('Admin.UserMgr.store');
 Route::get('/Admin/UserMgr/edit/{id}', [UserController::class, 'edit'])->name('Admin.UserMgr.edit');
+Route::put('/Admin/UserMgr/update/{id}', [UserController::class, 'update'])->name('Admin.UserMgr.update');
+Route::delete('/Admin/UserMgr/delete/{id}', [UserController::class, 'destroy'])->name('Admin.UserMgr.destroy');
+
+
 
 // Admin routes
 Route::prefix('admin')->name('admin.')->group(function () {

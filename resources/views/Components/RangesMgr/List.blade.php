@@ -1,15 +1,37 @@
-
+<div x-data="{ open: false }" class="relative mb-4 flex items-center gap-2">
 <div class="p-6 bg-white rounded-lg shadow-md">
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg font-bold">All Ranges:
         <span class="text-indigo-600"></span>
         <span class="text-blue-500">{{ $ranges->count() }}</span>
       </h2>
-        <a href="/Admin/RangesMgr?state=create" class="text-white">
-            <button class="bg-[#ff3131] hover:bg-[#B20710] text-white px-4 py-2 rounded-md text-sm font-semibold">
-                + Add Ranges
+      <div class="flex items-center gap-2">
+            <button @click="open = !open" class="text-gray-600 hover:text-black focus:outline-none">
+            <i class="fas fa-search text-xl"></i>
             </button>
-        </a>
+
+            <!-- Search Input -->
+            <form method="GET" action="{{ route('Admin.RangesMgr') }}"
+                x-show="open"
+                @click.away="open = false"
+                x-transition
+                class="flex items-center"
+            >
+                <input type="text"
+                    id="search-input"
+                    name="keyword"
+                    placeholder="Search..."
+                    value="{{ request('keyword') }}"
+                    class="border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring w-64"
+                    @keydown.enter="open = false"
+                />
+            </form>
+            <a href="/Admin/RangesMgr?state=create" class="text-white">
+                <button class="bg-[#ff3131] hover:bg-[#B20710] text-white px-4 py-2 rounded-md text-sm font-semibold">
+                    + Add Ranges
+                </button>
+            </a>
+        </div>
     </div>
 
     <table class="w-full text-sm text-left text-gray-700">
@@ -31,7 +53,7 @@
                 <span>{{ $range->id }}</span>
             </td>
             <td class="p-3">
-                <span>{{ $range->name }}</span>
+                <span class="range-name">{{ $range->name }}</span>
             </td>
             <td class="p-3">
                 <span>{{ $range->description }}</span>
@@ -80,6 +102,11 @@
             </td>
         </tr>
         @endforeach
+        <tr id="no-results-row" class="hidden">
+            <td colspan="6" class="text-center py-4 text-gray-500">
+                 <i class="fas fa-exclamation-circle text-red-500 mr-2"></i> No results found.
+            </td>
+        </tr>
       </tbody>
     </table>
     <!-- Pagination -->
@@ -87,8 +114,39 @@
     <div id="pagination-info" class="text-sm text-gray-500">Showing 1–10</div>
     <div id="pagination-buttons" class="space-x-1"></div>
     </div>
+</div>
 <script>
+
+
 $(document).ready(function () {
+    let filteredRows;
+    $('#search-input').on('input', function () {
+        const keyword = $(this).val().toLowerCase();
+        let $filteredRows = $('tbody tr').not('#no-results-row').filter(function () {
+            const nameText = $(this).find('.range-name').text().toLowerCase();
+            return nameText.includes(keyword);
+        });
+
+        $('tbody tr').not('#no-results-row').hide(); // Ẩn tất cả
+        $filteredRows.show(); // Hiện dòng khớp
+
+        if ($filteredRows.length === 0) {
+            $('#no-results-row').removeClass('hidden');
+            $('#pagination-wrapper').addClass('hidden');
+            $('#pagination-info').text(`No results found`);
+        } else {
+            $('#no-results-row').addClass('hidden');
+            $('#pagination-wrapper').removeClass('hidden');
+            $('#pagination-info').text(`Found ${$filteredRows.length} result(s)`);
+        }
+
+        // Cập nhật lại danh sách cho phân trang
+        filteredRows = $filteredRows; // Lưu tạm vào biến toàn cục
+        currentPage = 1;
+        update(); // Cập nhật phân trang theo dữ liệu lọc
+    });
+
+
     const rowsPerPage = 10;
     const $rows = $('tbody tr');
     const rowsCount = $rows.length;
@@ -99,18 +157,21 @@ $(document).ready(function () {
         const start = (page - 1) * rowsPerPage;
         const end = start + rowsPerPage;
 
-        $rows.hide().slice(start, end).show();
+        // Nếu có filteredRows (sau khi lọc), dùng nó
+        const rowsToPaginate = filteredRows && filteredRows.length ? filteredRows : $rows.not('#no-results-row');
 
-        // Cập nhật text: Showing x–y of z
+        rowsToPaginate.hide().slice(start, end).show();
+
         const from = start + 1;
-        const to = Math.min(end, rowsCount);
-        $('#pagination-info').text(`Showing ${from}–${to} of ${rowsCount}`);
+        const to = Math.min(end, rowsToPaginate.length);
+        $('#pagination-info').text(`Showing ${from}–${to} of ${rowsToPaginate.length}`);
     }
+
 
     function renderPagination() {
         $('#pagination-buttons').empty();
 
-        // Nút Prev
+
         const $prev = $('<button class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">&laquo;</button>');
         if (currentPage === 1) $prev.prop('disabled', true).addClass('opacity-50');
         $prev.click(() => {
@@ -121,7 +182,7 @@ $(document).ready(function () {
         });
         $('#pagination-buttons').append($prev);
 
-        // Các nút trang
+
         for (let i = 1; i <= pageCount; i++) {
             const $btn = $('<button class="px-2 py-1 rounded"></button>');
             $btn.text(i);

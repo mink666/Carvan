@@ -93,7 +93,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         if ($user->role === 'admin' && $user->id == 1) {
-            return redirect()->route('Admin.UserMgr')->with('error', 'Không thể xóa tài khoản Admin gốc.');
+            return redirect()->route('Admin.UserMgr')->with('error', 'Cannot delete Admin Account.');
         }
         $user->delete();
         return redirect()->route('Admin.UserMgr')->with('success', 'User deleted successfully.');

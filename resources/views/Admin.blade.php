@@ -89,7 +89,7 @@
             <main class="flex-1 p-4 overflow-y-auto">
                 <div class="flex justify-end items-center px-5 py-1">
                     <div class="flex items-center gap-2">
-                        <img src="{{ asset('images/UserLogo.png') }}" class="w-10 h-8 rounded-full" alt="Avatar">
+                        <img src="{{ asset('images/UserLogo.png') }}" class="w-10 h-10 rounded-full" alt="Avatar">
                         <span class="text-sm font-medium">Hi, {{ Auth::user()->name }}</span>
                     </div>
                 </div>

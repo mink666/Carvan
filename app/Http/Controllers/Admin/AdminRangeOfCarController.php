@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\RangeOfCar;
 
-class RangeOfCarController extends Controller
+class AdminRangeOfCarController extends Controller
 {
 
     public function index()
@@ -49,7 +49,7 @@ class RangeOfCarController extends Controller
             'name' => $request->name,
             'description' => $request->description,
         ]);
-        return redirect()->route('range_of_car.index')->with('success', 'Range of car created successfully.');
+        return redirect()->route('Admin.RangesMgr')->with('success', 'Range of car created successfully.');
     }
 
     public function show(RangeOfCar $rangeOfCar)
@@ -84,7 +84,7 @@ class RangeOfCarController extends Controller
         ]);
         $data = $request->only(['name', 'description']);
         $range->update($data);
-        return redirect()->route('range_of_car.index')->with('success', 'Range of car updated successfully.');
+        return redirect()->route('Admin.RangesMgr')->with('success', 'Range of car updated successfully.');
     }
 
     public function destroy(string $id)

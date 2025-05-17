@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 
-class BrandController extends Controller
+class AdminBrandController extends Controller
 {
 
     public function index()
@@ -42,10 +42,14 @@ class BrandController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:brands,name',
+            'company_full_name' => 'nullable|string|max:255',
             'year' => 'nullable|integer|min:2000|max:' . date('Y'),
+            'founder' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'location' => 'nullable|string|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'motto' => 'nullable|string|max:255',
+            'website_url' => 'nullable|url|max:255',
+            'location' => 'nullable|string|max:255',
         ]);
 
         $data = $request->only(['name', 'year', 'description', 'location']);

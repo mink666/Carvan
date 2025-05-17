@@ -91,7 +91,7 @@ class CarModelController extends Controller
     }
 
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $carModel = CarModel::findOrFail($id);
         $request->validate([
@@ -110,7 +110,7 @@ class CarModelController extends Controller
             $data['image'] = $request->file('image')->store('car_models');
         }
         $carModel->update($data);
-        return redirect()->route('car_models.index')->with('success', 'Car model updated successfully.');
+        return redirect()->route('Admin.CarMgr')->with('success', 'Car model updated successfully.');
     }
 
 

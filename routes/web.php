@@ -16,8 +16,8 @@ use App\Http\Controllers\NewsEventsController;
 use App\Http\Controllers\ContactPageController;
 use App\Http\Controllers\PreOwnedController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\Admin\BrandController as AdminBrandController;
-use App\Http\Controllers\Admin\RangeOfCarController as AdminRangeOfCarController;
+use App\Http\Controllers\Admin\AdminBrandController;
+use App\Http\Controllers\Admin\AdminRangeOfCarController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -65,6 +65,7 @@ Route::get('/Admin/CarMgr', [CarModelController::class, 'index'])->name('Admin.C
 Route::get('/Admin/CarMgr/create', [CarModelController::class, 'create'])->name('Admin.CarMgr.create');
 Route::post('/Admin/CarMgr/store', [CarModelController::class, 'store'])->name('Admin.CarMgr.store');
 Route::get('/Admin/CarMgr/edit/{id}', [CarModelController::class, 'edit'])->name('Admin.CarMgr.edit');
+Route::put('/Admin/CarMgr/update/{id}', [CarModelController::class, 'update'])->name('Admin.CarMgr.update');
 
 Route::get('/Admin/BrandMgr', [AdminBrandController::class, 'list'])->name('Admin.BrandMgr');
 Route::get('/Admin/BrandMgr/create', [AdminBrandController::class, 'create'])->name('Admin.BrandMgr.create');
@@ -72,7 +73,9 @@ Route::get('/Admin/BrandMgr/edit/{id}', [AdminBrandController::class, 'edit'])->
 
 Route::get('/Admin/RangesMgr', [AdminRangeOfCarController::class, 'list'])->name('Admin.RangesMgr');
 Route::get('/Admin/RangesMgr/create', [AdminRangeOfCarController::class, 'create'])->name('Admin.RangesMgr.create');
+Route::post('/Admin/RangesMgr/store', [AdminRangeOfCarController::class, 'store'])->name('Admin.RangesMgr.store');
 Route::get('/Admin/RangesMgr/edit/{id}', [AdminRangeOfCarController::class, 'edit'])->name('Admin.RangesMgr.edit');
+Route::put('/Admin/RangesMgr/update/{id}', [AdminRangeOfCarController::class, 'update'])->name('Admin.RangesMgr.update');
 
 Route::get('/Admin/UserMgr', [UserController::class, 'index'])->name('Admin.UserMgr');
 Route::get('/Admin/UserMgr/create', [UserController::class, 'create'])->name('Admin.UserMgr.create');

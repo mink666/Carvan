@@ -61,11 +61,11 @@ class UserController extends Controller
 
     public function edit(string $id)
     {
-        $user = User::findOrFail($id);
+        $users = User::findOrFail($id);
         return view('Admin', [
             'section' => 'UserMgr',
             'state' => 'edit',
-            'data' => compact('user'),
+            'data' => compact('users'),
         ]);
     }
 
@@ -77,7 +77,7 @@ class UserController extends Controller
             'username' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'nullable|string|min:6|confirmed',
             'role' => 'required|string',
         ]);
         $data = $request->only(['username', 'name', 'email', 'role']);
@@ -85,14 +85,17 @@ class UserController extends Controller
             $data['password'] = bcrypt($request->password);
         }
         $user->update($data);
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('Admin.UserMgr')->with('success', 'User updated successfully.');
     }
 
 
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
+        if ($user->role === 'admin' && $user->id == 1) {
+            return redirect()->route('Admin.UserMgr')->with('error', 'Không thể xóa tài khoản Admin gốc.');
+        }
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('Admin.UserMgr')->with('success', 'User deleted successfully.');
     }
 }

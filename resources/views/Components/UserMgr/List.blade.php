@@ -2,7 +2,7 @@
 <div class="p-6 bg-white rounded-lg shadow-md">
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg font-bold">All User:
-        <span class="text-indigo-600">3</span>
+        <span class="text-indigo-600">{{$users->count()}}</span>
         {{-- Projects: <span class="text-indigo-600">884</span> --}}
       </h2>
         <a href="/Admin/UserMgr?state=create" class="text-white">
@@ -62,17 +62,28 @@
                             class="origin-top-right absolute right-0 mt-2 w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
                         >
                             <div class="py-1 text-sm text-gray-700">
-                            <a href=""
-                                class="block px-4 py-2 hover:bg-gray-100">Edit</a>
-
-                            <form action="" method="POST" onsubmit="return confirm('Are you sure?')">
+                            <a href="{{ route('Admin.UserMgr.edit', $user->id) }}"
+                                class="block px-4 py-2 hover:bg-gray-100">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </a>
+                            @if ($user->role !== 'admin')
+                            <form action="{{ route('Admin.UserMgr.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
                                         class="w-full text-left px-4 py-2 hover:bg-red-100 text-red-600">
+                                    <i class="fa fa-trash"></i>
                                 Delete
                                 </button>
                             </form>
+                            @else
+                                <a href=""
+                                class="block px-4 py-2 hover:bg-gray-100">
+                                <i class="fas fa-user-shield"></i>
+                                    Admin
+                                </a>
+                            @endif
                             </div>
                         </div>
                         </div>

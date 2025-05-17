@@ -1,6 +1,7 @@
-<form action="{{ route('Admin.UserMgr.store') }}" method="POST" >
+<form action="{{ route('Admin.UserMgr.update',['id' => $users->id]) }}" method="POST" >
 @csrf
-<div x-data="{username: '', email: '', name: '' , showPassword: false, showConfirmPassword: false}" class="flex flex-col md:flex-row gap-8 p-6 bg-white rounded-xl shadow-md">
+@method('PUT')
+<div x-data="{username: '{{$users->username ?? ''}}', email: '{{$users->email ?? ''}}', name: '{{$users->name ?? ''}}' , showPassword: false, showConfirmPassword: false}" class="flex flex-col md:flex-row gap-8 p-6 bg-white rounded-xl shadow-md">
     <!-- Left Profile Card -->
     <div class="w-full md:w-1/3 flex flex-col items-center text-center">
         <div class="relative">
@@ -26,7 +27,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium mb-1">ID</label>
-                    <input type="text" name="id" value="{{$nextId}}" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300" />
+                    <input type="text" name="id" value="{{$users->id}}" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300" />
                 </div>
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium mb-1">Username</label>
@@ -34,7 +35,7 @@
                 </div>
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium mb-1">Email</label>
-                    <input type="email" name="email" x-model="email" class="w-full border rounded px-3 py-2 bg-gray-100 text-gray-600" />
+                    <input type="email" name="email" x-model="email"  class="w-full border rounded px-3 py-2 bg-gray-100 text-gray-600" />
                 </div>
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium mb-1">Name</label>
@@ -42,10 +43,10 @@
                 </div>
                 <div class="md:col-span-2" x-data="{ role: 'user' }">
                     <label class="block text-sm font-medium mb-1">Role</label>
-                    <select x-model="role" name="role" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
-                        <option value="user">user</option>
-                        <option value="admin">admin</option>
-                        <option value="sale">sale</option>
+                    <select  name="role" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+                        <option value="user" {{ $users->role == 'user' ? 'selected' : '' }}>user</option>
+                        <option value="admin" {{ $users->role == 'admin' ? 'selected' : '' }}>admin</option>
+                        <option value="sale" {{ $users->role == 'sale' ? 'selected' : '' }}>sale</option>
                     </select>
                 </div>
             </div>

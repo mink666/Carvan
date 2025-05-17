@@ -29,11 +29,13 @@
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
+                @admin
                 <a href="/Admin/UserMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-user-cog"></i>
                     <span>User</span>
                 </a>
+                @endadmin
                 <a href="/Admin/CarMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-car-side"></i>
@@ -84,7 +86,13 @@
         </aside>
 
         <!-- Content -->
-            <main class="flex-1 p-6 overflow-y-auto">
+            <main class="flex-1 p-4 overflow-y-auto">
+                <div class="flex justify-end items-center px-5 py-1">
+                    <div class="flex items-center gap-2">
+                        <img src="{{ asset('images/UserLogo.png') }}" class="w-10 h-8 rounded-full" alt="Avatar">
+                        <span class="text-sm font-medium">Hi, {{ Auth::user()->name }}</span>
+                    </div>
+                </div>
                 @if($section === 'Dashboard')
                     @include('Components/Dashboard', $data)
                 @elseif($section === 'CarMgr')

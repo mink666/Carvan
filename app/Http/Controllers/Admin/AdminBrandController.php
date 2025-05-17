@@ -43,24 +43,39 @@ class AdminBrandController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:brands,name',
             'company_full_name' => 'nullable|string|max:255',
-            'year' => 'nullable|integer|min:2000|max:' . date('Y'),
+            'year' => 'nullable|integer|min:1900|max:' . date('Y'),
             'founder' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'motto' => 'nullable|string|max:255',
             'website_url' => 'nullable|url|max:255',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'key_achievements' => 'nullable|array',
+            'key_achievements.*' => 'nullable|string',
             'location' => 'nullable|string|max:255',
         ]);
 
-        $data = $request->only(['name', 'year', 'description', 'location']);
+        $data = $request->only([
+            'name', 'company_full_name', 'year', 'founder', 'description', 'motto',
+            'website_url', 'location'
+        ]);
+
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('brands');
-        }else {
-            $data['logo'] = null;
         }
+
+        if ($request->hasFile('cover_image')) {
+            $data['cover_image'] = $request->file('cover_image')->store('brands');
+        }
+
+        if ($request->has('key_achievements')) {
+            $data['key_achievements'] = json_encode($request->input('key_achievements'));
+        }
+
         Brand::create($data);
-        return redirect()->route('brands.index')->with('success', 'Brand created successfully.');
+        return redirect()->route('Admin.BrandMgr')->with('success', 'Brand created successfully.');
     }
+
 
 
     public function show(Brand $brand)
@@ -89,19 +104,43 @@ class AdminBrandController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:brands,name,' . $id,
-            'year' => 'nullable|integer|min:2000|max:' . date('Y'),
+            'company_full_name' => 'nullable|string|max:255',
+            'year' => 'nullable|integer|min:1900|max:' . date('Y'),
+            'founder' => 'nullable|string|max:255',
             'description' => 'nullable|string',
+            'motto' => 'nullable|string|max:255',
+            'website_url' => 'nullable|url|max:255',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'key_achievements' => 'nullable|array',
+            'key_achievements.*' => 'nullable|string',
             'location' => 'nullable|string|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        $data = $request->only(['name', 'year', 'description', 'location']);
+
         $brand = Brand::findOrFail($id);
+
+        $data = $request->only([
+            'name', 'company_full_name', 'year', 'founder', 'description', 'motto',
+            'website_url', 'location'
+        ]);
+
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('brands');
         }
+
+        if ($request->hasFile('cover_image')) {
+            $data['cover_image'] = $request->file('cover_image')->store('brands');
+        }
+
+        if ($request->has('key_achievements')) {
+            $data['key_achievements'] = json_encode($request->input('key_achievements'));
+        }
+
         $brand->update($data);
-        return redirect()->route('brands.index')->with('success', 'Brand updated successfully.');
+
+        return redirect()->route('Admin.BrandMgr')->with('success', 'Brand updated successfully.');
     }
+
 
 
     public function destroy(string $id)

@@ -69,7 +69,9 @@ Route::put('/Admin/CarMgr/update/{id}', [CarModelController::class, 'update'])->
 
 Route::get('/Admin/BrandMgr', [AdminBrandController::class, 'list'])->name('Admin.BrandMgr');
 Route::get('/Admin/BrandMgr/create', [AdminBrandController::class, 'create'])->name('Admin.BrandMgr.create');
+Route::post('/Admin/BrandMgr/store', [AdminBrandController::class, 'store'])->name('Admin.BrandMgr.store');
 Route::get('/Admin/BrandMgr/edit/{id}', [AdminBrandController::class, 'edit'])->name('Admin.BrandMgr.edit');
+Route::put('/Admin/BrandMgr/update/{id}', [AdminBrandController::class, 'update'])->name('Admin.BrandMgr.update');
 
 Route::get('/Admin/RangesMgr', [AdminRangeOfCarController::class, 'list'])->name('Admin.RangesMgr');
 Route::get('/Admin/RangesMgr/create', [AdminRangeOfCarController::class, 'create'])->name('Admin.RangesMgr.create');

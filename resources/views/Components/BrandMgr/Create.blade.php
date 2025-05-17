@@ -1,6 +1,6 @@
 <div class="max-w-8xl w-full mx-auto bg-white shadow-xl rounded-xl overflow-hidden flex">
 
-    <form action="" method="POST" enctype="multipart/form-data" class="flex w-full">
+    <form action="{{ route('Admin.BrandMgr.store') }}" method="POST" enctype="multipart/form-data" class="flex w-full">
         @csrf
 
         <!-- Bên trái: Upload Image -->

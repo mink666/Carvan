@@ -73,7 +73,7 @@
                                 <li>
                                     <strong>Email:</strong>
                                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@carvan.vn" target="_blank">
-                                      carvanOfficial@gmail.com
+                                      contact@carvan.vn
                                     </a>
                                 </li>
                             </ul>

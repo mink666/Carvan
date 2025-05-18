@@ -27,14 +27,13 @@ class TestDriveController extends Controller
             'phone_number' => 'required|string|max:20',
         ]);
 
-        // dd($validatedData);
         $test = TestDriveRequest::create($validatedData);
         return redirect()->route('test_drive.index')->with('success', 'Request for test drive submitted successfully.');
     }
 
     public function show()
     {
-        $requests = TestDriveRequest::with('carModel')->latest()->paginate(10);
+        $requests = TestDriveRequest::with(['carModel', 'schedule'])->orderByDesc('created_at')->paginate(10);
         return view('test_drive.list', compact('requests'));
     }
 

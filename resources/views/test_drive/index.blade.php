@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="max-w-6xl mx-auto px-4 py-8">
+        @if(session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+                <strong>Success!</strong> {{ session('success') }}
+            </div>
+        @endif
         <!-- Section: Car Selection and Image -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <!-- Left Column: Car Selection Form -->
@@ -29,7 +34,11 @@
                         <label for="request_date" class="block text-sm font-medium text-gray-700">Preferred Date &
                             Time</label>
                         <input type="datetime-local" name="request_date" id="request_date"
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ old('request_date') }}" required>
+
+                        @error('request_date')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Note -->
@@ -112,5 +121,16 @@
                 const imageElement = document.getElementById('carImage');
                 imageElement.src = imageUrl;
             }
+
+            document.querySelector('form').addEventListener('submit', function(e) {
+                const dateInput = document.getElementById('request_date');
+                const selectedDate = new Date(dateInput.value);
+                const now = new Date();
+
+                if (selectedDate < now) {
+                    e.preventDefault();
+                    alert("Please select a date and time in the future.");
+                }
+            });
         </script>
     @endsection

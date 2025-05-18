@@ -8,7 +8,7 @@
                 <div class="mt-2">
                     <p class="text-sm dark:text-gray-400">123 Main Street, Anytown, USA 12345</p>
                     <p class="text-sm dark:text-gray-400 mt-2 mb-2">Tel: (555) 123-4567</p>
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@carvan.vn" target="_blank" class="text-sm dark:text-gray-400">Email: carvanOfficial@gmail.com</a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@carvan.vn" target="_blank" class="text-sm dark:text-gray-400">Email: contact@carvan.vn</a>
                 </div>
           </div>
           <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

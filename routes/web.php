@@ -41,6 +41,7 @@ Route::get('/range_of_car/{rangeOfCar}', [RangeOfCarController::class, 'show'])-
 
 Route::get('/test_drive', [TestDriveController::class, 'index'])->name('test_drive.index');
 Route::post('/test_drive', [TestDriveController::class, 'store'])->name('test_drive.store');
+Route::get('/test_drive/list', [TestDriveController::class, 'show'])->name('test_drive.list');
 
 Route::get('/preOwned', [PreOwnedController::class, 'index'])->name('preOwned.index');
 Route::get('/preOwned/{preOwned}', [PreOwnedController::class, 'show'])->name('preOwned.show');
@@ -87,6 +88,8 @@ Route::put('/Admin/UserMgr/update/{id}', [UserController::class, 'update'])->nam
 Route::delete('/Admin/UserMgr/delete/{id}', [UserController::class, 'destroy'])->name('Admin.UserMgr.destroy');
 
 
+
+// Route::get('/Admin/TestDriveRequestMgr', [AdminTestDriveController::class, 'list'])->name('Admin.TestDriveRequest');
 
 // Admin routes
 Route::prefix('admin')->name('admin.')->group(function () {

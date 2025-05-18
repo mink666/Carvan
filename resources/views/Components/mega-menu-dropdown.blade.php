@@ -87,7 +87,7 @@
 
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4">
                                         @forelse ($item->carModels as $model)
-                                            <a href="{{ route('car_models.show', ['carModel' => $model->id]) }}"
+                                            <a href="{{ route('products.show', ['carModel' => $model->id]) }}"
                                                class="block group p-3 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150 border border-gray-100 hover:border-gray-200">
                                                 <div class="flex items-start space-x-3">
                                                     <div class="flex-shrink-0 mt-1">

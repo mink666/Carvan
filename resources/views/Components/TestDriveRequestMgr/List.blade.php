@@ -1,7 +1,7 @@
 <div class="p-6 bg-white rounded-lg shadow-md">
     <div class="flex items-center justify-between mb-4">
         <h2 class="text-lg font-bold">
-            All Requests: <span class="text-indigo-600">{{ $requests->total() }}</span>
+            All Requests: <span class="text-indigo-600">{{ $requests->count() }}</span>
         </h2>
     </div>
 
@@ -34,8 +34,4 @@
         </tbody>
     </table>
 
-    <!-- Pagination -->
-    <div class="mt-4">
-        {{ $requests->links() }}
-    </div>
 </div>

@@ -56,18 +56,19 @@
                     <i class="fas fa-car"></i>
                     <span>Range</span>
                 </a>
+                @admin
                 <a href="#"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-edit"></i>
                     <span>Forms</span>
                 </a>
-                @admin
-                <a href="#"
+                @endadmin
+                <a href="/Admin/TestDriveRequestMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-file-alt"></i>
-                    <span>Report</span>
+                    <span>Test Drive</span>
                 </a>
-                @endadmin
+
                 <a href="#"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-chart-line"></i>
@@ -134,6 +135,14 @@
                         @include('Components/EventMgr/Create', $data)
                     @elseif($state === 'edit')
                         @include('Components/EventMgr/Edit', $data)
+                    @endif
+                @elseif($section === 'TestDriveRequestMgr')
+                    @if($state === 'list')
+                        @include('Components/TestDriveRequestMgr/List', $data)
+                    @elseif($state === 'create')
+                        @include('Components/TestDriveRequestMgr/Create', $data)
+                    @elseif($state === 'edit')
+                        @include('Components/TestDriveRequestMgr/Edit', $data)
                     @endif
                 @else
                     <h1 class="text-2xl font-semibold text-gray-700 mb-6">Page Not Found</h1>

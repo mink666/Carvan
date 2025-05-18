@@ -12,7 +12,7 @@ class AdminController extends Controller
     {
         $state = $request->query('state', 'list'); // Mặc định là 'list'
         $data = []; // Dữ liệu mặc định
-
+        
         // Xử lý từng section
         if ($section === 'CarMgr') {
             if ($state === 'create') {
@@ -34,6 +34,11 @@ class AdminController extends Controller
                 return redirect()->route('Admin.RangesMgr.create');
             }
             $data['ranges'] = \App\Models\RangeOfCar::all();
+        } elseif ($section === 'TestDriveRequestMgr') {
+            if ($state === 'create') {
+                return redirect()->route('Admin.TestDriveRequestMgr.create');
+            }
+            $data['requests'] = \App\Models\TestDriveRequest::all();
         } elseif ($section === 'Dashboard') {
             $data['userCount'] = \App\Models\User::count();
             $data['carCount'] = \App\Models\CarModel::count();

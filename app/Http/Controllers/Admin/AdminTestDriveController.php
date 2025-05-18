@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\TestDriveRequest;
+
+class AdminTestDriveController extends Controller
+{
+    //
+    public function list()
+    {
+        $requests = TestDriveRequest::get();
+        return view('Admin', [
+            'section' => 'TestDriveRequestMgr',
+            'state' => 'list',
+            'data' => compact('requests'),
+        ]);
+    }
+}

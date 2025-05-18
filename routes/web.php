@@ -18,6 +18,7 @@ use App\Http\Controllers\PreOwnedController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\AdminBrandController;
 use App\Http\Controllers\Admin\AdminRangeOfCarController;
+use App\Http\Controllers\Admin\AdminTestDriveController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -87,6 +88,7 @@ Route::get('/Admin/UserMgr/edit/{id}', [UserController::class, 'edit'])->name('A
 Route::put('/Admin/UserMgr/update/{id}', [UserController::class, 'update'])->name('Admin.UserMgr.update');
 Route::delete('/Admin/UserMgr/delete/{id}', [UserController::class, 'destroy'])->name('Admin.UserMgr.destroy');
 
+Route::get('/Admin/TestDriveRequestMgr', [AdminTestDriveController::class, 'list'])->name('Admin.TestDriveMgr');
 
 
 // Route::get('/Admin/TestDriveRequestMgr', [AdminTestDriveController::class, 'list'])->name('Admin.TestDriveRequest');

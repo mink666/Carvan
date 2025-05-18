@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             NewsSeeder::class,
             EventSeeder::class,
             UserSeeder::class,
+            TestDriveRequestSeeder::class
         ]);
     }
 }

@@ -12,13 +12,13 @@ class AdminController extends Controller
     {
         $state = $request->query('state', 'list'); // Mặc định là 'list'
         $data = []; // Dữ liệu mặc định
-        
+
         // Xử lý từng section
         if ($section === 'CarMgr') {
             if ($state === 'create') {
                 return redirect()->route('Admin.CarMgr.create');
             }
-            $data['carModels'] = \App\Models\CarModel::with('brand')->get();
+            $data['carModels'] = \App\Models\CarModel::with('brand','rangeOfCars')->get();
         } elseif ($section === 'UserMgr') {
             if ($state === 'create') {
                 return redirect()->route('Admin.UserMgr.create');

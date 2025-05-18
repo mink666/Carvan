@@ -145,7 +145,7 @@
                     @foreach($brand->carModels as $model)
                         {{-- Card mẫu xe (sử dụng code card mẫu xe đã có của bạn) --}}
                         <div class="bg-white rounded-xl shadow-lg overflow-hidden group flex flex-col hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1.5">
-                            <a href="{{ route('car_models.show', $model->id) }}" class="block overflow-hidden">
+                            <a href="{{ route('products.show', $model->id) }}" class="block overflow-hidden">
                                 @if($model->image)
                                     <img src="{{ asset($model->image) }}" alt="{{ $model->name }}" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out">
                                 @else
@@ -155,7 +155,7 @@
                                 @endif
                             </a>
                             <div class="p-5 flex flex-col flex-grow">
-                                <a href="{{ route('car_models.show', $model->id) }}" class="block">
+                                <a href="{{ route('products.show', $model->id) }}" class="block">
                                     <h3 class="text-xl font-bold text-gray-900 group-hover:text-red-700 transition-colors duration-300 mb-1 truncate" title="{{ $model->name }} {{ $model->year ? '('.$model->year.')' : '' }}">
                                         {{ $model->name }} {{ $model->year ? '('.$model->year.')' : '' }}
                                     </h3>
@@ -175,7 +175,7 @@
                                         Price unavailable
                                     </p>
                                 @endif
-                                <a href="{{ route('car_models.show', $model->id) }}"
+                                <a href="{{ route('products.show', $model->id) }}"
                                    class="mt-auto inline-block w-full text-center bg-red-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors duration-300">
                                     View Model Details
                                 </a>

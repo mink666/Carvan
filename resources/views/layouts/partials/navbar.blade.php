@@ -34,13 +34,8 @@
 
         <div class="sm:flex items-center space-x-4 md:space-x-8 lg:space-x-10 xl:space-x-12 2xl:space-x-20">
             <a href="{{ route('car_models.index') }}"
-                class="mr-0 text-sm font-bold text-black hover:underline transform transition duration-300 ease-in-out hover:scale-105">
+                class="mr-2 text-sm font-bold text-black hover:underline transform transition duration-300 ease-in-out hover:scale-105">
                 New Products
-            </a>
-
-            <a href="{{ route('preOwned.index') }}"
-                class="mr-0 text-sm font-bold text-black hover:underline transform transition duration-300 ease-in-out hover:scale-105">
-                Pre-Owned Cars
             </a>
 
             @if (isset($brandsWithModelsForNavbar) && $brandsWithModelsForNavbar->count() > 0)
@@ -78,7 +73,9 @@
         </div>
 
         <div class="flex items-center space-x-3 flex-shrink-0">
-            {{-- place holder --}}
+            <a href = "{{ route('AdminLogin')}}">
+            <button type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Log In</button>
+            </a>
         </div>
     </div>
 </nav>

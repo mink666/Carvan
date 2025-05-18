@@ -47,24 +47,18 @@ class CarModelController extends Controller
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+        $data = $request->only(['brand_id', 'range_of_cars_id', 'name', 'year', 'description']);
 
-        $path = null;
         if ($request->hasFile('image')) {
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images/car_models'), $imageName);
-            $path = 'images/car_models/' . $imageName;
+            $file = $request->file('image');
+            $filename = $file->getClientOriginalName();
+            $file->storeAs('images/car_models', $filename, 'public');
+            $data['image'] = 'images/car_models/' . $filename;
         }
 
-        CarModel::create([
-            'brand_id' => $request->brand_id,
-            'range_of_cars_id' => $request->range_of_cars_id,
-            'name' => $request->name,
-            'year' => $request->year,
-            'description' => $request->description,
-            'image' => $path,
-        ]);
-
-        return redirect()->route('Admin.CarMgr')->with('success', 'Car model created successfully.');
+        CarModel::create($data);
+        return redirect()->route('Admin.CarMgr')->with('success', 'Car model updated successfully.');
+        dd('Validation passed!');
     }
 
 

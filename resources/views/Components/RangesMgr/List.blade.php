@@ -76,18 +76,19 @@
                         class="origin-top-right absolute right-0 mt-2 w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
                       >
                         <div class="py-1 text-sm text-gray-700">
-                            <a href="{{ route('Admin.RangesMgr.edit', $range->id) }}"
+                            <a href=""
                              class="block px-4 py-2 hover:bg-gray-100">
                              <i class="fas fa-search"></i>
                              Detail
                             </a>
+                            @admin
                           <a href="{{ route('Admin.RangesMgr.edit', $range->id) }}"
                              class="block px-4 py-2 hover:bg-gray-100">
                              <i class="fa fa-edit"></i>
                              Edit
                             </a>
-
-                          <form action="/car_models/{{ $range->id }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                            @endadmin
+                          {{-- <form action="/car_models/{{ $range->id }}" method="POST" onsubmit="return confirm('Are you sure?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit"
@@ -95,7 +96,7 @@
                                     <i class="fa fa-trash"></i>
                               Delete
                             </button>
-                          </form>
+                          </form> --}}
                         </div>
                       </div>
                     </div>

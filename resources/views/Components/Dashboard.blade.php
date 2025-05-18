@@ -10,14 +10,14 @@
         <div class="bg-green-500 text-white p-6 rounded shadow flex items-center justify-between">
             <div>
                 <h3 class="text-sm">Brand</h3>
-                <p class="text-2xl font-bold">{{$carCountsByBrand->count()}}</p>
+                <p class="text-2xl font-bold">{{$brandCount}}</p>
             </div>
             <i class="fas fa-building text-4xl"></i>
         </div>
         <div class="bg-purple-500 text-white p-6 rounded shadow flex items-center justify-between">
             <div>
                 <h3 class="text-sm">Ranges</h3>
-                <p class="text-2xl font-bold">{{$carCountsByRange->count()}}</p>
+                <p class="text-2xl font-bold">{{$rangeCount}}</p>
             </div>
             <i class="fas fa-car text-4xl"></i>
         </div>

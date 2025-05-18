@@ -32,4 +32,10 @@ class TestDriveController extends Controller
         return redirect()->route('test_drive.index')->with('success', 'Request for test drive submitted successfully.');
     }
 
+    public function show()
+    {
+        $requests = TestDriveRequest::with('carModel')->latest()->paginate(10);
+        return view('test_drive.list', compact('requests'));
+    }
+
 }

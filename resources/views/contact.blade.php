@@ -73,7 +73,7 @@
                                 <li>
                                     <strong>Email:</strong>
                                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@carvan.vn" target="_blank">
-                                      contact@carvan.vn
+                                      carvanOfficial@gmail.com
                                     </a>
                                 </li>
                             </ul>
@@ -82,18 +82,6 @@
                         </div>
                     </div>
                 </div>
-
-                {{-- 2.2. Keep In Touch Form Section --}}
-                <div id="contact-form-section" class="contact-form-container">
-                    <h2 class="section-title">KEEP IN TOUCH WITH US</h2>
-                    {{-- Hiển thị thông báo thành công (nếu có từ session) --}}
-                    @if (session('success'))
-                        <div class="alert alert-success" style="background-color: #d1e7dd; color: #0f5132; padding: 1rem; border: 1px solid #badbcc; border-radius: .25rem; margin-bottom: 1rem;">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                </div>
-
             </section> {{-- Kết thúc contact-container --}}
 
         </div> {{-- Kết thúc main-content-area --}}

@@ -210,11 +210,6 @@
                         </div>
 
                         <div class="mt-auto grid grid-cols-2 gap-3">
-                            {{-- Nút Inquire có thể trỏ đến form test drive hoặc một form liên hệ riêng cho xe cũ --}}
-                            <a href="{{ route('testdrive.form', ['preowned_id' => $preowned->id]) }}" {{-- Hoặc 1 route khác --}}
-                               class="block w-full text-center bg-green-600 text-white font-semibold py-3 px-4 rounded-md border border-green-600 hover:bg-white hover:border-green-700 hover:text-green-700 transition-colors duration-300 text-sm">
-                                INQUIRE
-                            </a>
                             <a href="{{ route('preOwned.show', $preowned->id) }}"
                                class="block w-full text-center bg-white text-gray-700 font-semibold py-3 px-4 rounded-md border border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-colors duration-300 text-sm">
                                 MORE DETAILS
@@ -227,7 +222,7 @@
     </div>
     @if(isset($featuredPreownedCars) && $featuredPreownedCars->count() > 0)
     <div class="text-center mt-10">
-        <a href="{{ route('preOwned.index') }}" class="inline-block bg-gray-800 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-700 transition-colors duration-300">
+        <a href="{{ route('preowned.index') }}" class="inline-block bg-gray-800 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-700 transition-colors duration-300">
             View All Pre-Owned Cars
         </a>
     </div>
@@ -288,7 +283,7 @@
                     Request a Test Drive
                 </a>
                 <span class="mx-3 font-semibold text-white text-lg">or</span>
-                <a href="{{ route('preOwned.index') }}"
+                <a href="{{ route('preowned.index') }}"
                    class="inline-block bg-red-600 text-white font-bold py-3 px-10 rounded-lg hover:bg-red-700 text-lg transition-colors duration-300 transform hover:scale-105">
                     Explore Pre-Owned Cars
                 </a>

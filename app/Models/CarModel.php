@@ -32,6 +32,6 @@ class CarModel extends Model
 
     public function inventories(): HasMany
     {
-        return $this->hasMany(Inventory::class);
+        return $this->hasMany(Inventory::class, 'car_model_id');
     }
 }

@@ -17,12 +17,15 @@
         <tr>
           <th class="p-3"><input type="checkbox" /></th>
           <th class="p-3">ID</th>
+          <th class="p-3">Name</th>
           <th class="p-3">Brand</th>
           <th class="p-3">Range</th>
-          <th class="p-3">Name</th>
           <th class="p-3">Year</th>
           <th class="p-3">Description</th>
           <th class="p-3">Image</th>
+          <th class="p-3">Color</th>
+          <th class="p-3">Price</th>
+          <th class="p-3">Active</th>
           <th class="p-3">Last update</th>
           <th class="p-3 text-center">Status</th>
         </tr>
@@ -35,13 +38,13 @@
                 <span>{{ $carModel->id }}</span>
             </td>
             <td class="p-3">
+                <span>{{ $carModel->name }}</span>
+            </td>
+            <td class="p-3">
                 <span>{{ $carModel->brand->name }}</span>
             </td>
             <td class="p-3">
                 <span>{{ $carModel->rangeOfCars->name }}</span>
-            </td>
-            <td class="p-3">
-                <span>{{ $carModel->name }}</span>
             </td>
             <td class="p-3">
                 <span>{{ $carModel->year }}</span>
@@ -51,6 +54,26 @@
             </td>
             <td class="p-3">
                 <img src="{{ asset('' . $carModel->image) }}" alt="{{ $carModel->name }}" class="w-30 h-12 object-contain mx-auto">
+            </td>
+            @php $inventory = $carModel->inventories->first(); @endphp
+            <td class="p-3">
+                {{ $inventory->color ?? '' }}
+            </td>
+            <td class="p-3">
+                {{ $inventory->price ?? '' }}
+            </td>
+            <td class="p-3">
+                @if (isset($inventory))
+                    @if ($inventory->is_active)
+                        <span class="inline-block px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">
+                            Sale
+                        </span>
+                    @else
+                        <span class="inline-block px-2 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full">
+                            Sold
+                        </span>
+                    @endif
+                @endif
             </td>
             <td class="p-3">
                 <span>{{ $carModel->created_at->format('d M Y') }}</span>

@@ -15,10 +15,28 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">Upload Car Image</label>
                     <input id="imageInput" type="file" name="image" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
                 </div>
+                <div class="w-full">
+                    {{-- @php   dump($carModel->inventories); @endphp --}}
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                    <input type="text" name="color" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <!-- Price -->
+                <div class="w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Price</label>
+                    <input type="number" name="price"  class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <!-- Is Active -->
+                <div class="w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Active</label>
+                    <select name="is_active" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                        <option value="1" {{ (isset($inventory) && $inventory->is_active) ? 'selected' : '' }}>Sale</option>
+                        <option value="0" {{ (isset($inventory) && !$inventory->is_active) ? 'selected' : '' }}>Sold</option>
+                    </select>
+                </div>
             </div>
         </div>
 
-        <!-- Bên phải: Form nhập thông tin -->
+
         <div class="w-1/2 p-6 flex flex-col">
             <div class="flex justify-between items-center mb-4">
                 <div class="flex items-center">

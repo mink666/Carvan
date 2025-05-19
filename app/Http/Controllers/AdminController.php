@@ -18,7 +18,7 @@ class AdminController extends Controller
             if ($state === 'create') {
                 return redirect()->route('Admin.CarMgr.create');
             }
-            $data['carModels'] = \App\Models\CarModel::with('brand','rangeOfCars')->get();
+            $data['carModels'] = \App\Models\CarModel::with('brand','rangeOfCars','inventories')->get();
         } elseif ($section === 'UserMgr') {
             if ($state === 'create') {
                 return redirect()->route('Admin.UserMgr.create');

@@ -28,4 +28,15 @@ class AdminTestDriveController extends Controller
             'data' => compact('testDriveRequest'),
         ]);
     }
+    public function editSchedule(string $id)
+    {
+        $schedule = TestDriveRequest::findOrFail($id);
+
+        return view('Admin', [
+            'section' => 'TestDriveScheduleMgr',
+            'state' => 'edit',
+            'data' => compact('schedule'),
+        ]);
+    }
+
 }

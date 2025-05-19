@@ -168,7 +168,7 @@
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col group hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1.5">
                     <div class="relative">
                         {{-- Ảnh của xe pre-owned sẽ được ưu tiên --}}
-                        <a href="{{ route('preOwned.show', $preowned->id) }}" class="block">
+                        <a href="{{ route('preowned.show', $preowned->id) }}" class="block">
                             <img src="{{ $preowned->image ? asset($preowned->image) : ($carModel->image ? asset($carModel->image) : asset('assets/images/default-car-large.jpg')) }}"
                                  alt="Pre-Owned {{ $brand->name }} {{ $carModel->name }}"
                                  class="w-full h-56 md:h-64 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
@@ -180,23 +180,27 @@
                     <div class="p-5 md:p-6 flex flex-col flex-grow">
                         <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
                             <span>{{ $carModel->year }}</span>
-                            <span>{{ number_format($preowned->mileage, 0, ',', '.') }} KM</span>
+                            <span>Milleage: {{ number_format($preowned->mileage, 0, ',', '.') }} KM</span>
                         </div>
 
                         <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-1 truncate" title="{{ $brand->name }} {{ $carModel->name }}">
-                            <a href="{{ route('preOwned.show', $preowned->id) }}" class="hover:text-green-700 transition-colors">
+                            <a href="{{ route('preowned.show', $preowned->id) }}" class="hover:text-green-700 transition-colors">
                                 {{ strtoupper($brand->name) }} {{ strtoupper($carModel->name) }}
                             </a>
                         </h3>
 
-                        <p class="text-2xl lg:text-xl font-semibold text-green-600 mb-4"> {{-- Màu giá khác cho preowned --}}
+                        <p class="text-2xl lg:text-xl font-semibold text-green-600 mb-4">
                             {{ number_format($preowned->price, 0, ',', '.') }} VND
                         </p>
 
                         <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
                             <div>
                                 <p class="text-gray-500 uppercase tracking-wider text-xs">Exterior Color</p>
-                                <p class="font-semibold text-gray-700">{{ $inventory->color ?? 'N/A' }}</p>
+                                <p class="font-semibold text-gray-700">{{ $preowned->color ?? 'N/A' }}</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 uppercase tracking-wider text-xs">Interior Color</p>
+                                <p class="font-semibold text-gray-700">{{ $preowned->interior_color ?? 'N/A' }}</p>
                             </div>
                             <div>
                                 <p class="text-gray-500 uppercase tracking-wider text-xs">Condition</p>
@@ -204,14 +208,9 @@
                             </div>
                         </div>
 
-                        <div class="mb-5 text-sm">
-                            <p class="text-gray-500 uppercase tracking-wider text-xs">Available At</p>
-                            <p class="font-semibold text-gray-700">Carvan Certified Pre-Owned</p>
-                        </div>
-
-                        <div class="mt-auto grid grid-cols-2 gap-3">
-                            <a href="{{ route('preOwned.show', $preowned->id) }}"
-                               class="block w-full text-center bg-white text-gray-700 font-semibold py-3 px-4 rounded-md border border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-colors duration-300 text-sm">
+                        <div class="mt-auto gap-3">
+                            <a href="{{ route('preowned.show', $preowned->id) }}"
+                               class="block w-full text-center bg-white text-gray-700 font-semibold py-3 px-4 rounded-md border border-gray-300 hover:bg-black hover:text-white transition-colors duration-300 text-sm">
                                 MORE DETAILS
                             </a>
                         </div>

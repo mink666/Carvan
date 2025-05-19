@@ -9,10 +9,11 @@
             <div class="ne-hero-banner">
                 <div class="ne-slide">
                     @if ($latestNews->image)
-                        <img src="{{ asset('storage/' . $latestNews->image) }}" class="ne-slide-image"
+                        <img src="{{ asset('images/' . $latestNews->image) }}" class="ne-slide-image"
                             alt="{{ $latestNews->title }}">
                     @else
-                        <img src="{{ asset('images/no-image.png') }}" class="ne-slide-image" alt="No image">
+                        <img src="{{ asset('images/news_events/default-news.jpg') }}" class="ne-slide-image"
+                            alt="Default news image">
                     @endif
                     <div class="ne-slide-overlay"></div>
                 </div>

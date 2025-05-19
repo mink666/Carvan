@@ -11,8 +11,8 @@
                     <!-- Slide 1 -->
                     <div class="swiper-slide">
                         <div class="ne-slide">
-                            <img src="{{ asset('images/pngtree-sporty-red-lamborghini-road-image_2913570.jpg') }}"
-                                class="ne-slide-image" alt="Upcoming Events">
+                            <img src="{{ asset('images/news_events/banner-1.jpg') }}" class="ne-slide-image"
+                                alt="Upcoming Events">
                             <div class="ne-slide-overlay"></div>
                             <div class="ne-slide-content">
                                 <h2>Upcoming Events</h2>
@@ -23,7 +23,7 @@
                     <!-- Slide 2 -->
                     <div class="swiper-slide">
                         <div class="ne-slide">
-                            <img src="{{ asset('images/neon-car.jpg') }}" class="ne-slide-image" alt="Events">
+                            <img src="{{ asset('images/news_events/banner-2.jpg') }}" class="ne-slide-image" alt="Events">
                             <div class="ne-slide-overlay"></div>
                             <div class="ne-slide-content">
                                 <h2>Stay Connected</h2>
@@ -57,10 +57,11 @@
                                 <a href="{{ route('events.show', $event->id) }}"
                                     class="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                                     @if ($event->image)
-                                        <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}"
+                                        <img src="{{ asset('images/' . $event->image) }}" alt="{{ $event->title }}"
                                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-105 aspect-[16/9]">
                                     @else
-                                        <img src="{{ asset('images/neon-car.jpg') }}" alt="No image"
+                                        <img src="{{ asset('images/news_events/default-event.jpg') }}"
+                                            alt="Default event image"
                                             class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-105 aspect-[16/9]">
                                     @endif
                                 </a>

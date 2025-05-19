@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('range_of_cars_id')->nullable();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->integer('year')->nullable();
             $table->text('description')->nullable();
             $table->string('image')->nullable();

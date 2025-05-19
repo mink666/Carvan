@@ -4,13 +4,6 @@
 }
 
 /* Hero Banner Section */
-.ne-hero-section {
-    position: relative;
-    height: 400px;
-    overflow: hidden;
-    width: 100%;
-    margin-bottom: 4rem;
-}
 
 .ne-hero-slider {
     width: 100%;

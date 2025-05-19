@@ -145,7 +145,7 @@
                                 </div>
 
                                 <div class="mt-auto grid grid-cols-2 gap-3">
-                                    <a href="{{ route('preOwned.index', ['car_model_id' => $model->id, 'inventory_id' => $inventory->id]) }}" {{-- Truyền inventory_id nếu form cần biết phiên bản cụ thể --}}
+                                    <a href="{{ route('preowned.index', ['car_model_id' => $model->id, 'inventory_id' => $inventory->id]) }}" {{-- Truyền inventory_id nếu form cần biết phiên bản cụ thể --}}
                                        class="block w-full text-center bg-red-600 text-white font-semibold py-3 px-4 rounded-md hover:bg-red-700 transition-colors duration-300 text-sm">
                                         INQUIRE
                                     </a>

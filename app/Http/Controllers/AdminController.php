@@ -38,12 +38,16 @@ class AdminController extends Controller
             if ($state === 'create') {
                 return redirect()->route('Admin.TestDriveRequestMgr.create');
             }
+            if ($state === 'edit') {
+                $data['testDriveRequest'] = \App\Models\TestDriveRequest::all();
+                return redirect()->route('Admin.TestDriveScheduleMgr.edit');
+            }
             $data['requests'] = \App\Models\TestDriveRequest::all();
         } elseif ($section === 'TestDriveScheduleMgr') {
             if ($state === 'create') {
                 return redirect()->route('Admin.TestDriveScheduleMgr.create');
             }
-            $data['schedules'] = \App\Models\TestDriveSchedule::all();
+            $data['schedules'] = \App\Models\TestDriveSchedule::get();
         } elseif ($section === 'Dashboard') {
             $data['userCount'] = \App\Models\User::count();
             $data['carCount'] = \App\Models\CarModel::count();

@@ -12,6 +12,22 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        // Chuyển hướng sang trang preowned nếu tìm kiếm xe cũ
+        if ($request->filled('type') && $request->type === 'preowned') {
+            return redirect()->route('preowned.index', $request->except('type'));
+        }
+
+        // Chuyển hướng sang trang preowned nếu tìm kiếm có từ khóa liên quan đến xe cũ
+        if ($request->filled('search')) {
+            $searchTerm = strtolower($request->search);
+            $preownedKeywords = ['used', 'preowned', 'pre-owned', 'second hand'];
+            foreach ($preownedKeywords as $keyword) {
+                if (str_contains($searchTerm, $keyword)) {
+                    return redirect()->route('preowned.index', $request->all());
+                }
+            }
+        }
+
         $query = Inventory::with(['carModel.brand', 'carModel.rangeOfCars', 'preowned'])
             ->where('is_active', true)
             ->where('is_preowned', false);

@@ -25,7 +25,7 @@ class NewsSeeder extends Seeder
                     <li>Premium seat massage feature with 10 different programs</li>
                 </ul>
                 <p>The vehicle is expected to be available in Vietnam market in Q3 2024 with 3 versions: S450 4MATIC, S500 4MATIC, and S580 4MATIC.</p>',
-                'image' => 'news/mercedes-sclass-2024.jpg',
+                'image' => 'news_events/mercedes-sclass-2024.jpg',
                 'date' => Carbon::now()->subDays(2),
             ],
             [
@@ -38,7 +38,7 @@ class NewsSeeder extends Seeder
                     <li>Operating range up to 566 km</li>
                 </ul>
                 <p>The vehicle is equipped with next-generation battery technology featuring DC fast charging up to 200kW, enabling charging from 10% to 80% in 35 minutes. Interior is finished with premium materials and the BMW Curved Display.</p>',
-                'image' => 'news/bmw-ix-m60.jpg',
+                'image' => 'news_events/bmw-ix-m60.jpg',
                 'date' => Carbon::now()->subDays(4),
             ],
             [
@@ -51,7 +51,7 @@ class NewsSeeder extends Seeder
                     <li>16-speaker Bang & Olufsen sound system</li>
                 </ul>
                 <p>The vehicle is distributed with prices starting from 6.5 billion VND, including 3-year warranty and complimentary maintenance package for the first 5 years.</p>',
-                'image' => 'news/audi-rs-etron.jpg',
+                'image' => 'news_events/audi-rs-etron.jpg',
                 'date' => Carbon::now()->subDays(6),
             ],
             [
@@ -64,7 +64,7 @@ class NewsSeeder extends Seeder
                     <li>Burmester 4D sound system with 21 speakers</li>
                 </ul>
                 <p>Notably, the new Turbo E-Hybrid version produces up to 729 horsepower, making it the most powerful Cayenne ever.</p>',
-                'image' => 'news/porsche-cayenne.jpg',
+                'image' => 'news_events/porsche-cayenne.jpg',
                 'date' => Carbon::now()->subDays(8),
             ],
             [
@@ -77,7 +77,7 @@ class NewsSeeder extends Seeder
                     <li>nanoe X air purification system with negative ions</li>
                 </ul>
                 <p>The vehicle is equipped with a 2.5L hybrid engine for fuel efficiency, combined with 8-speed automatic transmission and AVS adaptive suspension system.</p>',
-                'image' => 'news/lexus-lm.jpg',
+                'image' => 'news_events/lexus-lm.jpg',
                 'date' => Carbon::now()->subDays(10),
             ],
         ];

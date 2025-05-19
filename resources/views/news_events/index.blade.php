@@ -11,8 +11,8 @@
                     <!-- Slide 1 -->
                     <div class="swiper-slide">
                         <div class="ne-slide">
-                            <img src="{{ asset('images/pngtree-sporty-red-lamborghini-road-image_2913570.jpg') }}"
-                                class="ne-slide-image" alt="News & Events">
+                            <img src="{{ asset('images/news_events/banner-1.jpg') }}" class="ne-slide-image"
+                                alt="News & Events">
                             <div class="ne-slide-overlay"></div>
                             <div class="ne-slide-content">
                                 <h2>Latest News & Events</h2>
@@ -23,7 +23,8 @@
                     <!-- Slide 2 -->
                     <div class="swiper-slide">
                         <div class="ne-slide">
-                            <img src="{{ asset('images/neon-car.jpg') }}" class="ne-slide-image" alt="News & Events">
+                            <img src="{{ asset('images/news_events/banner-2.jpg') }}" class="ne-slide-image"
+                                alt="News & Events">
                             <div class="ne-slide-overlay"></div>
                             <div class="ne-slide-content">
                                 <h2>Connect with Carvan</h2>
@@ -52,9 +53,9 @@
                     <div class="ne-news-item-full-width">
                         <div class="item-image">
                             @if ($news->image)
-                                <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->title }}">
+                                <img src="{{ asset('images/' . $news->image) }}" alt="{{ $news->title }}">
                             @else
-                                <img src="{{ asset('images/neon-car.jpg') }}" alt="No image">
+                                <img src="{{ asset('images/news_events/default-news.jpg') }}" alt="Default news image">
                             @endif
                         </div>
                         <div class="item-content">
@@ -94,9 +95,9 @@
                     <div class="ne-event-item-full-width">
                         <div class="item-image">
                             @if ($event->image)
-                                <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}">
+                                <img src="{{ asset('images/' . $event->image) }}" alt="{{ $event->title }}">
                             @else
-                                <img src="{{ asset('images/neon-car.jpg') }}" alt="No image">
+                                <img src="{{ asset('images/news_events/default-event.jpg') }}" alt="Default event image">
                             @endif
                             @php
                                 $status = 'Upcoming';

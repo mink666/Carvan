@@ -10,8 +10,6 @@ use App\Http\Controllers\TestDriveController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\EventController;
-// use App\Http\Controllers\NewsController as UserNewsController;
-// use App\Http\Controllers\EventController as UserEventController;
 use App\Http\Controllers\NewsEventsController;
 use App\Http\Controllers\ContactPageController;
 use App\Http\Controllers\PreOwnedController;
@@ -24,6 +22,8 @@ use App\Http\Middleware\CheckAdminRole;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Range;
+use App\Models\Product;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
@@ -43,7 +43,6 @@ Route::get('/range_of_car/{rangeOfCar}', [RangeOfCarController::class, 'show'])-
 
 Route::get('/test_drive', [TestDriveController::class, 'index'])->name('test_drive.index');
 Route::post('/test_drive', [TestDriveController::class, 'store'])->name('test_drive.store');
-
 Route::get('/schedules', [TestDriveScheduleController::class, 'index'])->name('schedules.index');
 Route::get('/schedules/create', [TestDriveScheduleController::class, 'create'])->name('schedules.create');
 Route::post('/schedules', [TestDriveScheduleController::class, 'store'])->name('schedules.store');
@@ -52,12 +51,7 @@ Route::put('/schedules/{schedule}', [TestDriveScheduleController::class, 'update
 Route::delete('/schedules/{schedule}', [TestDriveScheduleController::class, 'cancel'])->name('schedules.cancel');
 
 
-Route::get('/preOwned', [PreOwnedController::class, 'index'])->name('preOwned.index');
-Route::get('/preOwned/{preOwned}', [PreOwnedController::class, 'show'])->name('preOwned.show');
-
 //Route for Admin
-
-
 Route::middleware([CheckAdminRole::class])->group(function () {
     Route::get('/Admin', function () {
         return redirect('/Admin/Dashboard');
@@ -117,11 +111,12 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::get('/products/{carModel}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/get-ranges-by-brand/{brandId}', [ProductController::class, 'getRangesByBrand'])->name('get.ranges.by.brand');
 Route::get('/get-origins-by-brand/{brandId}', [ProductController::class, 'getOriginsByBrand'])->name('get.origins.by.brand');
+//preowned
+Route::get('/preowned', [PreOwnedController::class, 'index'])->name('preowned.index');
+Route::get('/preowned/{id}', [PreOwnedController::class, 'show'])->name('preowned.show');
+Route::get('/get-ranges-by-brand-preowned/{brandId}', [PreOwnedController::class, 'getRangesByBrand'])->name('get.ranges.by.brand.preowned');
+Route::get('/get-origins-by-brand-preowned/{brandId}', [PreOwnedController::class, 'getOriginsByBrand'])->name('get.origins.by.brand.preowned');
 
-// News & Events page
-// Route::get('/news-events', function () {
-//     return view('news_events.index');
-// })->name('news_events.index');
 
 Route::get('/LoginAdmin', [AuthController::class, 'showLogin'])->name('AdminLogin');
 Route::post('/LoginAdmin', [AuthController::class, 'login'])->name('login');

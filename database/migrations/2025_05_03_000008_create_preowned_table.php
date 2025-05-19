@@ -16,7 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('inventory_id');
             $table->integer('mileage')->nullable();
             $table->text('story')->nullable();
-            $table->enum('condition', ['excellent', 'good', 'fair', 'poor'])->default('excellent');
+            $table->string('color')->nullable();
+            $table->string('interior_color')->nullable();
+            $table->enum('condition', ['excellent', 'very good', 'good', 'fair', 'poor'])->default('excellent');
+            $table->text('features')->nullable();
             $table->dateTime('purchase_date')->nullable();
             $table->unsignedBigInteger('price')->nullable();
             $table->string('image')->nullable();

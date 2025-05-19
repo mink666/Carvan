@@ -25,7 +25,7 @@ class EventSeeder extends Seeder
                     <li>Workshops and talkshows on automotive technology trends</li>
                 </ul>
                 <p>Visitors will have the opportunity to test drive the latest models and participate in exclusive promotional programs at the exhibition.</p>',
-                // 'image' => 'events/auto-show-2024.jpg',
+                'image' => 'news_events/auto-show-2024.jpg',
                 'start_date' => Carbon::now()->addMonths(2),
                 'end_date' => Carbon::now()->addMonths(2)->addDays(7),
             ],
@@ -39,7 +39,7 @@ class EventSeeder extends Seeder
                     <li>Level 3 autonomous driving technology experience</li>
                 </ul>
                 <p>Event limited to 100 participants, priority given to VIP customers and Mercedes-Benz owners.</p>',
-                // 'image' => 'events/mercedes-experience.jpg',
+                'image' => 'news_events/mercedes-experience.jpg',
                 'start_date' => Carbon::now()->addDays(15),
                 'end_date' => Carbon::now()->addDays(17),
             ],
@@ -53,7 +53,7 @@ class EventSeeder extends Seeder
                     <li>Networking with BMW M owners community</li>
                 </ul>
                 <p>Event features experts from BMW M GmbH and BMW Vietnam technical team.</p>',
-                // 'image' => 'events/bmw-track-day.jpg',
+                'image' => 'news_events/bmw-track-day.jpg',
                 'start_date' => Carbon::now()->addDays(45),
                 'end_date' => Carbon::now()->addDays(45),
             ],
@@ -67,7 +67,7 @@ class EventSeeder extends Seeder
                     <li>Introduction to next-generation PPE platform</li>
                 </ul>
                 <p>Visitors will tour the technology showroom and experience the latest features firsthand.</p>',
-                // 'image' => 'events/audi-tech-day.jpg',
+                'image' => 'news_events/audi-tech-day.jpg',
                 'start_date' => Carbon::now()->addDays(5),
                 'end_date' => Carbon::now()->addDays(5),
             ],
@@ -81,7 +81,7 @@ class EventSeeder extends Seeder
                     <li>Networking with Porsche Club Vietnam</li>
                 </ul>
                 <p>Event includes Porsche Design area with exclusive and limited edition products available only during the festival.</p>',
-                // 'image' => 'events/porsche-festival.jpg',
+                'image' => 'news_events/porsche-festival.jpg',
                 'start_date' => Carbon::now()->addMonths(3),
                 'end_date' => Carbon::now()->addMonths(3)->addDays(2),
             ],

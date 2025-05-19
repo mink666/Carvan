@@ -33,9 +33,14 @@
         </div>
 
         <div class="sm:flex items-center space-x-4 md:space-x-8 lg:space-x-10 xl:space-x-12 2xl:space-x-20">
-            <a href="{{ route('car_models.index') }}"
-                class="mr-2 text-sm font-bold text-black hover:underline transform transition duration-300 ease-in-out hover:scale-105">
+            <a href="{{ route('products.index') }}"
+                class="mr-0 text-sm font-bold text-black hover:underline transform transition duration-300 ease-in-out hover:scale-105">
                 New Products
+            </a>
+
+            <a href="{{ route('preowned.index') }}"
+                class="mr-0 text-sm font-bold text-black hover:underline transform transition duration-300 ease-in-out hover:scale-105">
+                Pre-Owned Cars
             </a>
 
             @if (isset($brandsWithModelsForNavbar) && $brandsWithModelsForNavbar->count() > 0)

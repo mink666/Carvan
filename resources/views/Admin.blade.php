@@ -41,38 +41,33 @@
                     <i class="fas fa-car-side"></i>
                     <span>Car</span>
                 </a>
+                @admin
                 <a href="/Admin/BrandMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-building"></i>
                     <span>Brand</span>
-                </a>
-                <a href="/Admin/EventMgr?state=list"
-                class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Event</span>
                 </a>
                 <a href="/Admin/RangesMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-car"></i>
                     <span>Range</span>
                 </a>
-                @admin
-                <a href="#"
-                class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
-                    <i class="fas fa-edit"></i>
-                    <span>Forms</span>
-                </a>
                 @endadmin
+                <a href="/Admin/EventMgr?state=list"
+                class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Event</span>
+                </a>
                 <a href="/Admin/TestDriveRequestMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-file-alt"></i>
                     <span>Test Drive</span>
                 </a>
 
-                <a href="#"
+                <a href="/Admin/TestDriveScheduleMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Charts</span>
+                    <i class="fas fa-calendar"></i>
+                    <span>Schedule</span>
                 </a>
                 <div class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <form method="POST" action="{{ route('logout') }}">
@@ -143,6 +138,14 @@
                         @include('Components/TestDriveRequestMgr/Create', $data)
                     @elseif($state === 'edit')
                         @include('Components/TestDriveRequestMgr/Edit', $data)
+                    @endif
+                @elseif($section === 'TestDriveScheduleMgr')
+                    @if($state === 'list')
+                        @include('Components/TestDriveScheduleMgr/List', $data)
+                    @elseif($state === 'create')
+                        @include('Components/TestDriveScheduleMgr/Create', $data)
+                    @elseif($state === 'edit')
+                        @include('Components/TestDriveScheduleMgr/Edit', $data)
                     @endif
                 @else
                     <h1 class="text-2xl font-semibold text-gray-700 mb-6">Page Not Found</h1>

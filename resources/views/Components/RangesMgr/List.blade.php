@@ -6,6 +6,11 @@
         <span class="text-blue-500">{{ $ranges->count() }}</span>
       </h2>
       <div class="flex items-center gap-2">
+            <div id="no-results-row" class="hidden">
+                <div colspan="6" class="text-center py-4 text-gray-500">
+                    <i class="fas fa-exclamation-circle text-red-500 mr-2"></i> No results found.
+                </div>
+            </div>
             <button @click="open = !open" class="text-gray-600 hover:text-black focus:outline-none">
             <i class="fas fa-search text-xl"></i>
             </button>
@@ -103,11 +108,7 @@
             </td>
         </tr>
         @endforeach
-        <tr id="no-results-row" class="hidden">
-            <td colspan="6" class="text-center py-4 text-gray-500">
-                 <i class="fas fa-exclamation-circle text-red-500 mr-2"></i> No results found.
-            </td>
-        </tr>
+
       </tbody>
     </table>
     <!-- Pagination -->

@@ -47,17 +47,17 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="bg-white p-4 rounded shadow text-center">
                 <p class="text-sm text-gray-500 mb-2">74% Recommended</p>
-                <img src="{{ asset('images/car_models/ffiesta.png') }}" alt="Car" class="w-full h-40 object-contain mb-2">
+                <img src="{{ asset('images/car_models/ferrari_roma.png') }}" alt="Car" class="w-full h-40 object-contain mb-2">
                 <p class="font-semibold">Car Model 1</p>
             </div>
             <div class="bg-white p-4 rounded shadow text-center">
                 <p class="text-sm text-gray-500 mb-2">82% Recommended</p>
-                <img src="{{ asset('images/car_models/hdcity.jpg') }}" alt="Car" class="w-full h-40 object-contain mb-2">
+                <img src="{{ asset('images/car_models/lamborghini_revuelto.png') }}" alt="Car" class="w-full h-40 object-contain mb-2">
                 <p class="font-semibold">Car Model 2</p>
             </div>
             <div class="bg-white p-4 rounded shadow text-center">
                 <p class="text-sm text-gray-500 mb-2">85% Recommended</p>
-                <img src="{{ asset('images/car_models/tytvios.png') }}" alt="Car" class="w-full h-40 object-contain mb-2">
+                <img src="{{ asset('images/car_models/mazda_mx5.png') }}" alt="Car" class="w-full h-40 object-contain mb-2">
                 <p class="font-semibold">Car Model 3</p>
             </div>
     </div>

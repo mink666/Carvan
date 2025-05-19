@@ -41,7 +41,6 @@
                     <i class="fas fa-car-side"></i>
                     <span>Car</span>
                 </a>
-                @admin
                 <a href="/Admin/BrandMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-building"></i>
@@ -52,7 +51,6 @@
                     <i class="fas fa-car"></i>
                     <span>Range</span>
                 </a>
-                @endadmin
                 <a href="/Admin/EventMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-newspaper"></i>

@@ -5,7 +5,7 @@
         <span class="text-indigo-600"></span>
         <span class="text-blue-500">{{ $ranges->count() }}</span>
       </h2>
-      <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2">
             <div id="no-results-row" class="hidden">
                 <div colspan="6" class="text-center py-4 text-gray-500">
                     <i class="fas fa-exclamation-circle text-red-500 mr-2"></i> No results found.
@@ -172,7 +172,7 @@ $(document).ready(function () {
 
     function renderPagination() {
         $('#pagination-buttons').empty();
-
+        const pageCount = Math.ceil(filteredRows.length / rowsPerPage);
 
         const $prev = $('<button class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">&laquo;</button>');
         if (currentPage === 1) $prev.prop('disabled', true).addClass('opacity-50');

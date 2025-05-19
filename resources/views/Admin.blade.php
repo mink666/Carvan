@@ -56,6 +56,11 @@
                     <i class="fas fa-newspaper"></i>
                     <span>Event</span>
                 </a>
+                <a href="/Admin/PreOwnedMgr?state=list"
+                class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
+                    <i class="fas fa-car-alt"></i>
+                    <span>PreOwned Car</span>
+                </a>
                 <a href="/Admin/TestDriveRequestMgr?state=list"
                 class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-300 transition">
                     <i class="fas fa-file-alt"></i>
@@ -128,6 +133,14 @@
                         @include('Components/EventMgr/Create', $data)
                     @elseif($state === 'edit')
                         @include('Components/EventMgr/Edit', $data)
+                    @endif
+                @elseif($section === 'PreOwnedMgr')
+                    @if($state === 'list')
+                        @include('Components/PreOwnedMgr/List', $data)
+                    @elseif($state === 'create')
+                        @include('Components/PreOwnedMgr/Create', $data)
+                    @elseif($state === 'edit')
+                        @include('Components/PreOwnedMgr/Edit', $data)
                     @endif
                 @elseif($section === 'TestDriveRequestMgr')
                     @if($state === 'list')

@@ -34,6 +34,11 @@ class AdminController extends Controller
                 return redirect()->route('Admin.RangesMgr.create');
             }
             $data['ranges'] = \App\Models\RangeOfCar::all();
+        }elseif ($section === 'PreOwnedMgr') {
+            if ($state === 'create') {
+                return redirect()->route('Admin.PreOwnedMgr.create');
+            }
+            $data['PreOwnedCars'] = \App\Models\Preowned::all();
         } elseif ($section === 'TestDriveRequestMgr') {
             if ($state === 'create') {
                 return redirect()->route('Admin.TestDriveRequestMgr.create');

@@ -24,6 +24,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Range;
 use App\Models\Product;
+use App\Models\TestDriveSchedule;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
@@ -91,6 +92,7 @@ Route::put('/Admin/UserMgr/update/{id}', [UserController::class, 'update'])->nam
 Route::delete('/Admin/UserMgr/delete/{id}', [UserController::class, 'destroy'])->name('Admin.UserMgr.destroy');
 
 Route::get('/Admin/TestDriveRequestMgr', [AdminTestDriveController::class, 'list'])->name('Admin.TestDriveMgr');
+Route::get('/Admin/TestDriveRequestMgr/edit/{id}', [AdminTestDriveController::class, 'edit'])->name('Admin.TestDriveScheduleMgr.edit');
 
 
 // Route::get('/Admin/TestDriveRequestMgr', [AdminTestDriveController::class, 'list'])->name('Admin.TestDriveRequest');

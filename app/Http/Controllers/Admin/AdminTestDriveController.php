@@ -18,4 +18,14 @@ class AdminTestDriveController extends Controller
             'data' => compact('requests'),
         ]);
     }
+    public function edit(string $id)
+    {
+        $testDriveRequest = TestDriveRequest::findOrFail($id);
+
+        return view('Admin', [
+            'section' => 'TestDriveRequestMgr',
+            'state' => 'edit',
+            'data' => compact('testDriveRequest'),
+        ]);
+    }
 }

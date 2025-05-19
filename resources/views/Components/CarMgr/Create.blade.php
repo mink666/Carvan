@@ -2,7 +2,6 @@
 
     <form action="{{route('Admin.CarMgr.store')}}" method="POST" enctype="multipart/form-data" class="flex w-full">
         @csrf
-
         <!-- Bên trái: Upload Image -->
         <div class="w-1/2 p-6 flex flex-col">
             <h2 class="text-lg font-semibold text-gray-700 mb-4">Create Car</h2>
@@ -16,10 +15,28 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">Upload Car Image</label>
                     <input id="imageInput" type="file" name="image" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
                 </div>
+                <div class="w-full">
+                    {{-- @php   dump($carModel->inventories); @endphp --}}
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                    <input type="text" name="color" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <!-- Price -->
+                <div class="w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Price</label>
+                    <input type="number" name="price"  class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <!-- Is Active -->
+                <div class="w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Active</label>
+                    <select name="is_active" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                        <option value="1" {{ (isset($inventory) && $inventory->is_active) ? 'selected' : '' }}>Sale</option>
+                        <option value="0" {{ (isset($inventory) && !$inventory->is_active) ? 'selected' : '' }}>Sold</option>
+                    </select>
+                </div>
             </div>
         </div>
 
-        <!-- Bên phải: Form nhập thông tin -->
+
         <div class="w-1/2 p-6 flex flex-col">
             <div class="flex justify-between items-center mb-4">
                 <div class="flex items-center">
@@ -70,8 +87,8 @@
 
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Year</label>
-                    <input type="text" name="year" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
-
+                    <input id="yearInput" type="text" name="year" min="2000" max="2025" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                    <p id="errorMsg" class="text-red-500 mt-1 text-sm hidden">Please input year from 2000 to 2025</p>
                 </div>
 
                 <div>
@@ -82,12 +99,13 @@
 
             <!-- Buttons -->
             <div class="flex justify-between items-center mt-6">
-                <a href="/Admin/CarMgr?state=list" class="text-gray-700">
-                    <button type="button" class="px-4 py-2 bg-gray-100 text-gray-700 font-semibold rounded-md hover:bg-gray-300">
+                    <button onclick="window.location.href='/Admin/CarMgr?state=list'" type="button" class="px-4 py-2 bg-gray-100 text-gray-700 font-semibold rounded-md hover:bg-gray-300">
                         Cancel
                       </button>
-                </a>
-                <button type="submit" class="px-4 py-2 bg-[#ff3131] text-white font-semibold rounded-md hover:bg-[#B20710]">Save now</button>
+
+                <button type="submit" class="px-4 py-2 bg-[#ff3131] text-white font-semibold rounded-md hover:bg-[#B20710]">
+                    Save now
+                </button>
             </div>
 
         </div>
@@ -110,4 +128,18 @@
             previewImage.src = "{{ asset('images/placeholder.png') }}";
         }
     });
+
+    const yearInput = document.getElementById('yearInput');
+    const errorMsg = document.getElementById('errorMsg');
+
+  yearInput.addEventListener('input', () => {
+    const value = parseInt(yearInput.value);
+    if (value < 2000 || value > 2025) {
+      errorMsg.classList.remove('hidden');
+      yearInput.classList.add('border-red-500', 'focus:ring-red-500');
+    } else {
+      errorMsg.classList.add('hidden');
+      yearInput.classList.remove('border-red-500', 'focus:ring-red-500');
+    }
+  });
 </script>

@@ -28,8 +28,13 @@ class TestDriveController extends Controller
         ]);
 
         $test = TestDriveRequest::create($validatedData);
-        // dd($test);
         return redirect()->route('test_drive.index')->with('success', 'Request for test drive submitted successfully.');
+    }
+
+    public function show()
+    {
+        $requests = TestDriveRequest::with(['carModel', 'schedule'])->orderByDesc('created_at')->paginate(10);
+        return view('test_drive.list', compact('requests'));
     }
 
 }

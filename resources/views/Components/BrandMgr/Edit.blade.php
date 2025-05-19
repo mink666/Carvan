@@ -1,8 +1,8 @@
 <div class="max-w-8xl w-full mx-auto bg-white shadow-xl rounded-xl overflow-hidden flex">
 
-    <form action="" method="POST" enctype="multipart/form-data" class="flex w-full">
+    <form action="{{ route('Admin.BrandMgr.update',['id' => $brand->id]) }}" method="POST" enctype="multipart/form-data" class="flex w-full">
         @csrf
-
+        @method('PUT')
         <!-- Bên trái: Upload Image -->
         <div class="w-1/2 p-6 flex flex-col">
             <h2 class="text-lg font-semibold text-gray-700 mb-4">Update Brand</h2>

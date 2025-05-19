@@ -21,9 +21,13 @@ class UserController extends Controller
 
     public function create()
     {
+        $users = User::all();
+        // Lấy ID lớn nhất hiện tại và cộng thêm 1
+        $nextId = \App\Models\User::max('id') + 1;
         return view('Admin', [
             'section' => 'UserMgr',
             'state' => 'create',
+            'data' => compact('users', 'nextId'),
         ]);
     }
 
@@ -45,7 +49,7 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('Admin.UserMgr')->with('success', 'User created successfully.');
     }
 
 
@@ -57,11 +61,11 @@ class UserController extends Controller
 
     public function edit(string $id)
     {
-        $user = User::findOrFail($id);
+        $users = User::findOrFail($id);
         return view('Admin', [
             'section' => 'UserMgr',
             'state' => 'edit',
-            'data' => compact('user'),
+            'data' => compact('users'),
         ]);
     }
 
@@ -73,7 +77,7 @@ class UserController extends Controller
             'username' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'nullable|string|min:6|confirmed',
             'role' => 'required|string',
         ]);
         $data = $request->only(['username', 'name', 'email', 'role']);
@@ -81,14 +85,17 @@ class UserController extends Controller
             $data['password'] = bcrypt($request->password);
         }
         $user->update($data);
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('Admin.UserMgr')->with('success', 'User updated successfully.');
     }
 
 
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
+        if ($user->role === 'admin' && $user->id == 1) {
+            return redirect()->route('Admin.UserMgr')->with('error', 'Cannot delete Admin Account.');
+        }
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('Admin.UserMgr')->with('success', 'User deleted successfully.');
     }
 }

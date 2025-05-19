@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Brand;
 use App\Models\CarModel;
+use App\Models\Preowned;
 
 class PageController extends Controller
 {
@@ -33,7 +34,19 @@ class PageController extends Controller
             $model->inventories_min_price = $model->displayInventory ? $model->displayInventory->price : 0;
         });
 
-        return view('home', compact('featuredBrands', 'popularModels'));
+          $featuredPreownedCars = Preowned::with([
+                                    'inventory.carModel.brand',
+                                    'inventory.carModel.rangeOfCars'
+                                ])
+                                ->whereHas('inventory.carModel.brand') // Đảm bảo có đủ thông tin liên kết
+                                ->whereHas('inventory', function ($query) {
+                                    $query->where('is_active', true); // Chỉ lấy inventory preowned đang active
+                                })
+                                ->inRandomOrder()
+                                ->take(3) // Hiển thị 3 xe pre-owned nổi bật
+                                ->get();
+
+        return view('home', compact('featuredBrands', 'popularModels', 'featuredPreownedCars'));
     }
 
     public function about(): View

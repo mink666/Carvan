@@ -10,20 +10,20 @@ use App\Http\Controllers\TestDriveController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\EventController;
-// use App\Http\Controllers\NewsController as UserNewsController;
-// use App\Http\Controllers\EventController as UserEventController;
 use App\Http\Controllers\NewsEventsController;
 use App\Http\Controllers\ContactPageController;
 use App\Http\Controllers\PreOwnedController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\Admin\BrandController as AdminBrandController;
-use App\Http\Controllers\Admin\RangeOfCarController as AdminRangeOfCarController;
+use App\Http\Controllers\Admin\AdminBrandController;
+use App\Http\Controllers\Admin\AdminRangeOfCarController;
+use App\Http\Controllers\Admin\AdminTestDriveController;
+use App\Http\Controllers\TestDriveScheduleController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Range;
 use App\Models\Product;
-
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
@@ -43,6 +43,14 @@ Route::get('/range_of_car/{rangeOfCar}', [RangeOfCarController::class, 'show'])-
 
 Route::get('/test_drive', [TestDriveController::class, 'index'])->name('test_drive.index');
 Route::post('/test_drive', [TestDriveController::class, 'store'])->name('test_drive.store');
+Route::get('/schedules', [TestDriveScheduleController::class, 'index'])->name('schedules.index');
+Route::get('/schedules/create', [TestDriveScheduleController::class, 'create'])->name('schedules.create');
+Route::post('/schedules', [TestDriveScheduleController::class, 'store'])->name('schedules.store');
+Route::get('/schedules/{schedule}/edit', [TestDriveScheduleController::class, 'edit'])->name('schedules.edit');
+Route::put('/schedules/{schedule}', [TestDriveScheduleController::class, 'update'])->name('schedules.update');
+Route::delete('/schedules/{schedule}', [TestDriveScheduleController::class, 'cancel'])->name('schedules.cancel');
+
+
 //Route for Admin
 Route::middleware([CheckAdminRole::class])->group(function () {
     Route::get('/Admin', function () {
@@ -61,16 +69,31 @@ Route::get('/Admin/CarMgr', [CarModelController::class, 'index'])->name('Admin.C
 Route::get('/Admin/CarMgr/create', [CarModelController::class, 'create'])->name('Admin.CarMgr.create');
 Route::post('/Admin/CarMgr/store', [CarModelController::class, 'store'])->name('Admin.CarMgr.store');
 Route::get('/Admin/CarMgr/edit/{id}', [CarModelController::class, 'edit'])->name('Admin.CarMgr.edit');
+Route::put('/Admin/CarMgr/update/{id}', [CarModelController::class, 'update'])->name('Admin.CarMgr.update');
 
 Route::get('/Admin/BrandMgr', [AdminBrandController::class, 'list'])->name('Admin.BrandMgr');
 Route::get('/Admin/BrandMgr/create', [AdminBrandController::class, 'create'])->name('Admin.BrandMgr.create');
+Route::post('/Admin/BrandMgr/store', [AdminBrandController::class, 'store'])->name('Admin.BrandMgr.store');
 Route::get('/Admin/BrandMgr/edit/{id}', [AdminBrandController::class, 'edit'])->name('Admin.BrandMgr.edit');
+Route::put('/Admin/BrandMgr/update/{id}', [AdminBrandController::class, 'update'])->name('Admin.BrandMgr.update');
 
 Route::get('/Admin/RangesMgr', [AdminRangeOfCarController::class, 'list'])->name('Admin.RangesMgr');
 Route::get('/Admin/RangesMgr/create', [AdminRangeOfCarController::class, 'create'])->name('Admin.RangesMgr.create');
+Route::post('/Admin/RangesMgr/store', [AdminRangeOfCarController::class, 'store'])->name('Admin.RangesMgr.store');
 Route::get('/Admin/RangesMgr/edit/{id}', [AdminRangeOfCarController::class, 'edit'])->name('Admin.RangesMgr.edit');
+Route::put('/Admin/RangesMgr/update/{id}', [AdminRangeOfCarController::class, 'update'])->name('Admin.RangesMgr.update');
 
-Route::get('/Admin/UserMgr', [AdminController::class, 'userIndex'])->name('Admin.UserMgr');
+Route::get('/Admin/UserMgr', [UserController::class, 'index'])->name('Admin.UserMgr');
+Route::get('/Admin/UserMgr/create', [UserController::class, 'create'])->name('Admin.UserMgr.create');
+Route::post('/Admin/UserMgr/store', [UserController::class, 'store'])->name('Admin.UserMgr.store');
+Route::get('/Admin/UserMgr/edit/{id}', [UserController::class, 'edit'])->name('Admin.UserMgr.edit');
+Route::put('/Admin/UserMgr/update/{id}', [UserController::class, 'update'])->name('Admin.UserMgr.update');
+Route::delete('/Admin/UserMgr/delete/{id}', [UserController::class, 'destroy'])->name('Admin.UserMgr.destroy');
+
+Route::get('/Admin/TestDriveRequestMgr', [AdminTestDriveController::class, 'list'])->name('Admin.TestDriveMgr');
+
+
+// Route::get('/Admin/TestDriveRequestMgr', [AdminTestDriveController::class, 'list'])->name('Admin.TestDriveRequest');
 
 // Admin routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -94,10 +117,11 @@ Route::get('/preowned/{id}', [PreOwnedController::class, 'show'])->name('preowne
 Route::get('/get-ranges-by-brand-preowned/{brandId}', [PreOwnedController::class, 'getRangesByBrand'])->name('get.ranges.by.brand.preowned');
 Route::get('/get-origins-by-brand-preowned/{brandId}', [PreOwnedController::class, 'getOriginsByBrand'])->name('get.origins.by.brand.preowned');
 
-// News & Events page
-// Route::get('/news-events', function () {
-//     return view('news_events.index');
-// })->name('news_events.index');
 
 Route::get('/LoginAdmin', [AuthController::class, 'showLogin'])->name('AdminLogin');
 Route::post('/LoginAdmin', [AuthController::class, 'login'])->name('login');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('LoginAdmin');
+})->name('logout');

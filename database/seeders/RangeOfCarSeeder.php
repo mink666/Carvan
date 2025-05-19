@@ -30,11 +30,11 @@ class RangeOfCarSeeder extends Seeder
             ],
             [
                 'name' => 'Pickup Truck',
-                'description' => 'Rugged vehicles with an open cargo bed, designed for hauling, towing, and off-road performance. Ideal for work and an_array_of_recreational activities.'
+                'description' => 'Rugged vehicles with an open cargo bed, designed for hauling, towing, and off-road performance. Ideal for work and recreational activities.'
             ],
             [
                 'name' => 'Coupe',
-                'description' => 'Sporty two-door cars characterized by a sleek, sloping roofline, often emphasizing performance and an_array_of_styling over practicality.'
+                'description' => 'Sporty two-door cars characterized by a sleek, sloping roofline, often emphasizing performance and styling over practicality.'
             ],
             [
                 'name' => 'Convertible (Cabriolet)',

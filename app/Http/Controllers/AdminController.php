@@ -18,7 +18,7 @@ class AdminController extends Controller
             if ($state === 'create') {
                 return redirect()->route('Admin.CarMgr.create');
             }
-            $data['carModels'] = \App\Models\CarModel::with('brand')->get();
+            $data['carModels'] = \App\Models\CarModel::with('brand','rangeOfCars','inventories')->get();
         } elseif ($section === 'UserMgr') {
             if ($state === 'create') {
                 return redirect()->route('Admin.UserMgr.create');
@@ -34,11 +34,22 @@ class AdminController extends Controller
                 return redirect()->route('Admin.RangesMgr.create');
             }
             $data['ranges'] = \App\Models\RangeOfCar::all();
+        } elseif ($section === 'TestDriveRequestMgr') {
+            if ($state === 'create') {
+                return redirect()->route('Admin.TestDriveRequestMgr.create');
+            }
+            $data['requests'] = \App\Models\TestDriveRequest::all();
+        } elseif ($section === 'TestDriveScheduleMgr') {
+            if ($state === 'create') {
+                return redirect()->route('Admin.TestDriveScheduleMgr.create');
+            }
+            $data['schedules'] = \App\Models\TestDriveSchedule::all();
         } elseif ($section === 'Dashboard') {
             $data['userCount'] = \App\Models\User::count();
             $data['carCount'] = \App\Models\CarModel::count();
             $data['brandCount'] = \App\Models\Brand::count();
             $data['rangeCount'] = \App\Models\RangeOfCar::count();
+            $data['NewsCount'] = \App\Models\News::count();
             $data['carCountsByBrand'] = \App\Models\CarModel::select('brand_id', DB::raw('count(*) as total'))
                 ->groupBy('brand_id')
                 ->with('brand')

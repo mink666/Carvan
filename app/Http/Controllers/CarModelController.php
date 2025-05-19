@@ -12,21 +12,22 @@ use App\Models\RangeOfCar;
 class CarModelController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $carModels = CarModel::with(['brand','rangeOfCars'])->get();
+        $carModels = CarModel::with(['brand', 'rangeOfCars'])->get();
+
         return view('Admin', [
             'section' => 'CarMgr',
             'state' => 'list',
             'data' => compact('carModels'),
-        ]);
+            ]);
     }
 
     public function create()
     {
         $brands = Brand::all();
         $ranges = RangeOfCar::all();
-        // Lấy ID lớn nhất hiện tại và cộng thêm 1
+
         $nextId = \App\Models\CarModel::max('id') + 1;
         return view('Admin', [
             'section' => 'CarMgr',
@@ -45,25 +46,25 @@ class CarModelController extends Controller
             'year' => 'nullable|integer|min:2000|max:' . date('Y'),
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'color' => 'required|string|max:50',
+            'price' => 'required|numeric|min:0',
+            'is_active' => 'required|boolean',
         ]);
+        $data = $request->only(['brand_id', 'range_of_cars_id', 'name', 'year', 'description']);
 
-        $path = null;
         if ($request->hasFile('image')) {
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images/car_models'), $imageName);
-            $path = 'images/car_models/' . $imageName;
+            $file = $request->file('image');
+            $filename = $file->getClientOriginalName();
+            $file->storeAs('images/car_models', $filename, 'public');
+            $data['image'] = 'images/car_models/' . $filename;
         }
 
-        CarModel::create([
-            'brand_id' => $request->brand_id,
-            'range_of_cars_id' => $request->range_of_cars_id,
-            'name' => $request->name,
-            'year' => $request->year,
-            'description' => $request->description,
-            'image' => $path,
-        ]);
+        $carModel = CarModel::create($data);
+        $inventoryData = $request->only(['color', 'price', 'is_active']);
+        $inventoryData['car_model_id'] = $carModel->id;
+        \App\Models\Inventory::create($inventoryData);
 
-        return redirect()->route('Admin.CarMgr')->with('success', 'Car model created successfully.');
+        return redirect()->route('Admin.CarMgr')->with('success', 'Car model updated successfully.');
     }
 
 
@@ -79,9 +80,10 @@ class CarModelController extends Controller
     public function edit(string $id)
 
     {
-        $carModel = CarModel::findOrFail($id);
+        $carModel = CarModel::with('inventories')->findOrFail($id);
         $brands = Brand::all();
         $ranges = RangeOfCar::all();
+
         return view('Admin', [
             'section' => 'CarMgr',
             'state' => 'edit',
@@ -90,7 +92,7 @@ class CarModelController extends Controller
     }
 
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $carModel = CarModel::findOrFail($id);
         $request->validate([
@@ -100,6 +102,9 @@ class CarModelController extends Controller
             'year' => 'nullable|integer|min:2000|max:' . date('Y'),
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'color' => 'required|string|max:50',
+            'price' => 'required|numeric|min:0',
+            'is_active' => 'required|boolean',
         ]);
         $data = $request->only(['brand_id', 'range_of_cars_id', 'name', 'year', 'description']);
         if ($request->hasFile('image')) {
@@ -108,8 +113,17 @@ class CarModelController extends Controller
             }
             $data['image'] = $request->file('image')->store('car_models');
         }
+
         $carModel->update($data);
-        return redirect()->route('car_models.index')->with('success', 'Car model updated successfully.');
+        $inventoryData = $request->only(['color', 'price', 'is_active']);
+        $inventory = $carModel->inventories->first();
+        if ($inventory) {
+            $inventory->update($inventoryData);
+        } else {
+            $inventoryData['car_model_id'] = $carModel->id;
+            \App\Models\Inventory::create($inventoryData);
+        }
+        return redirect()->route('Admin.CarMgr')->with('success', 'Car model updated successfully.');
     }
 
 

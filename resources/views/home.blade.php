@@ -92,14 +92,14 @@
         @if(isset($popularModels) && $popularModels->count() > 0)
         <section id="popular-models" class="mb-12 md:mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2 text-center">Featured Vehicles</h2>
-            <p class="text-sm font-semibold text-gry-800 tracking-wider text-center mb-10">Explore our popular models</p>
+            <p class="text-sm font-semibold text-gry-800 tracking-wider text-center mb-10">Explore our new models</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 @foreach($popularModels as $model)
-                    @if($model->displayInventory) {{-- Chỉ hiển thị nếu có inventory để lấy thông tin --}}
+                    @if($model->displayInventory)
                         @php $inventory = $model->displayInventory; @endphp
                         <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col group">
                             <div class="relative">
-                                <a href="{{ route('car_models.show', $model->id) }}" class="block">
+                                <a href="{{ route('products.show', $model->id) }}" class="block">
                                     <img src="{{ $model->image ? asset($model->image) : asset('assets/images/default-car-large.jpg') }}"
                                          alt="{{ $model->brand->name ?? '' }} {{ $model->name }}"
                                          class=" w-full h-56 md:h-64 object-contain transition-transform duration-300 ease-in-out group-hover:scale-105">
@@ -109,8 +109,6 @@
                             <div class="p-5 md:p-6 flex flex-col flex-grow">
                                 <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
                                     <span>{{ $model->year }}</span>
-                                    {{-- <span>{{ number_format($inventory->mileage ?? 0, 0, ',', '.') }} KM</span> --}}
-                                    {{-- Bạn cần thêm trường 'mileage' vào Inventory nếu muốn hiển thị --}}
                                     @if($inventory->status)
                                     <span class="px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full {{ $inventory->status === 'sale' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
                                         For {{ ucfirst($inventory->status) }}
@@ -119,7 +117,7 @@
                                 </div>
 
                                 <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-1 truncate" title="{{ $model->brand->name ?? '' }} {{ $model->name }}">
-                                    <a href="{{ route('car_models.show', $model->id) }}" class="hover:text-red-700 transition-colors">
+                                    <a href="{{ route('products.show', $model->id) }}" class="hover:text-red-700 transition-colors">
                                         {{ strtoupper($model->brand->name ?? '') }} {{ strtoupper($model->name) }}
                                     </a>
                                 </h3>
@@ -139,18 +137,9 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-5 text-sm">
-                                    <p class="text-gray-500 uppercase tracking-wider text-xs">Available At</p>
-                                    <p class="font-semibold text-gray-700">Carvan Showroom</p> {{-- Thay bằng thông tin thực tế nếu có --}}
-                                </div>
-
-                                <div class="mt-auto grid grid-cols-2 gap-3">
-                                    <a href="{{ route('preowned.index', ['car_model_id' => $model->id, 'inventory_id' => $inventory->id]) }}" {{-- Truyền inventory_id nếu form cần biết phiên bản cụ thể --}}
-                                       class="block w-full text-center bg-red-600 text-white font-semibold py-3 px-4 rounded-md hover:bg-red-700 transition-colors duration-300 text-sm">
-                                        INQUIRE
-                                    </a>
-                                    <a href="{{ route('car_models.show', $model->id) }}"
-                                       class="block w-full text-center bg-white text-gray-700 font-semibold py-3 px-4 rounded-md border border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-colors duration-300 text-sm">
+                                <div class="mt-auto gap-3">
+                                    <a href="{{ route('products.show', $model->id) }}"
+                                       class="block w-full text-center bg-red-500 text-white font-semibold py-3 px-4 rounded-md border border-red-500 hover:bg-white hover:border-black hover:text-black transition-colors duration-300 text-sm">
                                         MORE DETAILS
                                     </a>
                                 </div>
@@ -162,7 +151,91 @@
         </section>
         @endif
 
-        {{-- 4. How It Works / Our Services (Focus on Test Drive) --}}
+    {{-- 7. Featured Pre-Owned Vehicles Section --}}
+@if(isset($featuredPreownedCars) && $featuredPreownedCars->count() > 0)
+<section id="featured-preowned" class="mb-12 md:mb-16 pt-8">
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2 text-center">Quality Pre-Owned Vehicles</h2>
+    <p class="text-sm font-semibold text-gray-700 tracking-wider text-center mb-10">Handpicked and ready for you</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        @foreach($featuredPreownedCars as $preowned)
+            @php
+                $inventory = $preowned->inventory;
+                $carModel = $inventory->carModel ?? null;
+                $brand = $carModel->brand ?? null;
+            @endphp
+
+            @if($carModel && $brand && $inventory)
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col group hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1.5">
+                    <div class="relative">
+                        {{-- Ảnh của xe pre-owned sẽ được ưu tiên --}}
+                        <a href="{{ route('preOwned.show', $preowned->id) }}" class="block">
+                            <img src="{{ $preowned->image ? asset($preowned->image) : ($carModel->image ? asset($carModel->image) : asset('assets/images/default-car-large.jpg')) }}"
+                                 alt="Pre-Owned {{ $brand->name }} {{ $carModel->name }}"
+                                 class="w-full h-56 md:h-64 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+                        </a>
+                        {{-- Tag Pre-Owned --}}
+                        <span class="absolute top-3 left-3 bg-yellow-400 text-yellow-800 text-xs font-bold px-3 py-1 rounded-full shadow">PRE-OWNED</span>
+                    </div>
+
+                    <div class="p-5 md:p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
+                            <span>{{ $carModel->year }}</span>
+                            <span>{{ number_format($preowned->mileage, 0, ',', '.') }} KM</span>
+                        </div>
+
+                        <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-1 truncate" title="{{ $brand->name }} {{ $carModel->name }}">
+                            <a href="{{ route('preOwned.show', $preowned->id) }}" class="hover:text-green-700 transition-colors">
+                                {{ strtoupper($brand->name) }} {{ strtoupper($carModel->name) }}
+                            </a>
+                        </h3>
+
+                        <p class="text-2xl lg:text-xl font-semibold text-green-600 mb-4"> {{-- Màu giá khác cho preowned --}}
+                            {{ number_format($preowned->price, 0, ',', '.') }} VND
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
+                            <div>
+                                <p class="text-gray-500 uppercase tracking-wider text-xs">Exterior Color</p>
+                                <p class="font-semibold text-gray-700">{{ $inventory->color ?? 'N/A' }}</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 uppercase tracking-wider text-xs">Condition</p>
+                                <p class="font-semibold text-gray-700">{{ $preowned->condition ?? 'N/A' }}</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-5 text-sm">
+                            <p class="text-gray-500 uppercase tracking-wider text-xs">Available At</p>
+                            <p class="font-semibold text-gray-700">Carvan Certified Pre-Owned</p>
+                        </div>
+
+                        <div class="mt-auto grid grid-cols-2 gap-3">
+                            {{-- Nút Inquire có thể trỏ đến form test drive hoặc một form liên hệ riêng cho xe cũ --}}
+                            <a href="{{ route('testdrive.form', ['preowned_id' => $preowned->id]) }}" {{-- Hoặc 1 route khác --}}
+                               class="block w-full text-center bg-green-600 text-white font-semibold py-3 px-4 rounded-md border border-green-600 hover:bg-white hover:border-green-700 hover:text-green-700 transition-colors duration-300 text-sm">
+                                INQUIRE
+                            </a>
+                            <a href="{{ route('preOwned.show', $preowned->id) }}"
+                               class="block w-full text-center bg-white text-gray-700 font-semibold py-3 px-4 rounded-md border border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-colors duration-300 text-sm">
+                                MORE DETAILS
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    </div>
+    @if(isset($featuredPreownedCars) && $featuredPreownedCars->count() > 0)
+    <div class="text-center mt-10">
+        <a href="{{ route('preOwned.index') }}" class="inline-block bg-gray-800 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-700 transition-colors duration-300">
+            View All Pre-Owned Cars
+        </a>
+    </div>
+    @endif
+</section>
+@endif
+
+        {{-- 4. How It Works / Our Services --}}
         <section id="how-it-works" class=" mb-12 md:mb-16 py-10 px-6 rounded-lg">
             <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-8 text-center">Experience Your Dream Car</h2>
             <div class="grid md:grid-cols-3 gap-8 text-center">
@@ -213,6 +286,11 @@
                 <a href="{{ route('test_drive.index')}}"
                    class="inline-block bg-white text-red-600 font-bold py-3 px-10 rounded-lg hover:bg-gray-100 text-lg transition-colors duration-300 transform hover:scale-105">
                     Request a Test Drive
+                </a>
+                <span class="mx-3 font-semibold text-white text-lg">or</span>
+                <a href="{{ route('preOwned.index') }}"
+                   class="inline-block bg-red-600 text-white font-bold py-3 px-10 rounded-lg hover:bg-red-700 text-lg transition-colors duration-300 transform hover:scale-105">
+                    Explore Pre-Owned Cars
                 </a>
             </div>
         </section>

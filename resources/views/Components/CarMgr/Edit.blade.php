@@ -1,9 +1,9 @@
 <div class="max-w-8xl w-full mx-auto bg-white shadow-xl rounded-xl overflow-hidden flex">
 
-    <form action="" method="POST" enctype="multipart/form-data" class="flex w-full">
+    <form action="{{ route('Admin.CarMgr.update',['id' => $carModel->id]) }}" method="POST" enctype="multipart/form-data" class="flex w-full">
         @csrf
+        @method('PUT')
 
-        <!-- Bên trái: Upload Image -->
         <div class="w-1/2 p-6 flex flex-col">
             <h2 class="text-lg font-semibold text-gray-700 mb-4">Update Car</h2>
 
@@ -16,10 +16,30 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">Upload Car Image</label>
                     <input id="imageInput" type="file" name="image" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
                 </div>
+                <!-- Color -->
+                @php $inventory = $carModel->inventories->first(); @endphp
+                <div class="w-full">
+                    {{-- @php   dump($carModel->inventories); @endphp --}}
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                    <input type="text" name="color" value="{{ $inventory->color ?? '' }}" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <!-- Price -->
+                <div class="w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Price</label>
+                    <input type="number" name="price" value="{{ $inventory->price ?? '' }}" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <!-- Is Active -->
+                <div class="w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Active</label>
+                    <select name="is_active" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                        <option value="1" {{ (isset($inventory) && $inventory->is_active) ? 'selected' : '' }}>Sale</option>
+                        <option value="0" {{ (isset($inventory) && !$inventory->is_active) ? 'selected' : '' }}>Sold</option>
+                    </select>
+                </div>
             </div>
         </div>
 
-        <!-- Bên phải: Form nhập thông tin -->
+
         <div class="w-1/2 p-6 flex flex-col">
             <div class="flex justify-between items-center mb-4">
                 <div class="flex items-center">
@@ -37,13 +57,13 @@
             <div class="space-y-4 flex-grow">
                 <!-- Car Id -->
                 <div>
-                    <label class="block text-base font-medium text-gray-700 mb-1">ID</label>
-                    <input type="text" name="id" value="{{$carModel ->id}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">ID</label>
+                    <input type="text" name="id" value="{{$carModel ->id}}" class="w-full text-sm px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                 </div>
                 <!-- Car Name-->
                 <div>
-                    <label class="block text-base font-medium text-gray-700 mb-1">Brand</label>
-                    <select name="brand_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+                    <select name="brand_id" class="w-full text-sm px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                         <option value="" disabled selected>Select a Brand</option>
                         @foreach($brands as $brand)
                             <option value="{{ $brand->id }}" {{ $carModel->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
@@ -53,26 +73,31 @@
 
                 <!-- Range -->
                 <div>
-                    <label class="block text-base font-medium text-gray-700 mb-1">Range</label>
-                    <select name="range_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Range</label>
+                    <select name="range_of_cars_id" class="w-full text-sm px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                         <option value="" disabled selected>Select a Range</option>
                         @foreach($ranges as $range)
                             <option value="{{ $range->id }}" {{ $carModel->range_of_cars_id == $range->id ? 'selected' : '' }}>{{ $range->name }}</option>
                         @endforeach
                     </select>
                 </div>
+                <!-- Name -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">name</label>
+                    <input type="text" value="{{$carModel->name}}" name="name"  class="w-full text-sm px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black ">
+                </div>
 
                 <!-- Year -->
                 <div>
-                    <label class="block text-base font-medium text-gray-700 mb-1">Year</label>
-                    <input type="text" value="{{$carModel->year}}" name="review"  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black ">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Year</label>
+                    <input type="text" value="{{$carModel->year}}" name="year"  class="w-full text-sm px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black ">
 
                 </div>
 
                 <!-- Description -->
                 <div>
-                    <label class="block text-base font-medium text-gray-700 mb-1">Description</label>
-                    <textarea name="description"  class="w-full h-36 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black" >{{$carModel->description}}</textarea>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                    <textarea name="description"  class="w-full text-sm h-36 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black" >{{$carModel->description}}</textarea>
                 </div>
             </div>
 

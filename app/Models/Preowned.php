@@ -14,7 +14,7 @@ class Preowned extends Model
     protected $table = 'preowned';
 
     protected $fillable = [
-        'inventory_id',
+        'name',
         'mileage',
         'story',
         'color',

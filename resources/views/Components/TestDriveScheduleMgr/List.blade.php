@@ -21,7 +21,7 @@
                     <td class="p-3">{{ $schedule->location }}</td>
                     <td class="p-3 capitalize">{{ $schedule->status }}</td>
                     <td class="p-3 flex gap-2">
-                        <a href="{{ route('schedules.edit', $schedule->id) }}" class="text-blue-600 hover:underline">Edit</a>
+                        <a href="{{ route('Admin.TestDriveScheduleMgr.edit', $schedule->id) }}" class="text-blue-600 hover:underline">Edit</a>
 
                         <form method="POST" action="{{ route('schedules.cancel', $schedule->id) }}"
                             onsubmit="return confirm('Are you sure you want to cancel this schedule?')">

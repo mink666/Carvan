@@ -38,7 +38,7 @@
                                 {{ $request->schedule->location }}
                             </div>
                         @else
-                            <a href="{{ route('Admin.TestDriveScheduleMgr.edit', $request->id) }}"
+                            <a href="{{ route('Admin.TestDriveRequestMgr.edit', $request->id) }}"
                                class="text-blue-600 hover:underline font-semibold">
                                 + Assign Schedule
                             </a>

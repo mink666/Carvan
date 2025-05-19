@@ -92,7 +92,8 @@ Route::put('/Admin/UserMgr/update/{id}', [UserController::class, 'update'])->nam
 Route::delete('/Admin/UserMgr/delete/{id}', [UserController::class, 'destroy'])->name('Admin.UserMgr.destroy');
 
 Route::get('/Admin/TestDriveRequestMgr', [AdminTestDriveController::class, 'list'])->name('Admin.TestDriveMgr');
-Route::get('/Admin/TestDriveRequestMgr/edit/{id}', [AdminTestDriveController::class, 'edit'])->name('Admin.TestDriveScheduleMgr.edit');
+Route::get('/Admin/TestDriveRequestMgr/edit/{id}', [AdminTestDriveController::class, 'edit'])->name('Admin.TestDriveRequestMgr.edit');
+Route::get('/Admin/TestDriveScheduleMgr/edit/{id}', [AdminTestDriveController::class, 'editSchedule'])->name('Admin.TestDriveScheduleMgr.edit');
 
 
 // Route::get('/Admin/TestDriveRequestMgr', [AdminTestDriveController::class, 'list'])->name('Admin.TestDriveRequest');

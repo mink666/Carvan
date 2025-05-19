@@ -17,6 +17,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\AdminBrandController;
 use App\Http\Controllers\Admin\AdminRangeOfCarController;
 use App\Http\Controllers\Admin\AdminTestDriveController;
+use App\Http\Controllers\Admin\AdminPreOwnedController;
 use App\Http\Controllers\TestDriveScheduleController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Controllers\AuthController;
@@ -90,6 +91,9 @@ Route::post('/Admin/UserMgr/store', [UserController::class, 'store'])->name('Adm
 Route::get('/Admin/UserMgr/edit/{id}', [UserController::class, 'edit'])->name('Admin.UserMgr.edit');
 Route::put('/Admin/UserMgr/update/{id}', [UserController::class, 'update'])->name('Admin.UserMgr.update');
 Route::delete('/Admin/UserMgr/delete/{id}', [UserController::class, 'destroy'])->name('Admin.UserMgr.destroy');
+
+Route::get('/Admin/PreOwnedMgr', [AdminPreOwnedController::class, 'list'])->name('Admin.PreOwnedMgr');
+Route::get('/Admin/PreOwnedMgr/edit/{id}', [AdminPreOwnedController::class, 'edit'])->name('Admin.PreOwnedMgr.edit');
 
 Route::get('/Admin/TestDriveRequestMgr', [AdminTestDriveController::class, 'list'])->name('Admin.TestDriveMgr');
 Route::get('/Admin/TestDriveRequestMgr/edit/{id}', [AdminTestDriveController::class, 'edit'])->name('Admin.TestDriveRequestMgr.edit');

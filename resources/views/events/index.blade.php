@@ -11,7 +11,7 @@
                     <!-- Slide 1 -->
                     <div class="swiper-slide">
                         <div class="ne-slide">
-                            <img src="{{ asset('images/news_events/banner-1.jpg') }}" class="ne-slide-image"
+                            <img src="{{ asset('images/news_events/banner-2.png') }}" class="ne-slide-image"
                                 alt="Upcoming Events">
                             <div class="ne-slide-overlay"></div>
                             <div class="ne-slide-content">

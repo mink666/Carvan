@@ -11,7 +11,7 @@
                     <!-- Slide 1 -->
                     <div class="swiper-slide">
                         <div class="ne-slide">
-                            <img src="{{ asset('images/news_events/banner-1.jpg') }}" class="ne-slide-image"
+                            <img src="{{ asset('images/news_events/banner-1.png') }}" class="ne-slide-image"
                                 alt="News & Events">
                             <div class="ne-slide-overlay"></div>
                             <div class="ne-slide-content">
@@ -23,7 +23,7 @@
                     <!-- Slide 2 -->
                     <div class="swiper-slide">
                         <div class="ne-slide">
-                            <img src="{{ asset('images/news_events/banner-2.jpg') }}" class="ne-slide-image"
+                            <img src="{{ asset('images/news_events/banner-2.png') }}" class="ne-slide-image"
                                 alt="News & Events">
                             <div class="ne-slide-overlay"></div>
                             <div class="ne-slide-content">
@@ -49,7 +49,7 @@
             </div>
 
             <div class="ne-news-items-container">
-                @forelse($latestNews as $news)
+                @forelse($latestNews->where('is_active', true) as $news)
                     <div class="ne-news-item-full-width">
                         <div class="item-image">
                             @if ($news->image)
@@ -91,7 +91,7 @@
             </div>
 
             <div class="ne-events-items-container">
-                @forelse($latestEvents as $event)
+                @forelse($latestEvents->where('is_active', true) as $event)
                     <div class="ne-event-item-full-width">
                         <div class="item-image">
                             @if ($event->image)

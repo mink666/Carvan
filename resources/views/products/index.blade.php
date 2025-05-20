@@ -8,7 +8,7 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="ne-slide">
-                            <img src="{{ asset('images/banner-1.jpg') }}" class="ne-slide-image" alt="Our Products">
+                            <img src="{{ asset('images/preowned/car-model.png') }}" class="ne-slide-image" alt="Our Products">
                             <div class="ne-slide-overlay"></div>
                             <div class="ne-slide-content">
                                 <h2>Discover Our Collection</h2>
@@ -18,7 +18,7 @@
                     </div>
                     <div class="swiper-slide">
                         <div class="ne-slide">
-                            <img src="{{ asset('images/banner-preowned.jpg') }}" class="ne-slide-image"
+                            <img src="{{ asset('images/preowned/banner-preowned.png') }}" class="ne-slide-image"
                                 alt="Pre-Owned Vehicles">
                             <div class="ne-slide-overlay"></div>
                             <div class="ne-slide-content">
@@ -230,11 +230,11 @@
             <!-- Products Listing -->
             <div class="products-listing">
                 @forelse($products as $product)
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col group">
-                        <div class="relative">
+                    <div class="product-card">
+                        <div class="product-image">
                             <a href="{{ route('products.show', $product->id) }}">
                                 @if ($product->carModel && $product->carModel->image)
-                                    <img src="{{ asset('storage/' . $product->carModel->image) }}"
+                                    <img src="{{ asset($product->carModel->image) }}"
                                         alt="{{ $product->carModel->name ?? 'Car Image' }}"
                                         class="w-full h-56 md:h-64 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
                                 @else
@@ -291,6 +291,39 @@
                         <p>Please try different filters or check back later.</p>
                     </div>
                 @endforelse
+
+                <!-- Pagination -->
+                <div class="mt-8 flex justify-center">
+                    <div class="pagination-container">
+                        @if ($products->hasPages())
+                            <div class="pagination-wrapper flex items-center gap-2">
+                                {{-- Previous Page Link --}}
+                                @if ($products->onFirstPage())
+                                    <span class="pagination-btn disabled">Previous</span>
+                                @else
+                                    <a href="{{ $products->previousPageUrl() }}" class="pagination-btn">Previous</a>
+                                @endif
+
+                                {{-- Page Numbers --}}
+                                @for ($i = 1; $i <= $products->lastPage(); $i++)
+                                    @if ($i == $products->currentPage())
+                                        <span class="pagination-number active">{{ $i }}</span>
+                                    @else
+                                        <a href="{{ $products->url($i) }}"
+                                            class="pagination-number">{{ $i }}</a>
+                                    @endif
+                                @endfor
+
+                                {{-- Next Page Link --}}
+                                @if ($products->hasMorePages())
+                                    <a href="{{ $products->nextPageUrl() }}" class="pagination-btn">Next</a>
+                                @else
+                                    <span class="pagination-btn disabled">Next</span>
+                                @endif
+                            </div>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -314,7 +347,7 @@
                         <div class="available-car-card" id="available-car-{{ $product->id }}">
                             <div class="car-image">
                                 @if ($product->carModel && $product->carModel->image)
-                                    <img src="{{ asset('storage/' . $product->carModel->image) }}"
+                                    <img src="{{ asset($product->carModel->image) }}"
                                         alt="{{ $product->carModel->name }}">
                                 @else
                                     <div class="no-image">No Image</div>
@@ -330,7 +363,7 @@
                                             '{{ $product->carModel->brand->name ?? 'Unknown Brand' }}',
                                             '{{ $product->carModel->name ?? 'Unknown Model' }}',
                                             {{ $product->price }},
-                                            '{{ $product->carModel && $product->carModel->image ? asset('storage/' . $product->carModel->image) : '' }}',
+                                            '{{ $product->carModel && $product->carModel->image ? asset($product->carModel->image) : '' }}',
                                             '{{ $product->carModel->year ?? 'N/A' }}',
                                             '{{ $product->carModel->rangeOfCars->name ?? 'N/A' }}',
                                             '{{ $product->color ?? 'N/A' }}',
@@ -625,6 +658,55 @@
         .spec-value.different {
             background-color: #fef3c7;
         }
+
+        /* Pagination Styles */
+        .pagination-container {
+            margin-top: 2rem;
+        }
+
+        .pagination-wrapper {
+            display: inline-flex;
+            padding: 0.5rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .pagination-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            color: #4a5568;
+            background-color: #f7fafc;
+            transition: all 0.2s;
+        }
+
+        .pagination-btn:hover:not(.disabled) {
+            background-color: #e53e3e;
+            color: white;
+        }
+
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination-number {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            color: #4a5568;
+            transition: all 0.2s;
+        }
+
+        .pagination-number:hover:not(.active) {
+            background-color: #f7fafc;
+        }
+
+        .pagination-number.active {
+            background-color: #e53e3e;
+            color: white;
+        }
     </style>
 
     <script>
@@ -792,7 +874,7 @@
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            alert('Có lỗi xảy ra khi tải danh sách model range');
+                            alert('Error loading range list');
                         });
 
                     // Lấy origins theo brand
@@ -806,7 +888,7 @@
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            alert('Có lỗi xảy ra khi tải danh sách xuất xứ');
+                            alert('Error loading origin list');
                         });
                 }
             }

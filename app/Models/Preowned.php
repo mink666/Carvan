@@ -26,6 +26,7 @@ class Preowned extends Model
         'purchase_date',
         'price',
         'image',
+        'is_active',
     ];
 
     protected $casts = [

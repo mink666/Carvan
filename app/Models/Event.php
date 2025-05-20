@@ -12,8 +12,9 @@ class Event extends Model
         'title',
         'content',
         'start_date',
-        'image',
         'end_date',
+        'image',
+        'is_active',
     ];
     protected $casts = [
         'start_date' => 'datetime',

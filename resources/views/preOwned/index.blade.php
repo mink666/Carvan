@@ -8,7 +8,7 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="ne-slide">
-                            <img src="{{ asset('images/banner-preowned.jpg') }}" class="ne-slide-image"
+                            <img src="{{ asset('images/preowned/banner-preowned.png') }}" class="ne-slide-image"
                                 alt="Pre-Owned Vehicles">
                             <div class="ne-slide-overlay"></div>
                             <div class="ne-slide-content">
@@ -70,14 +70,15 @@
                     </div>
 
                     <div class="filter-group">
-                        <label>Model Range</label>
-                        <select name="range" id="rangeSelectPreowned">
-                            <option value="">All Models</option>
-                            @foreach ($ranges as $range)
-                                <option value="{{ $range }}" {{ request('range') == $range ? 'selected' : '' }}>
-                                    {{ $range }}
-                                </option>
-                            @endforeach
+                        <label>Condition</label>
+                        <select name="condition" id="conditionSelect">
+                            <option value="">All Conditions</option>
+                            <option value="excellent" {{ request('condition') == 'excellent' ? 'selected' : '' }}>Excellent
+                            </option>
+                            <option value="very_good" {{ request('condition') == 'very_good' ? 'selected' : '' }}>Very Good
+                            </option>
+                            <option value="good" {{ request('condition') == 'good' ? 'selected' : '' }}>Good</option>
+                            <option value="fair" {{ request('condition') == 'fair' ? 'selected' : '' }}>Fair</option>
                         </select>
                     </div>
 
@@ -129,7 +130,7 @@
 
             <!-- Products Listing -->
             <div class="products-listing">
-                @forelse($preownedCars as $preowned)
+                @forelse($preownedCars->  as $preowned)
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                         <div class="relative">
                             <a href="{{ route('preowned.show', $preowned->id) }}">
@@ -158,9 +159,11 @@
                             </a>
 
                             <div class="description">
-                                <p><strong>Mileage:</strong> {{ number_format($preowned->mileage, 0, ',', '.') }} km</p>
-                                <p><strong>Condition:</strong> {{ ucfirst($preowned->condition) ?? 'N/A' }}</p>
-                                <p><strong>Color:</strong> {{ $preowned->color ?? 'N/A' }}</p>
+                                <p class="mb-2"><strong>Mileage:</strong>
+                                    {{ number_format($preowned->mileage, 0, ',', '.') }} km</p>
+                                <p class="mb-2"><strong>Condition:</strong> {{ ucfirst($preowned->condition) ?? 'N/A' }}
+                                </p>
+                                <p class="mb-2"><strong>Color:</strong> {{ $preowned->color ?? 'N/A' }}</p>
                             </div>
 
                             <div class="mt-auto">
@@ -462,7 +465,7 @@
             document.getElementById('comparison-popup').classList.remove('hidden');
         }
 
-        function addToCompare(id, name, price, image, mileage, color, condition, description, features) {
+        function addToCompare(id, name, price, image, mileage, color, condition, story, features) {
             const btn = document.querySelector(`#available-car-${id} .select-for-compare-btn`);
 
             if (btn.classList.contains('selected')) {
@@ -485,7 +488,7 @@
                     mileage,
                     color,
                     condition,
-                    description,
+                    story,
                     features: typeof features === 'string' ? JSON.parse(features) : features
                 });
                 btn.classList.add('selected');
@@ -554,7 +557,7 @@
                     title: 'Description',
                     specs: [{
                         name: 'Vehicle Description',
-                        key: 'description'
+                        key: 'story'
                     }]
                 },
                 {

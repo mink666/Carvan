@@ -19,9 +19,9 @@ class AdminPreOwnedController extends Controller
         ]);
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $PreOwneds = Preowned::get();
+        $PreOwneds = Preowned::findOrFail($id);
         return view('Admin', [
             'section' => 'PreOwnedMgr',
             'state' => 'edit',
@@ -101,6 +101,6 @@ class AdminPreOwnedController extends Controller
 
         $preowned->update($validated);
 
-        return redirect()->back()->with('success', 'PreOwned updated successfully.');
+        return redirect()->route('Admin.PreOwnedMgr')->with('success', 'PreOwned updated successfully.');
     }
 }

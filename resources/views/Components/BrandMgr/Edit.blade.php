@@ -38,7 +38,7 @@
                 <!-- Brand ID -->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">ID</label>
-                    <input type="text" name="id" value="{{$brand ->id}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                    <input type="text" name="id" readonly value="{{$brand ->id}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                 </div>
                 <!-- Brand name -->
                 <div>
@@ -49,9 +49,13 @@
 
                 <!-- Year -->
                 <div>
-                    <label class="block text-base font-medium text-gray-700 mb-1">Range</label>
-                     <input type="text" name="year" value="{{$brand ->year}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                    <label class="block text-base font-medium text-gray-700 mb-1">Year</label>
+                    <input id="yearInput" type="text" name="year"
+                        value="{{ isset($brand) ? $brand->year : '' }}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                    <p id="errorMsg" class="text-red-500 mt-1 text-sm hidden">Please enter a year from 1900 to 2025.</p>
                 </div>
+
 
                 <!-- Description -->
                 <div>
@@ -88,6 +92,21 @@
             reader.readAsDataURL(file); // Đọc file dưới dạng Data URL
         } else {
             previewImage.src = "{{ asset('images/placeholder.png') }}"; // Nếu không có file, hiển thị ảnh mặc định
+        }
+    });
+
+     const yearInput = document.getElementById('yearInput');
+    const errorMsg = document.getElementById('errorMsg');
+
+    yearInput.addEventListener('input', () => {
+        const value = parseInt(yearInput.value);
+
+        if (isNaN(value) || value < 1900 || value > 2025) {
+            errorMsg.classList.remove('hidden');
+            yearInput.classList.add('border-red-500', 'focus:ring-red-500');
+        } else {
+            errorMsg.classList.add('hidden');
+            yearInput.classList.remove('border-red-500', 'focus:ring-red-500');
         }
     });
 </script>

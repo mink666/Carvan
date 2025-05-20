@@ -1,41 +1,30 @@
 <div class="max-w-8xl w-full mx-auto bg-white shadow-xl rounded-xl overflow-hidden flex">
 
-    <form action="{{ route('Admin.CarMgr.update',['id' => $carModel->id]) }}" method="POST" enctype="multipart/form-data" class="flex w-full">
+    <form action="{{route('Admin.PreOwnedMgr.update',['id' => $PreOwneds->id])}}" method="POST" enctype="multipart/form-data" class="flex w-full">
         @csrf
         @method('PUT')
 
         <div class="w-1/2 p-6 flex flex-col">
-            <h2 class="text-lg font-semibold text-gray-700 mb-4">Update Car PreOwned</h2>
+            <h2 class="text-lg font-semibold text-gray-700 mb-4">Create PreOwned Car</h2>
 
             <div class="flex-grow p-2 border border-dashed border-gray-300 rounded-md bg-white flex flex-col items-center ">
                 <!-- Preview image -->
-                <img id="previewImage" src="{{ asset('' . $carModel->image) }}" alt="Preview" class="w-80 h-80 object-contain rounded-md" />
+                <img id="previewImage" src="{{ asset('' . $PreOwneds->image) }}" alt="Preview" class="w-80 h-80 object-contain rounded-md" />
 
                 {{-- Upload Image --}}
                 <div class="w-full">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Upload Car Image</label>
                     <input id="imageInput" type="file" name="image" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
                 </div>
-                <!-- Color -->
-                @php $inventory = $carModel->inventories->first(); @endphp
-                <div class="w-full">
-                    {{-- @php   dump($carModel->inventories); @endphp --}}
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
-                    <input type="text" name="color" value="{{ $inventory->color ?? '' }}" class="w-full px-4 py-2 border border-gray-300 rounded-md">
-                </div>
-                <!-- Price -->
                 <div class="w-full">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Price</label>
-                    <input type="number" name="price" value="{{ $inventory->price ?? '' }}" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                    <input type="number" name="price" value="{{ $PreOwneds->price ?? '' }}"  class="w-full px-4 py-2 border border-gray-300 rounded-md">
                 </div>
-                <!-- Is Active -->
                 <div class="w-full">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Active</label>
-                    <select name="is_active" class="w-full px-4 py-2 border border-gray-300 rounded-md">
-                        <option value="1" {{ (isset($inventory) && $inventory->is_active) ? 'selected' : '' }}>Sale</option>
-                        <option value="0" {{ (isset($inventory) && !$inventory->is_active) ? 'selected' : '' }}>Sold</option>
-                    </select>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Purchase date</label>
+                    <input type="datetime-local" name="purchase_date" value="{{ $PreOwneds->purchase_date ?? '' }}"  class="w-full px-4 py-2 border border-gray-300 rounded-md">
                 </div>
+
             </div>
         </div>
 
@@ -44,10 +33,10 @@
             <div class="flex justify-between items-center mb-4">
                 <div class="flex items-center">
                     <i class="fas fa-car-side mr-2"></i>
-                    <h2 class="text-lg font-semibold text-gray-700">Car Information</h2>
+                    <h2 class="text-lg font-semibold text-gray-700">Car PreOwned Information</h2>
                 </div>
                 <button type="button" class="text-gray-400 hover:text-black text-5xl">
-                    <a href="/Admin/CarMgr?state=list">
+                    <a href="/Admin/PreOwnedMgr?state=list">
                         &times;
                     </a>
                 </button>
@@ -55,60 +44,45 @@
 
             <!-- Form fields -->
             <div class="space-y-4 flex-grow">
-                <!-- Car Id -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">ID</label>
-                    <input type="text" name="id" value="{{$carModel ->id}}" class="w-full text-sm px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                    <label class="block text-base font-medium text-gray-700 mb-1">Name</label>
+                    <input type="text" name="name" value="{{ $PreOwneds->name ?? '' }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+
                 </div>
-                <!-- Car Name-->
+
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
-                    <select name="brand_id" class="w-full text-sm px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
-                        <option value="" disabled selected>Select a Brand</option>
-                        @foreach($brands as $brand)
-                            <option value="{{ $brand->id }}" {{ $carModel->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
-                        @endforeach
+                    <label class="block text-base font-medium text-gray-700 mb-1">Mileage</label>
+                    <input id="yearInput" type="text" name="mileage" value="{{ $PreOwneds->mileage ?? '' }}"  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
+                <div>
+                    <label class="block text-base font-medium text-gray-700 mb-1">Story</label>
+                    <textarea name="story" class="w-full h-36 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">{{$PreOwneds->story}}</textarea>
+                </div>
+                <div class="w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                    <input type="text" value="{{ $PreOwneds->color ?? '' }}" name="color" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div class="w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Condition</label>
+                    <select name="condition" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                        <option value="excellent">Excellent</option>
+                        <option value="very good">Very Good</option>
+                        <option value="good">Good</option>
+                        <option value="fair">Fair</option>
+                        <option value="poor">Poor</option>
                     </select>
-                </div>
-
-                <!-- Range -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Range</label>
-                    <select name="range_of_cars_id" class="w-full text-sm px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
-                        <option value="" disabled selected>Select a Range</option>
-                        @foreach($ranges as $range)
-                            <option value="{{ $range->id }}" {{ $carModel->range_of_cars_id == $range->id ? 'selected' : '' }}>{{ $range->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <!-- Name -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">name</label>
-                    <input type="text" value="{{$carModel->name}}" name="name"  class="w-full text-sm px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black ">
-                </div>
-
-                <!-- Year -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Year</label>
-                    <input type="text" value="{{$carModel->year}}" name="year"  class="w-full text-sm px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black ">
-
-                </div>
-
-                <!-- Description -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                    <textarea name="description"  class="w-full text-sm h-36 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black" >{{$carModel->description}}</textarea>
                 </div>
             </div>
 
             <!-- Buttons -->
             <div class="flex justify-between items-center mt-6">
-                <a href="/Admin/CarMgr?state=list" class="text-gray-700">
-                    <button type="button" class="px-4 py-2 bg-gray-100 text-gray-700 font-semibold rounded-md hover:bg-gray-300">
+                    <button onclick="window.location.href='/Admin/PreOwnedMgr?state=list'" type="button" class="px-4 py-2 bg-gray-100 text-gray-700 font-semibold rounded-md hover:bg-gray-300">
                         Cancel
                       </button>
-                </a>
-                <button type="submit" class="px-4 py-2 bg-[#ff3131] text-white font-semibold rounded-md hover:bg-[#B20710]">Save now</button>
+
+                <button type="submit" class="px-4 py-2 bg-[#ff3131] text-white font-semibold rounded-md hover:bg-[#B20710]">
+                    Save now
+                </button>
             </div>
 
         </div>
@@ -128,7 +102,21 @@
             };
             reader.readAsDataURL(file); // Đọc file dưới dạng Data URL
         } else {
-            previewImage.src = "{{ asset('images/placeholder.png') }}"; // Nếu không có file, hiển thị ảnh mặc định
+            previewImage.src = "{{ asset('images/placeholder.png') }}";
         }
     });
+
+    const yearInput = document.getElementById('yearInput');
+    const errorMsg = document.getElementById('errorMsg');
+
+  yearInput.addEventListener('input', () => {
+    const value = parseInt(yearInput.value);
+    if (value < 2000 || value > 2025) {
+      errorMsg.classList.remove('hidden');
+      yearInput.classList.add('border-red-500', 'focus:ring-red-500');
+    } else {
+      errorMsg.classList.add('hidden');
+      yearInput.classList.remove('border-red-500', 'focus:ring-red-500');
+    }
+  });
 </script>

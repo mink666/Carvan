@@ -54,9 +54,10 @@
                 <span>{{ $PreOwnedCar->price }}</span>
             </td>
             <td class="p-3">
-                <img src="{{ asset('' . $PreOwnedCar->image) }}" alt="{{ $PreOwnedCar->condition }}" class="w-30 h-12 object-contain mx-auto">
+                <img src="{{ file_exists(public_path('storage/' . $PreOwnedCar->image)) ? asset('storage/' . $PreOwnedCar->image) : asset('' . $PreOwnedCar->image) }}"
+                    alt="{{ $PreOwnedCar->name }}"
+                    class="w-30 h-12 object-contain mx-auto"/>
             </td>
-
 
             <td class="p-3">
                 <span>{{ $PreOwnedCar->created_at->format('d M Y') }}</span>

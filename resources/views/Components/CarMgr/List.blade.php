@@ -53,7 +53,9 @@
                 <span>{{ $carModel->description }}</span>
             </td>
             <td class="p-3">
-                <img src="{{ asset('' . $carModel->image) }}" alt="{{ $carModel->name }}" class="w-30 h-12 object-contain mx-auto">
+                <img src="{{ file_exists(public_path('storage/' . $carModel->image)) ? asset('storage/' . $carModel->image) : asset('' . $carModel->image) }}"
+                    alt="{{ $carModel->name }}"
+                    class="w-30 h-12 object-contain mx-auto"/>
             </td>
             @php $inventory = $carModel->inventories->first(); @endphp
             <td class="p-3">

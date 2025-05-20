@@ -52,12 +52,13 @@ class CarModelController extends Controller
         ]);
         $data = $request->only(['brand_id', 'range_of_cars_id', 'name', 'year', 'description']);
 
-        if ($request->hasFile('image')) {
+         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
             $file->storeAs('images/car_models', $filename, 'public');
             $data['image'] = 'images/car_models/' . $filename;
         }
+
 
         $carModel = CarModel::create($data);
         $inventoryData = $request->only(['color', 'price', 'is_active']);

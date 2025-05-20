@@ -5,9 +5,9 @@
         <span class="text-indigo-600">{{$PreOwnedCars->count()}}</span>
         {{-- Projects: <span class="text-indigo-600">884</span> --}}
       </h2>
-        <a href="/Admin/CarMgr?state=create" class="text-white">
+        <a href="/Admin/PreOwnedMgr?state=create" class="text-white">
             <button class="bg-[#ff3131] hover:bg-[#B20710] text-white px-4 py-2 rounded-md text-sm font-semibold">
-                + Add new Car
+                + Add PreOwned Car
             </button>
         </a>
     </div>
@@ -17,9 +17,11 @@
         <tr>
           <th class="p-3"><input type="checkbox" /></th>
           <th class="p-3">ID</th>
+          <th class="p-3">Name Preowned Car</th>
           <th class="p-3">Mileage</th>
           <th class="p-3">Color</th>
           <th class="p-3">Condition</th>
+          <th class="p-3">Story</th>
           <th class="p-3">Price</th>
           <th class="p-3">Image</th>
           <th class="p-3">Last update</th>
@@ -34,6 +36,9 @@
                 <span>{{ $PreOwnedCar->id }}</span>
             </td>
             <td class="p-3">
+                <span>{{ $PreOwnedCar->name }}</span>
+            </td>
+            <td class="p-3">
                 <span>{{ $PreOwnedCar->mileage }}</span>
             </td>
             <td class="p-3">
@@ -41,6 +46,9 @@
             </td>
             <td class="p-3">
                 <span>{{ $PreOwnedCar->condition }}</span>
+            </td>
+            <td class="p-3">
+                <span>{{ $PreOwnedCar->story }}</span>
             </td>
             <td class="p-3">
                 <span>{{ $PreOwnedCar->price }}</span>

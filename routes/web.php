@@ -94,6 +94,9 @@ Route::delete('/Admin/UserMgr/delete/{id}', [UserController::class, 'destroy'])-
 
 Route::get('/Admin/PreOwnedMgr', [AdminPreOwnedController::class, 'list'])->name('Admin.PreOwnedMgr');
 Route::get('/Admin/PreOwnedMgr/edit/{id}', [AdminPreOwnedController::class, 'edit'])->name('Admin.PreOwnedMgr.edit');
+Route::get('/Admin/PreOwnedMgr/create', [AdminPreOwnedController::class, 'create'])->name('Admin.PreOwnedMgr.create');
+Route::post('/Admin/PreOwnedMgr/store', [AdminPreOwnedController::class, 'store'])->name('Admin.PreOwnedMgr.store');
+Route::put('/Admin/PreOwnedMgr/update/{id}', [AdminPreOwnedController::class, 'update'])->name('Admin.PreOwnedMgr.update');
 
 Route::get('/Admin/TestDriveRequestMgr', [AdminTestDriveController::class, 'list'])->name('Admin.TestDriveMgr');
 Route::get('/Admin/TestDriveRequestMgr/edit/{id}', [AdminTestDriveController::class, 'edit'])->name('Admin.TestDriveRequestMgr.edit');

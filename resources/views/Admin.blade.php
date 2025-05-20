@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    @php use Illuminate\Support\Str; @endphp
     <div class="min-h-screen flex bg-gray-100">
 
         <!-- Sidebar -->

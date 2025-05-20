@@ -12,7 +12,7 @@ class CarModelSeeder extends Seeder
 {
     public function run(): void
     {
-        // Fetch Brands
+        // Fetch Brands (Giữ nguyên phần này)
         $toyota = Brand::where('name', 'Toyota')->firstOrFail();
         $honda = Brand::where('name', 'Honda')->firstOrFail();
         $ford = Brand::where('name', 'Ford')->firstOrFail();
@@ -32,8 +32,7 @@ class CarModelSeeder extends Seeder
         $kia = Brand::where('name', 'Kia')->firstOrFail();
         $volvo = Brand::where('name', 'Volvo')->firstOrFail();
 
-
-        // Fetch RangeOfCars (Sử dụng tên chính xác bạn đã seed trong RangeOfCarSeeder)
+        // Fetch RangeOfCars (Giữ nguyên phần này)
         $sedan = RangeOfCar::where('name', 'Sedan')->firstOrFail();
         $suv = RangeOfCar::where('name', 'SUV (Sport Utility Vehicle)')->firstOrFail();
         $hatchback = RangeOfCar::where('name', 'Hatchback')->firstOrFail();
@@ -51,7 +50,7 @@ class CarModelSeeder extends Seeder
                 'brand_id' => $toyota->id, 'range_of_cars_id' => $sedan->id, 'name' => 'Vios', 'year' => 2025,
                 'description' => 'The Toyota Vios remains a top choice for a reliable and fuel-efficient subcompact sedan, ideal for city driving and first-time car owners.',
                 'image' => 'images/car_models/toyota_vios.png',
-                'inventory' => ['color' => 'Alumina Jade Metallic', 'interior_color' => 'Black Fabric', 'price' => 485000000, 'features' => json_encode(['Upgraded Infotainment', 'Enhanced Safety Features', 'Improved Fuel Economy'])]
+                'inventory' => ['color' => 'Alumina Jade Metallic', 'interior_color' => 'Black Fabric', 'price' => 485000000, 'features' => json_encode(['Upgraded Infotainment', 'Enhanced Safety Features', 'Improved Fuel Economy']), 'is_active' => false] // Đặt is_active = false cho inventory này
             ],
             [
                 'brand_id' => $toyota->id, 'range_of_cars_id' => $sedan->id, 'name' => 'Camry', 'year' => 2025,
@@ -72,8 +71,7 @@ class CarModelSeeder extends Seeder
                 'inventory' => ['color' => 'Nebula Blue', 'interior_color' => 'Black Leather', 'price' => 900000000, 'features' => json_encode(['Heavy-Duty Suspension', 'Advanced Off-Road Tech', 'Durable Bed Liner'])]
             ],
 
-
-            // === HONDA ===
+            // === HONDA === (Giữ nguyên các mục khác, chỉ thêm inventory.is_active khi cần)
             [
                 'brand_id' => $honda->id, 'range_of_cars_id' => $sedan->id, 'name' => 'City', 'year' => 2024,
                 'description' => 'The Honda City is a stylish and spacious subcompact sedan known for its sporty appeal, advanced features, and refined an_array_of_interior.',
@@ -99,7 +97,6 @@ class CarModelSeeder extends Seeder
                 'inventory' => ['color' => 'Obsidian Blue Pearl', 'interior_color' => 'Mocha Leather', 'price' => 1500000000, 'features' => json_encode(['CabinWatch & CabinTalk', 'Rear Entertainment System', 'HondaVAC Built-In Vacuum'])]
             ],
 
-
             // === FORD ===
             [
                 'brand_id' => $ford->id, 'range_of_cars_id' => $hatchback->id, 'name' => 'Focus', 'year' => 2024,
@@ -117,7 +114,7 @@ class CarModelSeeder extends Seeder
                 'brand_id' => $ford->id, 'range_of_cars_id' => $pickup->id, 'name' => 'F-150', 'year' => 2025,
                 'description' => 'The Ford F-150 is America\'s best-selling truck, known for its toughness, capability, and innovative features like the Pro Power Onboard generator.',
                 'image' => 'images/car_models/ford_f150.png',
-                'inventory' => ['color' => 'Antimatter Blue', 'interior_color' => 'Black Leather', 'price' => 2500000000, 'features' => json_encode(['PowerBoost Full Hybrid V6', 'Max Recline Seats', 'Interior Work Surface', 'Tailgate Work Surface'])]
+                'inventory' => ['color' => 'Antimatter Blue', 'interior_color' => 'Black Leather', 'price' => 2500000000, 'features' => json_encode(['PowerBoost Full Hybrid V6', 'Max Recline Seats', 'Interior Work Surface', 'Tailgate Work Surface']), 'is_active' => false] // Đặt is_active = false cho inventory này
             ],
              [
                 'brand_id' => $ford->id, 'range_of_cars_id' => $sports->id, 'name' => 'Mustang', 'year' => 2025,
@@ -126,7 +123,7 @@ class CarModelSeeder extends Seeder
                 'inventory' => ['color' => 'Grabber Blue', 'interior_color' => 'Showstopper Red Leather', 'price' => 2800000000, 'features' => json_encode(['5.0L V8 Engine', 'Magneride Damping System', 'Performance Package', 'Digital Instrument Cluster'])]
             ],
 
-
+            // ... (Các mục dữ liệu khác giữ nguyên, chỉ thêm 'inventory' => ['is_active' => false] cho mục cần thiết) ...
             // === HYUNDAI ===
             [
                 'brand_id' => $hyundai->id, 'range_of_cars_id' => $suv->id, 'name' => 'Tucson', 'year' => 2025,
@@ -135,7 +132,7 @@ class CarModelSeeder extends Seeder
                 'inventory' => ['color' => 'Deep Sea Blue', 'interior_color' => 'Gray Leather', 'price' => 870000000, 'features' => json_encode(['Parametric Jewel Hidden Lights', 'Remote Smart Park Assist', '10.25-inch Digital Cluster'])]
             ],
             [
-                'brand_id' => $hyundai->id, 'range_of_cars_id' => $sedan->id, 'name' => 'Accent', 'year' => 2024, // Elantra đã có, thêm Accent cho đa dạng
+                'brand_id' => $hyundai->id, 'range_of_cars_id' => $sedan->id, 'name' => 'Accent', 'year' => 2024,
                 'description' => 'The Hyundai Accent is a fuel-efficient and affordable subcompact sedan, perfect for city commuting with a comfortable interior and practical features.',
                 'image' => 'images/car_models/hyundai_accent.png',
                 'inventory' => ['color' => 'Admiral Blue', 'interior_color' => 'Beige Cloth', 'price' => 450000000, 'features' => json_encode(['7-inch Touchscreen Audio', 'Rearview Camera', 'Automatic Headlights', 'Bluetooth Connectivity'])]
@@ -152,7 +149,6 @@ class CarModelSeeder extends Seeder
                 'image' => 'images/car_models/hyundai_ioniq5.png',
                 'inventory' => ['color' => 'Cyber Gray Metallic', 'interior_color' => 'Dark Pebble Gray/Dove Gray', 'price' => 1300000000, 'features' => json_encode(['Vehicle-to-Load (V2L)', 'Augmented Reality Head-Up Display', 'Relaxation Comfort Seats', '800V Charging System'])]
             ],
-
 
             // === MERCEDES-BENZ ===
             [
@@ -172,6 +168,12 @@ class CarModelSeeder extends Seeder
                 'description' => 'The new Mercedes-Benz CLE Coupe blends expressive design with sporty performance and innovative comfort, succeeding both C-Class and E-Class coupes.',
                 'image' => 'images/car_models/mercedes_cle_coupe.png',
                 'inventory' => ['color' => 'MANUFAKTUR Patagonia Red', 'interior_color' => 'Neva Grey/Magma Grey Nappa', 'price' => 3500000000, 'features' => json_encode(['MBUX Superscreen', 'DYNAMIC BODY CONTROL', 'Integrated Starter-Generator', 'AMG Line Exterior/Interior'])]
+            ],
+             [
+                'brand_id' => $mercedes->id, 'range_of_cars_id' => $convertible->id, 'name' => 'SL Roadster', 'year' => 2025,
+                'description' => 'The iconic Mercedes-AMG SL Roadster returns, more luxurious and sportier than ever, with a classic soft top and available 2+2 seating.',
+                'image' => 'images/car_models/mercedes_sl_roadster.png',
+                'inventory' => ['color' => 'MANUFAKTUR Moonlight White Magno', 'interior_color' => 'Style Red Pepper/Black Nappa Leather', 'price' => 9000000000, 'features' => json_encode(['AMG Performance 4MATIC+', 'MBUX Hyperscreen', 'AIRSCARF neck-level heating', 'AMG Active Ride Control suspension'])]
             ],
 
             // === BMW ===
@@ -193,12 +195,19 @@ class CarModelSeeder extends Seeder
                 'image' => 'images/car_models/bmw_ix.png',
                 'inventory' => ['color' => 'Storm Bay Metallic', 'interior_color' => 'Stonegray Microfiber/Wool Blend', 'price' => 4500000000, 'features' => json_encode(['BMW Curved Display', 'Panoramic Glass Roof with Shading', '5th Gen eDrive Technology', 'Shy Tech features'])]
             ],
+            [
+                'brand_id' => $bmw->id, 'range_of_cars_id' => $coupe->id, 'name' => 'M4 Coupe', 'year' => 2025,
+                'description' => 'The BMW M4 Coupe delivers exhilarating performance and precision handling, featuring a bold design and M-specific chassis technology.',
+                'image' => 'images/car_models/bmw_m4_coupe.png',
+                'inventory' => ['color' => 'Isle of Man Green Metallic', 'interior_color' => 'Yas Marina Blue/Black Extended Merino Leather', 'price' => 5500000000, 'features' => json_encode(['M TwinPower Turbo inline 6-cylinder engine', 'M xDrive all-wheel drive available', 'M Carbon bucket seats', 'BMW Laserlight'])]
+            ],
+
             // === AUDI ===
             [
                 'brand_id' => $audi->id, 'range_of_cars_id' => $sedan->id, 'name' => 'A6', 'year' => 2025,
                 'description' => 'The Audi A6 sedan combines elegant design with advanced technology and a luxurious, spacious interior, perfect for business and pleasure.',
                 'image' => 'images/car_models/audi_a6.png',
-                'inventory' => ['color' => 'Firmament Blue Metallic', 'interior_color' => 'Sard  Brown Valcona Leather', 'price' => 3200000000, 'features' => json_encode(['Dual MMI touch response displays', 'Audi virtual cockpit plus', 'Bang & Olufsen 3D Premium Sound', 'HD Matrix-design LED headlights'])]
+                'inventory' => ['color' => 'Firmament Blue Metallic', 'interior_color' => 'Sard Brown Valcona Leather', 'price' => 3200000000, 'features' => json_encode(['Dual MMI touch response displays', 'Audi virtual cockpit plus', 'Bang & Olufsen 3D Premium Sound', 'HD Matrix-design LED headlights'])]
             ],
             [
                 'brand_id' => $audi->id, 'range_of_cars_id' => $suv->id, 'name' => 'Q7', 'year' => 2025,
@@ -212,6 +221,7 @@ class CarModelSeeder extends Seeder
                 'image' => 'images/car_models/audi_rs6_avant.png',
                 'inventory' => ['color' => 'Nardo Gray', 'interior_color' => 'Black Valcona Leather with Express Red stitching', 'price' => 7000000000, 'features' => json_encode(['4.0L TFSI V8 twin-turbo', 'RS sport suspension plus with Dynamic Ride Control', 'Carbon optic package', 'RS sport exhaust system'])]
             ],
+
             // === FERRARI ===
             [
                 'brand_id' => $ferrari->id, 'range_of_cars_id' => $sports->id, 'name' => '296 GTB', 'year' => 2024,
@@ -231,6 +241,7 @@ class CarModelSeeder extends Seeder
                 'image' => 'images/car_models/ferrari_purosangue.png',
                 'inventory' => ['color' => 'Grigio Titanio', 'interior_color' => 'Bordeaux Leather', 'price' => 35000000000, 'features' => json_encode(['Naturally Aspirated V12 Engine', 'Ferrari Active Suspension Technology', 'Welcome Doors', 'Spacious and Luxurious Cabin'])]
             ],
+
             // === LAMBORGHINI ===
             [
                 'brand_id' => $lamborghini->id, 'range_of_cars_id' => $sports->id, 'name' => 'Huracán Tecnica', 'year' => 2024,
@@ -250,6 +261,7 @@ class CarModelSeeder extends Seeder
                 'image' => 'images/car_models/lamborghini_revuelto.png',
                 'inventory' => ['color' => 'Arancio Dac Lucido', 'interior_color' => 'Nero Ade with Arancio Leonis Accents', 'price' => 45000000000, 'features' => json_encode(['V12 Hybrid Powertrain (1015 CV)', '8-Speed Dual-Clutch Transmission', 'Monofuselage Carbon Fiber Chassis', 'Active Aerodynamics'])]
             ],
+
             // === PORSCHE ===
             [
                 'brand_id' => $porsche->id, 'range_of_cars_id' => $sports->id, 'name' => '911 Carrera', 'year' => 2025,
@@ -270,36 +282,24 @@ class CarModelSeeder extends Seeder
                 'inventory' => ['color' => 'Frozen Blue Metallic', 'interior_color' => 'Blackberry/Slate Grey OLEA Club Leather', 'price' => 7000000000, 'features' => json_encode(['800-Volt Architecture', 'Performance Battery Plus', 'Porsche Recuperation Management (PRM)', 'Porsche Electric Sport Sound'])]
             ],
 
-             [
-                'brand_id' => $mercedes->id, 'range_of_cars_id' => $convertible->id, 'name' => 'SL Roadster', 'year' => 2025,
-                'description' => 'The iconic Mercedes-AMG SL Roadster returns, more luxurious and sportier than ever, with a classic soft top and available 2+2 seating.',
-                'image' => 'images/car_models/mercedes_sl_roadster.png',
-                'inventory' => ['color' => 'MANUFAKTUR Moonlight White Magno', 'interior_color' => 'Style Red Pepper/Black Nappa Leather', 'price' => 9000000000, 'features' => json_encode(['AMG Performance 4MATIC+', 'MBUX Hyperscreen', 'AIRSCARF neck-level heating', 'AMG Active Ride Control suspension'])]
-            ],
-             [
-                'brand_id' => $bmw->id, 'range_of_cars_id' => $coupe->id, 'name' => 'M4 Coupe', 'year' => 2025,
-                'description' => 'The BMW M4 Coupe delivers exhilarating performance and precision handling, featuring a bold design and M-specific chassis technology.',
-                'image' => 'images/car_models/bmw_m4_coupe.png',
-                'inventory' => ['color' => 'Isle of Man Green Metallic', 'interior_color' => 'Yas Marina Blue/Black Extended Merino Leather', 'price' => 5500000000, 'features' => json_encode(['M TwinPower Turbo inline 6-cylinder engine', 'M xDrive all-wheel drive available', 'M Carbon bucket seats', 'BMW Laserlight'])]
-            ],
-              // === CHEVROLET ===
+            // === CHEVROLET ===
             [
                 'brand_id' => $chevrolet->id, 'range_of_cars_id' => $suv->id, 'name' => 'Traverse', 'year' => 2025,
                 'description' => 'The Chevrolet Traverse is a spacious three-row SUV, offering comfortable seating for the whole family and ample cargo space.',
                 'image' => 'images/car_models/chevrolet_traverse.png',
-                'inventory' => ['color' => 'Summit White', 'interior_color' => 'Jet Black Cloth', 'price' => 1400000000, 'features' => json_encode(['8-inch Touchscreen', 'Chevy Safety Assist', 'Tri-Zone Climate Control']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Summit White', 'interior_color' => 'Jet Black Cloth', 'price' => 1400000000, 'features' => json_encode(['8-inch Touchscreen', 'Chevy Safety Assist', 'Tri-Zone Climate Control'])]
             ],
             [
                 'brand_id' => $chevrolet->id, 'range_of_cars_id' => $pickup->id, 'name' => 'Silverado 1500', 'year' => 2025,
                 'description' => 'The Chevrolet Silverado 1500 is a full-size pickup truck known for its powerful engine options, towing capability, and dependable performance.',
                 'image' => 'images/car_models/chevrolet_silverado.png',
-                'inventory' => ['color' => 'Red Hot', 'interior_color' => 'Gideon/Very Dark Atmosphere Cloth', 'price' => 1700000000, 'features' => json_encode(['Durabed Truck Bed', 'Multi-Flex Tailgate', 'Advanced Trailering System']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Red Hot', 'interior_color' => 'Gideon/Very Dark Atmosphere Cloth', 'price' => 1700000000, 'features' => json_encode(['Durabed Truck Bed', 'Multi-Flex Tailgate', 'Advanced Trailering System'])]
             ],
             [
                 'brand_id' => $chevrolet->id, 'range_of_cars_id' => $sports->id, 'name' => 'Corvette Stingray', 'year' => 2025,
                 'description' => 'The Chevrolet Corvette Stingray is an iconic American sports car, now with a mid-engine layout for unprecedented performance and handling.',
                 'image' => 'images/car_models/chevrolet_corvette.png',
-                'inventory' => ['color' => 'Torch Red', 'interior_color' => 'Jet Black Mulan Leather', 'price' => 5500000000, 'features' => json_encode(['6.2L V8 DI engine', 'Z51 Performance Package', 'Magnetic Ride Control']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Torch Red', 'interior_color' => 'Jet Black Mulan Leather', 'price' => 5500000000, 'features' => json_encode(['6.2L V8 DI engine', 'Z51 Performance Package', 'Magnetic Ride Control'])]
             ],
 
             // === KIA ===
@@ -307,19 +307,19 @@ class CarModelSeeder extends Seeder
                 'brand_id' => $kia->id, 'range_of_cars_id' => $suv->id, 'name' => 'Sportage', 'year' => 2025,
                 'description' => 'The Kia Sportage is a compact SUV that stands out with its bold design, spacious interior, and a wealth of technology features.',
                 'image' => 'images/car_models/kia_sportage.png',
-                'inventory' => ['color' => 'Vesta Blue', 'interior_color' => 'Black SynTex', 'price' => 950000000, 'features' => json_encode(['Dual Panoramic Displays', 'Kia Drive Wise Safety Suite', 'Available AWD']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Vesta Blue', 'interior_color' => 'Black SynTex', 'price' => 950000000, 'features' => json_encode(['Dual Panoramic Displays', 'Kia Drive Wise Safety Suite', 'Available AWD'])]
             ],
             [
                 'brand_id' => $kia->id, 'range_of_cars_id' => $sedan->id, 'name' => 'K5 (Optima)', 'year' => 2025,
                 'description' => 'The Kia K5 (formerly Optima) is a mid-size sedan offering striking styling, a comfortable cabin, and available turbocharged performance.',
                 'image' => 'images/car_models/kia_k5.png',
-                'inventory' => ['color' => 'Gravity Gray', 'interior_color' => 'Red SynTex', 'price' => 1050000000, 'features' => json_encode(['10.25-inch Touchscreen', 'Wireless Charging', 'Smart Cruise Control']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Gravity Gray', 'interior_color' => 'Red SynTex', 'price' => 1050000000, 'features' => json_encode(['10.25-inch Touchscreen', 'Wireless Charging', 'Smart Cruise Control'])]
             ],
             [
                 'brand_id' => $kia->id, 'range_of_cars_id' => $ev->id, 'name' => 'EV6', 'year' => 2025,
                 'description' => 'The Kia EV6 is an all-electric crossover with a futuristic design, long range, ultra-fast charging, and impressive performance.',
                 'image' => 'images/car_models/kia_ev6.png',
-                'inventory' => ['color' => 'Runway Red', 'interior_color' => 'Black Suede with Vegan Leather', 'price' => 1800000000, 'features' => json_encode(['Dual 12.3-inch Screens', 'Augmented Reality Head-Up Display', 'Vehicle-to-Load (V2L)']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Runway Red', 'interior_color' => 'Black Suede with Vegan Leather', 'price' => 1800000000, 'features' => json_encode(['Dual 12.3-inch Screens', 'Augmented Reality Head-Up Display', 'Vehicle-to-Load (V2L)'])]
             ],
 
             // === MAZDA ===
@@ -327,19 +327,19 @@ class CarModelSeeder extends Seeder
                 'brand_id' => $mazda->id, 'range_of_cars_id' => $suv->id, 'name' => 'CX-5', 'year' => 2025,
                 'description' => 'The Mazda CX-5 is a compact crossover SUV that offers a premium feel, engaging driving dynamics, and elegant Kodo design.',
                 'image' => 'images/car_models/mazda_cx5.png',
-                'inventory' => ['color' => 'Soul Red Crystal Metallic', 'interior_color' => 'Parchment Nappa Leather', 'price' => 1020000000, 'features' => json_encode(['i-Activ AWD', 'Bose 10-speaker Audio', 'Active Driving Display']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Soul Red Crystal Metallic', 'interior_color' => 'Parchment Nappa Leather', 'price' => 1020000000, 'features' => json_encode(['i-Activ AWD', 'Bose 10-speaker Audio', 'Active Driving Display'])]
             ],
             [
                 'brand_id' => $mazda->id, 'range_of_cars_id' => $sedan->id, 'name' => 'Mazda3 Sedan', 'year' => 2025,
                 'description' => 'The Mazda3 Sedan elevates the compact car segment with its sophisticated styling, upscale interior, and refined driving experience.',
                 'image' => 'images/car_models/mazda_mazda3_sedan.png',
-                'inventory' => ['color' => 'Machine Gray Metallic', 'interior_color' => 'Red Leather', 'price' => 800000000, 'features' => json_encode(['Skyactiv-G Engine', 'Mazda Connect Infotainment', 'i-Activsense Safety Features']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Machine Gray Metallic', 'interior_color' => 'Red Leather', 'price' => 800000000, 'features' => json_encode(['Skyactiv-G Engine', 'Mazda Connect Infotainment', 'i-Activsense Safety Features'])]
             ],
             [
                 'brand_id' => $mazda->id, 'range_of_cars_id' => $sports->id, 'name' => 'MX-5 Miata', 'year' => 2025,
                 'description' => 'The Mazda MX-5 Miata is the iconic lightweight sports car, delivering pure driving joy with its perfect balance and agile handling.',
                 'image' => 'images/car_models/mazda_mx5.png',
-                'inventory' => ['color' => 'Jet Black Mica', 'interior_color' => 'Black Cloth with Red Stitching', 'price' => 1300000000, 'features' => json_encode(['Retractable Fastback or Soft Top', 'Skyactiv-G 2.0L Engine', 'Kinematic Posture Control']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Jet Black Mica', 'interior_color' => 'Black Cloth with Red Stitching', 'price' => 1300000000, 'features' => json_encode(['Retractable Fastback or Soft Top', 'Skyactiv-G 2.0L Engine', 'Kinematic Posture Control'])]
             ],
 
             // === NISSAN ===
@@ -347,19 +347,19 @@ class CarModelSeeder extends Seeder
                 'brand_id' => $nissan->id, 'range_of_cars_id' => $suv->id, 'name' => 'Rogue (X-Trail)', 'year' => 2025,
                 'description' => 'The Nissan Rogue (known as X-Trail in many markets) is a family-friendly compact SUV with a comfortable interior, advanced safety tech, and available AWD.',
                 'image' => 'images/car_models/nissan_rogue.png',
-                'inventory' => ['color' => 'Boulder Gray Pearl', 'interior_color' => 'Charcoal Quilted Semi-aniline Leather', 'price' => 980000000, 'features' => json_encode(['ProPILOT Assist', 'Dual Panel Panoramic Moonroof', 'Motion Activated Liftgate']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Boulder Gray Pearl', 'interior_color' => 'Charcoal Quilted Semi-aniline Leather', 'price' => 980000000, 'features' => json_encode(['ProPILOT Assist', 'Dual Panel Panoramic Moonroof', 'Motion Activated Liftgate'])]
             ],
             [
                 'brand_id' => $nissan->id, 'range_of_cars_id' => $sedan->id, 'name' => 'Altima', 'year' => 2025,
                 'description' => 'The Nissan Altima is a mid-size sedan that offers a stylish design, a comfortable ride, and available Intelligent All-Wheel Drive.',
                 'image' => 'images/car_models/nissan_altima.png',
-                'inventory' => ['color' => 'Scarlet Ember Tintcoat', 'interior_color' => 'Gray Leather', 'price' => 900000000, 'features' => json_encode(['VC-Turbo Engine option', 'Nissan Safety Shield 360', 'Wireless Apple CarPlay']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Scarlet Ember Tintcoat', 'interior_color' => 'Gray Leather', 'price' => 900000000, 'features' => json_encode(['VC-Turbo Engine option', 'Nissan Safety Shield 360', 'Wireless Apple CarPlay'])]
             ],
             [
                 'brand_id' => $nissan->id, 'range_of_cars_id' => $ev->id, 'name' => 'Ariya', 'year' => 2025,
                 'description' => 'The Nissan Ariya is an all-electric crossover SUV featuring a sleek design, a lounge-like interior, and Nissan\'s latest EV technology.',
                 'image' => 'images/car_models/nissan_ariya.png',
-                'inventory' => ['color' => 'Northern Lights Metallic', 'interior_color' => 'Blue Gray Leatherette', 'price' => 1600000000, 'features' => json_encode(['e-4ORCE All-Wheel Drive', 'ProPILOT Assist 2.0', 'Dual 12.3-inch Displays']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Northern Lights Metallic', 'interior_color' => 'Blue Gray Leatherette', 'price' => 1600000000, 'features' => json_encode(['e-4ORCE All-Wheel Drive', 'ProPILOT Assist 2.0', 'Dual 12.3-inch Displays'])]
             ],
 
             // === SUBARU ===
@@ -367,19 +367,19 @@ class CarModelSeeder extends Seeder
                 'brand_id' => $subaru->id, 'range_of_cars_id' => $suv->id, 'name' => 'Outback', 'year' => 2025,
                 'description' => 'The Subaru Outback is a rugged and versatile wagon/SUV known for its standard Symmetrical All-Wheel Drive and go-anywhere capability.',
                 'image' => 'images/car_models/subaru_outback.png',
-                'inventory' => ['color' => 'Autumn Green Metallic', 'interior_color' => 'Java Brown Nappa Leather', 'price' => 1350000000, 'features' => json_encode(['EyeSight Driver Assist Technology', 'STARLINK Multimedia', 'Wilderness trim available']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Autumn Green Metallic', 'interior_color' => 'Java Brown Nappa Leather', 'price' => 1350000000, 'features' => json_encode(['EyeSight Driver Assist Technology', 'STARLINK Multimedia', 'Wilderness trim available'])]
             ],
             [
                 'brand_id' => $subaru->id, 'range_of_cars_id' => $suv->id, 'name' => 'Forester', 'year' => 2025,
                 'description' => 'The Subaru Forester is a compact SUV that delivers standard all-wheel drive, spaciousness, and renowned safety features.',
                 'image' => 'images/car_models/subaru_forester.png',
-                'inventory' => ['color' => 'Horizon Blue Pearl', 'interior_color' => 'Gray StarTex Water-Repellent', 'price' => 1150000000, 'features' => json_encode(['Symmetrical AWD', 'X-MODE with Hill Descent Control', 'Panoramic Power Moonroof']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Horizon Blue Pearl', 'interior_color' => 'Gray StarTex Water-Repellent', 'price' => 1150000000, 'features' => json_encode(['Symmetrical AWD', 'X-MODE with Hill Descent Control', 'Panoramic Power Moonroof'])]
             ],
             [
                 'brand_id' => $subaru->id, 'range_of_cars_id' => $sports->id, 'name' => 'WRX', 'year' => 2025,
                 'description' => 'The Subaru WRX is a rally-bred all-wheel-drive sport sedan, offering thrilling performance and agile handling for driving enthusiasts.',
                 'image' => 'images/car_models/subaru_wrx.png',
-                'inventory' => ['color' => 'WR Blue Pearl', 'interior_color' => 'Black Ultrasuede with Red Stitching', 'price' => 1500000000, 'features' => json_encode(['Turbocharged BOXER Engine', 'Symmetrical AWD', 'Performance-Tuned Suspension', 'Available STI variant']), 'is_preowned' => false]
+                'inventory' => ['color' => 'WR Blue Pearl', 'interior_color' => 'Black Ultrasuede with Red Stitching', 'price' => 1500000000, 'features' => json_encode(['Turbocharged BOXER Engine', 'Symmetrical AWD', 'Performance-Tuned Suspension', 'Available STI variant'])]
             ],
 
             // === TESLA ===
@@ -387,19 +387,19 @@ class CarModelSeeder extends Seeder
                 'brand_id' => $tesla->id, 'range_of_cars_id' => $ev->id, 'name' => 'Model 3', 'year' => 2025,
                 'description' => 'The Tesla Model 3 is a best-selling electric sedan that offers long range, quick acceleration, and access to Tesla\'s Supercharger network.',
                 'image' => 'images/car_models/tesla_model_3.png',
-                'inventory' => ['color' => 'Pearl White Multi-Coat', 'interior_color' => 'All Black Premium', 'price' => 1700000000, 'features' => json_encode(['Autopilot', '15-inch Touchscreen', 'Glass Roof', 'Over-the-air software updates']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Pearl White Multi-Coat', 'interior_color' => 'All Black Premium', 'price' => 1700000000, 'features' => json_encode(['Autopilot', '15-inch Touchscreen', 'Glass Roof', 'Over-the-air software updates'])]
             ],
             [
                 'brand_id' => $tesla->id, 'range_of_cars_id' => $ev->id, 'name' => 'Model Y', 'year' => 2025,
                 'description' => 'The Tesla Model Y is a compact electric SUV offering versatile space, impressive range, and Tesla\'s signature performance and technology.',
                 'image' => 'images/car_models/tesla_model_y.png',
-                'inventory' => ['color' => 'Midnight Silver Metallic', 'interior_color' => 'Black and White Premium', 'price' => 1900000000, 'features' => json_encode(['Optional Seven Seat Interior', 'HEPA Air Filtration System', 'All-Wheel Drive Dual Motor']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Midnight Silver Metallic', 'interior_color' => 'Black and White Premium', 'price' => 1900000000, 'features' => json_encode(['Optional Seven Seat Interior', 'HEPA Air Filtration System', 'All-Wheel Drive Dual Motor'])]
             ],
             [
                 'brand_id' => $tesla->id, 'range_of_cars_id' => $ev->id, 'name' => 'Model S', 'year' => 2025,
                 'description' => 'The Tesla Model S is a premium electric sedan that redefined the segment with its long range, blistering acceleration (Plaid), and advanced Autopilot features.',
                 'image' => 'images/car_models/tesla_model_s.png',
-                'inventory' => ['color' => 'Solid Black', 'interior_color' => 'Cream Premium with Walnut Décor', 'price' => 3500000000, 'features' => json_encode(['Plaid performance option', 'Yoke Steering (optional)', '17-inch Cinematic Display', 'Active Road Noise Reduction']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Solid Black', 'interior_color' => 'Cream Premium with Walnut Décor', 'price' => 3500000000, 'features' => json_encode(['Plaid performance option', 'Yoke Steering (optional)', '17-inch Cinematic Display', 'Active Road Noise Reduction'])]
             ],
 
             // === VOLKSWAGEN ===
@@ -407,19 +407,19 @@ class CarModelSeeder extends Seeder
                 'brand_id' => $volkswagen->id, 'range_of_cars_id' => $hatchback->id, 'name' => 'Golf GTI', 'year' => 2025,
                 'description' => 'The Volkswagen Golf GTI is the iconic hot hatchback, delivering a perfect blend of performance, practicality, and everyday usability.',
                 'image' => 'images/car_models/vw_golf_gti.png',
-                'inventory' => ['color' => 'Kings Red Metallic', 'interior_color' => 'Scale paper Plaid Cloth', 'price' => 1600000000, 'features' => json_encode(['2.0L TSI Engine', 'Dynamic Chassis Control', 'Digital Cockpit Pro', 'IQ.DRIVE safety suite']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Kings Red Metallic', 'interior_color' => 'Scale paper Plaid Cloth', 'price' => 1600000000, 'features' => json_encode(['2.0L TSI Engine', 'Dynamic Chassis Control', 'Digital Cockpit Pro', 'IQ.DRIVE safety suite'])]
             ],
             [
                 'brand_id' => $volkswagen->id, 'range_of_cars_id' => $suv->id, 'name' => 'Tiguan', 'year' => 2025,
                 'description' => 'The Volkswagen Tiguan is a stylish and versatile compact SUV, offering a comfortable interior, available third-row seating, and advanced driver-assistance features.',
                 'image' => 'images/car_models/vw_tiguan.png',
-                'inventory' => ['color' => 'Atlantic Blue Metallic', 'interior_color' => 'Titan Black V-Tex Leatherette', 'price' => 1300000000, 'features' => json_encode(['4MOTION All-Wheel Drive', 'Panoramic Sunroof', 'Wireless App-Connect', 'Travel Assist']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Atlantic Blue Metallic', 'interior_color' => 'Titan Black V-Tex Leatherette', 'price' => 1300000000, 'features' => json_encode(['4MOTION All-Wheel Drive', 'Panoramic Sunroof', 'Wireless App-Connect', 'Travel Assist'])]
             ],
             [
                 'brand_id' => $volkswagen->id, 'range_of_cars_id' => $ev->id, 'name' => 'ID.4', 'year' => 2025,
                 'description' => 'The Volkswagen ID.4 is an all-electric SUV that combines spaciousness, long-range capability, and intuitive technology for modern electric mobility.',
                 'image' => 'images/car_models/vw_id4.png',
-                'inventory' => ['color' => 'Moonstone Grey', 'interior_color' => 'Galaxy Black/Lunar Grey V-Tex', 'price' => 1750000000, 'features' => json_encode(['Available AWD', 'ID. Light intuitive communication', 'Glass Roof with Electric Sunshade', 'IQ.DRIVE with Park Assist Plus']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Moonstone Grey', 'interior_color' => 'Galaxy Black/Lunar Grey V-Tex', 'price' => 1750000000, 'features' => json_encode(['Available AWD', 'ID. Light intuitive communication', 'Glass Roof with Electric Sunshade', 'IQ.DRIVE with Park Assist Plus'])]
             ],
 
             // === VOLVO ===
@@ -427,25 +427,25 @@ class CarModelSeeder extends Seeder
                 'brand_id' => $volvo->id, 'range_of_cars_id' => $suv->id, 'name' => 'XC60', 'year' => 2025,
                 'description' => 'The Volvo XC60 is a mid-size luxury SUV that embodies Scandinavian design, advanced safety features, and efficient powertrain options, including plug-in hybrids.',
                 'image' => 'images/car_models/volvo_xc60.png',
-                'inventory' => ['color' => 'Crystal White Metallic', 'interior_color' => 'Blonde Nappa Leather', 'price' => 2800000000, 'features' => json_encode(['Google built-in infotainment', 'Air Purifier', 'Bowers & Wilkins High Fidelity Audio', 'Pilot Assist']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Crystal White Metallic', 'interior_color' => 'Blonde Nappa Leather', 'price' => 2800000000, 'features' => json_encode(['Google built-in infotainment', 'Air Purifier', 'Bowers & Wilkins High Fidelity Audio', 'Pilot Assist'])]
             ],
-            [
+            [ // Duplicate Volvo S90 entry, I will assume this is for a different inventory item (e.g. different color/price if intended)
                 'brand_id' => $volvo->id, 'range_of_cars_id' => $sedan->id, 'name' => 'S90', 'year' => 2025,
                 'description' => 'The Volvo S90 is a luxurious executive sedan, offering sophisticated styling, a serene cabin environment, and Volvo\'s renowned commitment to safety.',
                 'image' => 'images/car_models/volvo_s90.png',
-                'inventory' => ['color' => 'Denim Blue Metallic', 'interior_color' => 'Amber Nappa Leather', 'price' => 3200000000, 'features' => json_encode(['Google Assistant', 'Advanced Air Cleaner', 'Graphical Head-Up Display', 'Pilot Assist with Adaptive Cruise Control']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Denim Blue Metallic', 'interior_color' => 'Amber Nappa Leather', 'price' => 3200000000, 'features' => json_encode(['Google Assistant', 'Advanced Air Cleaner', 'Graphical Head-Up Display', 'Pilot Assist with Adaptive Cruise Control'])]
             ],
             [
-                'brand_id' => $volvo->id, 'range_of_cars_id' => $sedan->id, 'name' => 'S90', 'year' => 2025,
-                'description' => 'The Volvo S90 is a luxurious executive sedan, offering sophisticated styling, a serene cabin environment, and Volvo\'s renowned commitment to safety.',
-                'image' => 'images/car_models/volvo_s90.png',
-                'inventory' => ['color' => 'Onyx Black Metallic', 'interior_color' => 'Charcoal Nappa Leather', 'price' => 3250000000, 'features' => json_encode(['Google Assistant', 'Advanced Air Cleaner', 'Graphical Head-Up Display', 'Pilot Assist with Adaptive Cruise Control']), 'is_preowned' => false]
+                'brand_id' => $volvo->id, 'range_of_cars_id' => $sedan->id, 'name' => 'S90', 'year' => 2025, // This is the second S90
+                'description' => 'The Volvo S90 is a luxurious executive sedan, offering sophisticated styling, a serene cabin environment, and Volvo\'s renowned commitment to safety.', // Description is the same, but inventory differs
+                'image' => 'images/car_models/volvo_s90.png', // Image is the same
+                'inventory' => ['color' => 'Onyx Black Metallic', 'interior_color' => 'Charcoal Nappa Leather', 'price' => 3250000000, 'features' => json_encode(['Google Assistant', 'Advanced Air Cleaner', 'Graphical Head-Up Display', 'Pilot Assist with Adaptive Cruise Control'])]
             ],
             [
                 'brand_id' => $volvo->id, 'range_of_cars_id' => $ev->id, 'name' => 'EX30', 'year' => 2025,
                 'description' => 'The Volvo EX30 is a small, all-electric SUV designed to have the smallest CO2 footprint of any Volvo car to date, packed with smart tech and sustainable materials.',
                 'image' => 'images/car_models/volvo_ex30.png',
-                'inventory' => ['color' => 'Moss Yellow', 'interior_color' => 'Indigo (Recycled & Renewable Materials)', 'price' => 1500000000, 'features' => json_encode(['Single 12.3-inch Center Display', 'Next-gen Infotainment', 'Park Pilot Assist', 'Sustainable Interior Materials']), 'is_preowned' => false]
+                'inventory' => ['color' => 'Moss Yellow', 'interior_color' => 'Indigo (Recycled & Renewable Materials)', 'price' => 1500000000, 'features' => json_encode(['Single 12.3-inch Center Display', 'Next-gen Infotainment', 'Park Pilot Assist', 'Sustainable Interior Materials']), 'is_active' => false] // Đặt is_active = false cho inventory này
             ],
         ];
 
@@ -453,19 +453,23 @@ class CarModelSeeder extends Seeder
             $inventorySpecificData = $carModelData['inventory'] ?? null;
             unset($carModelData['inventory']);
 
-            $carModel = CarModel::firstOrCreate(
+            // Sử dụng updateOrCreate cho CarModel
+            $carModel = CarModel::updateOrCreate(
                 [
                     'brand_id' => $carModelData['brand_id'],
                     'name'     => $carModelData['name'],
                     'year'     => $carModelData['year']
                 ],
-                $carModelData
+                $carModelData // Dữ liệu để tạo hoặc cập nhật CarModel
             );
 
             if ($carModel && $inventorySpecificData) {
                 $inventorySpecificData['car_model_id'] = $carModel->id;
+                // Mặc định is_active cho inventory là true, trừ khi được đặt cụ thể trong $carModelsData
                 $inventorySpecificData['is_active'] = $inventorySpecificData['is_active'] ?? true;
-                $inventoryDataFromCarModel['is_preowned'] = false;
+                // Mặc định is_preowned cho inventory là false
+                $inventorySpecificData['is_preowned'] = $inventorySpecificData['is_preowned'] ?? false;
+                // Các trường mặc định khác cho inventory nếu cần
                 $inventorySpecificData['status'] = $inventorySpecificData['status'] ?? 'sale';
                 $inventorySpecificData['quantity'] = $inventorySpecificData['quantity'] ?? rand(5, 20);
 
@@ -473,9 +477,9 @@ class CarModelSeeder extends Seeder
                     [
                         'car_model_id' => $carModel->id,
                         'color'        => $inventorySpecificData['color'],
-                        'is_preowned' => false
+                        'is_preowned'  => $inventorySpecificData['is_preowned'] // Sử dụng giá trị đã được xử lý
                     ],
-                    $inventorySpecificData
+                    $inventorySpecificData // Dữ liệu để tạo hoặc cập nhật Inventory
                 );
             }
         }

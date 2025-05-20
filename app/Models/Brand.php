@@ -20,6 +20,7 @@ class Brand extends Model
         'cover_image',
         'key_achievements',
         'location',
+        'is_active'
     ];
 
     protected $casts = [

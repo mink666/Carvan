@@ -77,7 +77,7 @@
                             @endif
                         @endif
 
-                        <a href="#" class="test-drive-btn">
+                        <a href="{{ route('test_drive.index') }}" class="test-drive-btn">
                             Request a Test Drive
                         </a>
                         <a href="{{ route('preowned.index') }}" class="black-btn">
@@ -111,6 +111,7 @@
                                         <th>Features</th>
                                         <th>Price</th>
                                         <th>Condition</th>
+                                        <th>Mileage</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -138,6 +139,7 @@
                                                 {{ ucfirst($preownedCar->condition) }}
                                             </span>
                                         </td>
+                                        <td>{{ number_format($preownedCar->mileage, 0, ',', '.') }} km</td>
                                     </tr>
                                 </tbody>
                             </table>

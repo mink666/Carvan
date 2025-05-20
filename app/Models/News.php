@@ -13,6 +13,7 @@ class News extends Model
         'content',
         'image',
         'date',
+        'is_active',
     ];
 
     protected $casts = [

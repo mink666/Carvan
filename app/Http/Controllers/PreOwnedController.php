@@ -10,7 +10,7 @@ class PreOwnedController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Preowned::query();
+        $query = Preowned::where('is_active', true);
 
         // Search functionality
         if ($request->filled('search')) {
@@ -33,26 +33,26 @@ class PreOwnedController extends Controller
             $query->where('name', 'LIKE', "%{$brandName}%");
         }
 
-        // Filter theo range (SUV, Sedan, etc.)
-        if ($request->filled('range')) {
-            $rangeName = $request->range;
-            $query->where('story', 'LIKE', "%{$rangeName}%");
+        // Filter theo condition
+        if ($request->filled('condition')) {
+            $condition = $request->condition;
+            $query->where('condition', $condition);
         }
 
         // Filter theo khoảng giá
         if ($request->filled('price_range')) {
             switch ($request->price_range) {
-                case 'under_300':
-                    $query->where('price', '<', 300000000);
+                case 'under_500':
+                    $query->where('price', '<', 500000000);
                     break;
-                case '300_500':
-                    $query->whereBetween('price', [300000000, 500000000]);
+                case '500_1000':
+                    $query->whereBetween('price', [500000000, 1000000000]);
                     break;
-                case '500_800':
-                    $query->whereBetween('price', [500000000, 800000000]);
+                case '1000_2000':
+                    $query->whereBetween('price', [1000000000, 2000000000]);
                     break;
-                case 'above_800':
-                    $query->where('price', '>', 800000000);
+                case 'above_2000':
+                    $query->where('price', '>', 2000000000);
                     break;
             }
         }
@@ -93,12 +93,6 @@ class PreOwnedController extends Controller
             ->unique()
             ->values();
 
-        // Lấy danh sách ranges từ story
-        $ranges = collect(['Sedan', 'SUV', 'Pickup Truck', 'Crossover'])
-            ->filter(function ($range) {
-                return Preowned::where('story', 'LIKE', "%{$range}%")->exists();
-            });
-
         // Lấy danh sách năm từ tên xe
         $years = Preowned::select('name')
             ->get()
@@ -111,16 +105,16 @@ class PreOwnedController extends Controller
             ->sort()
             ->values();
 
-        return view('preowned.index', compact('preownedCars', 'brands', 'ranges', 'years'));
+        return view('preowned.index', compact('preownedCars', 'brands', 'years'));
     }
 
     public function show($id)
     {
-        $preownedCar = Preowned::findOrFail($id);
+        $preownedCar = Preowned::where('is_active', true)->findOrFail($id);
 
         // Lấy các xe tương tự (cùng hãng hoặc cùng loại)
         $brandName = explode(' ', $preownedCar->name)[0];
-        $similarVehicles = Preowned::where('id', '!=', $id)
+        $similarVehicles = Preowned::where('is_active', true)->where('id', '!=', $id)
             ->where(function ($query) use ($brandName, $preownedCar) {
                 $query->where('name', 'LIKE', "{$brandName}%")
                     ->orWhere(function ($q) use ($preownedCar) {

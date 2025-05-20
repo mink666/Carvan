@@ -32,10 +32,10 @@ class Inventory extends Model
         return $this->belongsTo(CarModel::class);
     }
 
-    public function preowned(): HasOne
-    {
-        return $this->hasOne(Preowned::class);
-    }
+    // public function preowned(): HasOne
+    // {
+    //     return $this->hasOne(Preowned::class);
+    // }
 
     public function testDriveRequests(): HasMany
     {

@@ -62,8 +62,8 @@
                         <select name="brand" id="brandSelectPreowned">
                             <option value="">All Brands</option>
                             @foreach ($brands as $brand)
-                                <option value="{{ $brand->id }}" {{ request('brand') == $brand->id ? 'selected' : '' }}>
-                                    {{ $brand->name }}
+                                <option value="{{ $brand }}" {{ request('brand') == $brand ? 'selected' : '' }}>
+                                    {{ $brand }}
                                 </option>
                             @endforeach
                         </select>
@@ -74,8 +74,8 @@
                         <select name="range" id="rangeSelectPreowned">
                             <option value="">All Models</option>
                             @foreach ($ranges as $range)
-                                <option value="{{ $range->id }}" {{ request('range') == $range->id ? 'selected' : '' }}>
-                                    {{ $range->name }}
+                                <option value="{{ $range }}" {{ request('range') == $range ? 'selected' : '' }}>
+                                    {{ $range }}
                                 </option>
                             @endforeach
                         </select>
@@ -134,8 +134,7 @@
                         <div class="relative">
                             <a href="{{ route('preowned.show', $preowned->id) }}">
                                 @if ($preowned->image)
-                                    <img src="{{ asset($preowned->image) }}"
-                                        alt="{{ $preowned->inventory->carModel->name ?? 'Pre-Owned Vehicle' }}"
+                                    <img src="{{ asset($preowned->image) }}" alt="{{ $preowned->name }}"
                                         class="w-full h-56 object-cover">
                                 @else
                                     <div class="w-full h-56 bg-gray-200 flex items-center justify-center">
@@ -154,15 +153,13 @@
                         <div class="p-5">
                             <a href="{{ route('preowned.show', $preowned->id) }}">
                                 <h3 class="text-xl font-bold text-gray-900 mb-1">
-                                    {{ $preowned->inventory->carModel->brand->name ?? 'Unknown Brand' }}
-                                    {{ $preowned->inventory->carModel->name ?? 'Unknown Model' }}
-                                    ({{ $preowned->inventory->carModel->year ?? 'N/A' }})
+                                    {{ $preowned->name }}
                                 </h3>
                             </a>
 
                             <div class="description">
                                 <p><strong>Mileage:</strong> {{ number_format($preowned->mileage, 0, ',', '.') }} km</p>
-                                <p><strong>Condition:</strong> {{ $preowned->condition ?? 'N/A' }}</p>
+                                <p><strong>Condition:</strong> {{ ucfirst($preowned->condition) ?? 'N/A' }}</p>
                                 <p><strong>Color:</strong> {{ $preowned->color ?? 'N/A' }}</p>
                             </div>
 
@@ -218,28 +215,24 @@
                         <div class="available-car-card" id="available-car-{{ $car->id }}">
                             <div class="car-image">
                                 @if ($car->image)
-                                    <img src="{{ asset($car->image) }}" alt="{{ $car->inventory->carModel->name }}">
+                                    <img src="{{ asset($car->image) }}" alt="{{ $car->name }}">
                                 @else
                                     <div class="no-image">No Image</div>
                                 @endif
                             </div>
                             <div class="car-details">
-                                <h4>{{ $car->inventory->carModel->brand->name }} {{ $car->inventory->carModel->name }}
-                                </h4>
+                                <h4>{{ $car->name }}</h4>
                                 <p class="price">{{ number_format($car->price, 0, ',', '.') }} VND</p>
                                 <button type="button" class="select-for-compare-btn"
                                     onclick="addToCompare(
                                             {{ $car->id }},
-                                            '{{ $car->inventory->carModel->brand->name }}',
-                                            '{{ $car->inventory->carModel->name }}',
+                                            '{{ $car->name }}',
                                             '{{ $car->price }}',
                                             '{{ $car->image }}',
-                                            '{{ $car->inventory->carModel->year }}',
                                             '{{ $car->mileage }}',
                                             '{{ $car->color }}',
-                                            '{{ $car->interior_color }}',
                                             '{{ $car->condition }}',
-                                            '{{ $car->inventory->carModel->description }}',
+                                            '{{ $car->description }}',
                                             {{ $car->features }}
                                         )">
                                     Select for Comparison
@@ -469,8 +462,7 @@
             document.getElementById('comparison-popup').classList.remove('hidden');
         }
 
-        function addToCompare(id, brand, model, price, image, year, mileage, color, interiorColor, condition, description,
-            features) {
+        function addToCompare(id, name, price, image, mileage, color, condition, description, features) {
             const btn = document.querySelector(`#available-car-${id} .select-for-compare-btn`);
 
             if (btn.classList.contains('selected')) {
@@ -487,14 +479,11 @@
 
                 selectedCars.push({
                     id,
-                    brand,
-                    model,
+                    name,
                     price,
                     image,
-                    year,
                     mileage,
                     color,
-                    interiorColor,
                     condition,
                     description,
                     features: typeof features === 'string' ? JSON.parse(features) : features
@@ -530,8 +519,8 @@
                 selectedCars.map(car => `
                     <th>
                         <div class="car-header">
-                            <img src="${car.image}" alt="${car.brand} ${car.model}">
-                            <h3>${car.brand} ${car.model}</h3>
+                            <img src="${car.image}" alt="${car.name}">
+                            <h3>${car.name}</h3>
                             <p class="price">${new Intl.NumberFormat('vi-VN').format(car.price)} VND</p>
                             <button onclick="removeFromComparison(${car.id})" class="remove-btn">Remove</button>
                         </div>
@@ -543,16 +532,8 @@
             const specGroups = [{
                     title: 'Basic Information',
                     specs: [{
-                            name: 'Brand',
-                            key: 'brand'
-                        },
-                        {
-                            name: 'Model',
-                            key: 'model'
-                        },
-                        {
-                            name: 'Year',
-                            key: 'year'
+                            name: 'Name',
+                            key: 'name'
                         },
                         {
                             name: 'Mileage',
@@ -566,10 +547,6 @@
                         {
                             name: 'Exterior Color',
                             key: 'color'
-                        },
-                        {
-                            name: 'Interior Color',
-                            key: 'interiorColor'
                         }
                     ]
                 },

@@ -33,18 +33,20 @@ class PageController extends Controller
             $model->displayInventory = $activeInventories->sortBy('price')->first(); // Lấy inventory có giá thấp nhất đang active
             $model->inventories_min_price = $model->displayInventory ? $model->displayInventory->price : 0;
         });
-
-          $featuredPreownedCars = Preowned::with([
-                                    'inventory.carModel.brand',
-                                    'inventory.carModel.rangeOfCars'
-                                ])
-                                ->whereHas('inventory.carModel.brand') // Đảm bảo có đủ thông tin liên kết
-                                ->whereHas('inventory', function ($query) {
-                                    $query->where('is_active', true); // Chỉ lấy inventory preowned đang active
-                                })
-                                ->inRandomOrder()
-                                ->take(3) // Hiển thị 3 xe pre-owned nổi bật
-                                ->get();
+        // $featuredPreownedCars = Preowned::with([
+        //     'inventory.carModel.brand',
+        //     'inventory.carModel.rangeOfCars'
+        // ])
+        // ->whereHas('inventory.carModel.brand') // Đảm bảo có đủ thông tin liên kết
+        // ->whereHas('inventory', function ($query) {
+        //     $query->where('is_active', true); // Chỉ lấy inventory preowned đang active
+        // })
+        // ->inRandomOrder()
+        // ->take(3) // Hiển thị 3 xe pre-owned nổi bật
+        // ->get();
+        $featuredPreownedCars = Preowned::inRandomOrder()
+            ->take(3) // Hiển thị 3 xe pre-owned nổi bật
+            ->get();
 
         return view('home', compact('featuredBrands', 'popularModels', 'featuredPreownedCars'));
     }

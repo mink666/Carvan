@@ -28,7 +28,7 @@ class ProductController extends Controller
             }
         }
 
-        $query = Inventory::with(['carModel.brand', 'carModel.rangeOfCars', 'preowned'])
+        $query = Inventory::with(['carModel.brand', 'carModel.rangeOfCars'])
             ->where('is_active', true)
             ->where('is_preowned', false);
 

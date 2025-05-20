@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title', ($preownedCar->inventory->carModel->brand->name ?? 'Unknown Brand') . ' ' .
-    ($preownedCar->inventory->carModel->name ?? 'Unknown Model') . ($preownedCar->inventory->carModel->year ? ' (' .
-    $preownedCar->inventory->carModel->year . ')' : '') . ' - Pre-Owned Details')
+@section('title', $preownedCar->name . ' - Pre-Owned Details')
 
 @section('content')
     <div class="product-show">
@@ -25,11 +23,7 @@
                         </svg>
                     </li>
                     <li>
-                        <span class="font-semibold">
-                            {{ $preownedCar->inventory->carModel->brand->name }}
-                            {{ $preownedCar->inventory->carModel->name }}
-                            {{ $preownedCar->inventory->carModel->year ? '(' . $preownedCar->inventory->carModel->year . ')' : '' }}
-                        </span>
+                        <span class="font-semibold">{{ $preownedCar->name }}</span>
                     </li>
                 </ol>
             </nav>
@@ -39,7 +33,7 @@
                     {{-- Image Gallery/Main Image --}}
                     <div class="md:w-1/2 xl:w-3/5 product-gallery">
                         @if ($preownedCar->image)
-                            <img src="{{ asset($preownedCar->image) }}" alt="{{ $preownedCar->inventory->carModel->name }}">
+                            <img src="{{ asset($preownedCar->image) }}" alt="{{ $preownedCar->name }}">
                         @else
                             <div
                                 class="w-full h-[300px] md:h-[500px] bg-gray-200 flex items-center justify-center rounded-lg">
@@ -55,19 +49,7 @@
 
                     {{-- Car Details and Call to Action --}}
                     <div class="md:w-1/2 xl:w-2/5 product-info">
-                        <h1 class="product-title">
-                            {{ $preownedCar->inventory->carModel->brand->name }}
-                            {{ $preownedCar->inventory->carModel->name }}
-                        </h1>
-                        <p class="product-year">
-                            {{ $preownedCar->inventory->carModel->year ? 'Model Year: ' . $preownedCar->inventory->carModel->year : '' }}
-                        </p>
-
-                        @if ($preownedCar->inventory->carModel->rangeOfCars)
-                            <span class="product-range-badge">
-                                {{ $preownedCar->inventory->carModel->rangeOfCars->name }}
-                            </span>
-                        @endif
+                        <h1 class="product-title">{{ $preownedCar->name }}</h1>
 
                         <p class="product-price">
                             {{ number_format($preownedCar->price, 0, ',', '.') }} VND
@@ -117,7 +99,7 @@
                         </div>
                     @endif
 
-                    {{-- Available Inventory --}}
+                    {{-- Vehicle Details --}}
                     <div class="mb-8">
                         <h3 class="text-xl font-semibold mb-4">Vehicle Details & Pricing</h3>
                         <div class="overflow-x-auto">
@@ -128,7 +110,7 @@
                                         <th>Interior</th>
                                         <th>Features</th>
                                         <th>Price</th>
-                                        <th>Status</th>
+                                        <th>Condition</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -152,17 +134,37 @@
                                         </td>
                                         <td>
                                             <span
-                                                class="status-badge {{ $preownedCar->inventory->status === 'sale' ? 'available' : 'pending' }}">
-                                                {{ ucfirst($preownedCar->inventory->status) }}
+                                                class="status-badge {{ $preownedCar->condition === 'excellent' ? 'available' : 'pending' }}">
+                                                {{ ucfirst($preownedCar->condition) }}
                                             </span>
-                                            <span class="text-sm ml-2">({{ $preownedCar->inventory->quantity }} in
-                                                stock)</span>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
+                    {{-- Similar Vehicles --}}
+                    @if ($similarVehicles->count() > 0)
+                        <div class="similar-vehicles mt-8">
+                            <h3 class="text-xl font-semibold mb-4">Similar Vehicles</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                @foreach ($similarVehicles as $vehicle)
+                                    <div class="similar-vehicle-card">
+                                        <img src="{{ asset($vehicle->image) }}" alt="{{ $vehicle->name }}"
+                                            class="w-full h-40 object-cover">
+                                        <div class="p-4">
+                                            <h4 class="font-semibold">{{ $vehicle->name }}</h4>
+                                            <p class="text-red-600 font-semibold">
+                                                {{ number_format($vehicle->price, 0, ',', '.') }} VND</p>
+                                            <a href="{{ route('preowned.show', $vehicle->id) }}"
+                                                class="view-details-link">View Details</a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

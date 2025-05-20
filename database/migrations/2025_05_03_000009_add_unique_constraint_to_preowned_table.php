@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('preowned', function (Blueprint $table) {
-            $table->unique('inventory_id');
+            // $table->unique('inventory_id');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('preowned', function (Blueprint $table) {
-            $table->dropUnique('preowned_inventory_id_unique');
+            // $table->dropUnique('preowned_inventory_id_unique');
         });
     }
 };

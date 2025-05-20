@@ -721,3 +721,6 @@ body {
 header .nav {
     transition: all 0.5s ease !important;
 }
+.email-link{
+     color:red;
+}

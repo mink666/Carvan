@@ -16,7 +16,7 @@
                         {{-- Slide 1 --}}
                         <div class="swiper-slide">
                              <div class="banner-slide"> {{-- Class style cho nội dung slide --}}
-                                  <img src="{{ asset('images/slide-1-background.jpg') }}" class="slide-background-image" alt="Company Values">
+                                  <img src="{{ asset('images/about/picture/evgeny-tchebotarev-aiwuLjLPFnU-unsplash.jpg') }}" class="slide-background-image" alt="Company Values">
                                   <div class="slide-overlay"></div>
                                   <div class="slide-content">
                                        <h2>Leading Innovation in Mobility</h2>
@@ -28,7 +28,7 @@
                         {{-- Slide 2 --}}
                         <div class="swiper-slide">
                             <div class="banner-slide">
-                                  <img src="{{ asset('images/slide-2-background.jpg') }}" class="slide-background-image" alt="Our Vision">
+                                  <img src="{{ asset('images/about/picture/Универсальный красный спортивный автомобиль других производителей, изолированные на темном фоне _ Премиум Фото.jpg') }}" class="slide-background-image" alt="Our Vision">
                                   <div class="slide-overlay"></div>
                                   <div class="slide-content">
                                        <h2>Driving Towards a Sustainable Future</h2>
@@ -56,7 +56,7 @@
                     {{-- Thẻ Sứ mệnh --}}
                     <div class="about-card" id="mission">
                         <div class="about-card-icon">
-                            <i class="fas fa-bullseye"></i> {{-- Ví dụ dùng Font Awesome, bạn cần tích hợp thư viện này hoặc dùng SVG/ảnh --}}
+                            <i class="fas fa-bullseye" style="color: red;"></i> {{-- Ví dụ dùng Font Awesome, bạn cần tích hợp thư viện này hoặc dùng SVG/ảnh --}}
                         </div>
                         <h2>OUR MISSION</h2>
                         <p>Building trust and enriching the car buying/selling experience with transparency and reliability for every customer.</p>
@@ -65,7 +65,7 @@
                     {{-- Thẻ Mục tiêu --}}
                     <div class="about-card" id="goals">
                         <div class="about-card-icon">
-                            <i class="fas fa-tasks"></i>
+                            <i class="fas fa-tasks" style="color: red;"></i>
                         </div>
                         <h2>OUR GOALS</h2>
                         <p>Expanding our network, enhancing service quality, maximizing customer value, building a strong brand, and ensuring sustainable growth.</p>
@@ -74,7 +74,7 @@
                     {{-- Thẻ Lịch sử --}}
                     <div class="about-card" id="history">
                         <div class="about-card-icon">
-                            <i class="fas fa-history"></i>
+                            <i class="fas fa-history" style="color: red;"></i>
                         </div>
                         <h2>OUR HISTORY</h2>
                         <p>Born from passion, CARVAN quickly established its mark with a focus on quality, evolving into a trusted name in the auto community.</p>
@@ -83,7 +83,7 @@
                     {{-- Thẻ Trách nhiệm --}}
                     <div class="about-card" id="responsibility">
                         <div class="about-card-icon">
-                            <i class="fas fa-hands-helping"></i>
+                            <i class="fas fa-hands-helping" style="color: red;"></i>
                         </div>
                         <h2>OUR RESPONSIBILITY</h2>
                         <p>Committed to our customers with transparent dealings, to our employees with a dynamic environment, and to society with ethical practices.</p>
@@ -96,7 +96,7 @@
             <section class="speech-container">
                 <div class="image-column">
                      {{-- Sử dụng asset() helper cho ảnh trong thư mục public --}}
-                    <img src="{{ asset('picture/download (2).jpg') }}" alt="Mr. Peter Jack - General Director of Carvan VN">
+                    <img src="{{ asset('images/about/picture/download (2).jpg') }}" alt="Mr. Peter Jack - General Director of Carvan VN">
                 </div>
                 <div class="text-column">
                     <p>

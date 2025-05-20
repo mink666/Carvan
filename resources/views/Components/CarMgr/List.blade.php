@@ -1,15 +1,42 @@
-
+<div x-data="{ open: false }" class="relative mb-4 flex items-center gap-2">
 <div class="p-6 bg-white rounded-lg shadow-md">
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg font-bold">All Car:
         <span class="text-indigo-600">{{$carModels->count()}}</span>
         {{-- Projects: <span class="text-indigo-600">884</span> --}}
       </h2>
+      <div class="flex items-center gap-2">
+            <div id="no-results-row" class="hidden">
+                <div colspan="13" class="text-center py-4 text-gray-500">
+                    <i class="fas fa-exclamation-circle text-red-500 mr-2"></i> No results found.
+                </div>
+            </div>
+            <button @click="open = !open" class="text-gray-600 hover:text-black focus:outline-none">
+            <i class="fas fa-search text-xl"></i>
+            </button>
+
+            <!-- Search Input -->
+            <form method="GET" action="{{ route('Admin.CarMgr') }}"
+                x-show="open"
+                @click.away="open = false"
+                x-transition
+                class="flex items-center"
+            >
+                <input type="text"
+                    id="search-input"
+                    name="keyword"
+                    placeholder="Search..."
+                    value="{{ request('keyword') }}"
+                    class="border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring w-64"
+                    @keydown.enter="open = false"
+                />
+            </form>
         <a href="/Admin/CarMgr?state=create" class="text-white">
             <button class="bg-[#ff3131] hover:bg-[#B20710] text-white px-4 py-2 rounded-md text-sm font-semibold">
                 + Add new Car
             </button>
         </a>
+      </div>
     </div>
 
     <table class="w-full text-sm text-left text-gray-700">
@@ -38,7 +65,7 @@
                 <span>{{ $carModel->id }}</span>
             </td>
             <td class="p-3">
-                <span>{{ $carModel->name }}</span>
+                <span class="car-name">{{ $carModel->name }}</span>
             </td>
             <td class="p-3">
                 <span>{{ $carModel->brand->name }}</span>
@@ -121,6 +148,11 @@
             </td>
         </tr>
         @endforeach
+        <tr id="no-results-row" class="hidden">
+        <td colspan="13" class="text-center py-4 text-gray-500">
+            <i class="fas fa-exclamation-circle text-red-500 mr-2"></i> No results found.
+        </td>
+    </tr>
       </tbody>
     </table>
     <!-- Pagination -->
@@ -133,8 +165,36 @@
 
 
   </div>
+</div>
 <script>
 $(document).ready(function () {
+
+    let filteredRows;
+    $('#search-input').on('input', function () {
+        const keyword = $(this).val().toLowerCase();
+        let $filteredRows = $('tbody tr').not('#no-results-row').filter(function () {
+            const nameText = $(this).find('.car-name').text().toLowerCase();
+            return nameText.includes(keyword);
+        });
+
+        $('tbody tr').not('#no-results-row').hide();
+        $filteredRows.show();
+
+        if ($filteredRows.length === 0) {
+            $('#no-results-row').removeClass('hidden');
+            $('#pagination-wrapper').addClass('hidden');
+            $('#pagination-info').text(`No results found`);
+        } else {
+            $('#no-results-row').addClass('hidden');
+            $('#pagination-wrapper').removeClass('hidden');
+            $('#pagination-info').text(`Found ${$filteredRows.length} result(s)`);
+        }
+
+        filteredRows = $filteredRows;
+        currentPage = 1;
+        update();
+    });
+
     const rowsPerPage = 10;
     const $rows = $('tbody tr');
     const rowsCount = $rows.length;
@@ -145,7 +205,8 @@ $(document).ready(function () {
         const start = (page - 1) * rowsPerPage;
         const end = start + rowsPerPage;
 
-        $rows.hide().slice(start, end).show();
+        const rowsToPaginate = filteredRows && filteredRows.length ? filteredRows : $rows.not('#no-results-row');
+        rowsToPaginate.hide().slice(start, end).show();
 
         // Cập nhật text: Showing x–y of z
         const from = start + 1;

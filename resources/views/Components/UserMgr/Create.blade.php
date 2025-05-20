@@ -12,7 +12,6 @@
             <i class="fas fa-map-marker-alt mr-1" ></i>Your Email
         </p>
         <div class="flex items-center mt-2 text-yellow-500">
-            <i class="fas fa-star mr-1"></i> <span class="text-sm font-medium">5.0</span> <span class="text-gray-400 text-xs ml-1">(1)</span>
             <span class="ml-2 text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded" x-text="name"></span>
         </div>
         <a href="{{route('Admin.UserMgr')}}" class="mt-4 text-red-500 text-sl hover:underline">Cancel</a>

@@ -15,7 +15,7 @@
                         <div class="swiper-slide">
                              <div class="banner-slide">
                                   {{-- Đảm bảo ảnh 'images/contact-banner-showroom.jpg' tồn tại trong thư mục public/images --}}
-                                  <img src="{{ asset('images/contact-banner-showroom.jpg') }}" class="slide-background-image" alt="CARVAN Showroom Contact">
+                                  <img src="{{ asset('images/about/picture/Q5_StageLarge_PC_Choose-to-be-elegent.avif') }}" class="slide-background-image" alt="CARVAN Showroom Contact">
                                   <div class="slide-overlay"></div>
                                   <div class="slide-content">
                                        <h2>Get In Touch With CARVAN</h2>
@@ -28,7 +28,7 @@
                         <div class="swiper-slide">
                             <div class="banner-slide">
                                   {{-- Đảm bảo ảnh 'images/customer-service-banner.jpg' tồn tại trong thư mục public/images --}}
-                                  <img src="{{ asset('images/customer-service-banner.jpg') }}" class="slide-background-image" alt="CARVAN Customer Support">
+                                  <img src="{{ asset('images/covers/ford_cover.png') }}" class="slide-background-image" alt="CARVAN Customer Support">
                                   <div class="slide-overlay"></div>
                                   <div class="slide-content">
                                        <h2>24/7 Customer Support</h2>
@@ -72,7 +72,7 @@
                                 <li><strong>Fax:</strong> +84 (0) 28 39 243 961</li>
                                 <li>
                                     <strong>Email:</strong>
-                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@carvan.vn" target="_blank">
+                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@carvan.vn" target="_blank" class="email-link">
                                       contact@carvan.vn
                                     </a>
                                 </li>

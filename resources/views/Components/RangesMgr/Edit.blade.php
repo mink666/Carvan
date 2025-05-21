@@ -54,7 +54,7 @@
 
             <!-- Buttons -->
             <div class="flex justify-between items-center mt-6">
-                <a href="/Admin/RangesMgr?state=list" class="text-gray-700">
+                <a  class="text-gray-700">
                     <button type="button" class="px-4 py-2 bg-gray-100 text-gray-700 font-semibold rounded-md hover:bg-gray-300">
                         Cancel
                       </button>

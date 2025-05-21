@@ -7,7 +7,8 @@
 
         <div class="mb-4">
             <label for="scheduled_date" class="block text-sm font-medium text-gray-700">Scheduled Date</label>
-            <input type="datetime-local" name="scheduled_date" id="scheduled_date" value="{{ old('scheduled_date', $schedule->scheduled_date) }}"
+            <input type="datetime-local" name="scheduled_date" id="scheduled_date"
+                value="{{ old('scheduled_date', $schedule->scheduled_date) }}"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
         </div>
 
@@ -22,13 +23,10 @@
                 Update Schedule
             </button>
 
-            <form method="POST" action="{{ route('schedules.cancel', $schedule->id) }}" onsubmit="return confirm('Cancel this schedule?')">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">
-                    Cancel
-                </button>
-            </form>
+            <a href="{{ route('Admin.TestDriveMgr') }}"
+                class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md">
+                Cancel
+            </a>
         </div>
     </form>
 </div>

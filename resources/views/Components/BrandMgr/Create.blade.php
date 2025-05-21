@@ -56,6 +56,10 @@
                     <label class="block text-base font-medium text-gray-700 mb-1">Location</label>
                     <input name="location" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"></input>
                 </div>
+                <select name="is_active" class="...">
+                    <option value="1" {{ old('is_active', $brand->is_active ?? 1) == 1 ? 'selected' : '' }}>Active</option>
+                    <option value="0" {{ old('is_active', $brand->is_active ?? 1) == 0 ? 'selected' : '' }}>Inactive</option>
+                </select>
             </div>
 
             <!-- Buttons -->

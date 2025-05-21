@@ -46,6 +46,7 @@
           <th class="p-3">ID</th>
           <th class="p-3">Name</th>
           <th class="p-3">Description</th>
+          <th class="p-3">Action</th>
           <th class="p-3">Last create</th>
           <th class="p-3 text-center">Status</th>
         </tr>
@@ -64,8 +65,20 @@
                 <span>{{ $range->description }}</span>
             </td>
             <td class="p-3">
+                    @if ($range->is_active)
+                        <span class="inline-block px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">
+                            Active
+                        </span>
+                    @else
+                        <span class="inline-block px-2 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full">
+                            Inactive
+                        </span>
+                    @endif
+            </td>
+            <td class="p-3">
                 <span>{{ $range->updated_at->format('d M Y') }}</span>
             </td>
+
 
             <td class="p-3 text-center relative">
                     <div x-data="{ open: false }" class="relative inline-block text-left">

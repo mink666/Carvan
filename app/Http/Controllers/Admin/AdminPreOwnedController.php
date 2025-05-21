@@ -53,6 +53,7 @@ class AdminPreOwnedController extends Controller
             'purchase_date' => 'nullable|date',
             'price' => 'nullable|integer',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'is_active' => 'required|boolean',
         ]);
 
         $data = $request->only([
@@ -87,6 +88,7 @@ class AdminPreOwnedController extends Controller
             'purchase_date' => 'nullable|date',
             'price' => 'nullable|integer',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'is_active' => 'required|boolean',
         ]);
 
         $validated = $request->only([

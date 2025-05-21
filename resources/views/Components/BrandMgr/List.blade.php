@@ -42,6 +42,7 @@
                     <th class="p-3">Description</th>
                     <th class="p-3">Logo</th>
                     <th class="p-3">Location</th>
+                    <th class="p-3 ">Action</th>
                     <th class="p-3">Last update</th>
                     <th class="p-3 text-center">Status</th>
                 </tr>
@@ -68,6 +69,17 @@
                         </td>
                         <td class="p-3">
                             <span>{{ $brand->location }}</span>
+                        </td>
+                        <td class="p-3">
+                                @if ($brand->is_active)
+                                    <span class="inline-block px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">
+                                        Active
+                                    </span>
+                                @else
+                                    <span class="inline-block px-2 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full">
+                                        Inactive
+                                    </span>
+                                @endif
                         </td>
                         <td class="p-3">
                             <span>{{ $brand->updated_at->format('d M Y') }}</span>
@@ -161,7 +173,7 @@
             const rowsCount = $rows.length;
             const pageCount = Math.ceil(rowsCount / rowsPerPage);
             let currentPage = 1;
-
+            filteredRows = $rows.not('#no-results-row');
             function showPage(page) {
                 const start = (page - 1) * rowsPerPage;
                 const end = start + rowsPerPage;

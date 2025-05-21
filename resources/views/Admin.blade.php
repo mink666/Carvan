@@ -90,7 +90,16 @@
                 <div class="flex justify-end items-center px-5 py-1">
                     <div class="flex items-center gap-2">
                         <img src="{{ asset('images/UserLogo.png') }}" class="w-10 h-10 rounded-full" alt="Avatar">
-                        <span class="text-sm font-medium">Hi, {{ Auth::user()->name }}</span>
+                        @php
+                            use Illuminate\Support\Facades\Auth;
+                        @endphp
+
+                        @if(Auth::check())
+                            {{-- <h2>Xin chào, {{ Auth::user()->name }}</h2> --}}
+                            <span class="text-sm font-medium">Hi, {{ Auth::user()->name }}</span>
+                        @else
+                            <script>window.location.href = "{{ route('Admin.login') }}";</script>
+                        @endif
                     </div>
                 </div>
                 @if($section === 'Dashboard')

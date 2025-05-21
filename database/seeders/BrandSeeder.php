@@ -42,7 +42,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/honda_logo.png',
                 'motto' => 'The Power of Dreams',
                 'website_url' => 'https://www.honda.com/',
-                'cover_image' => 'images/covers/honda_cover.png',
+                'cover_image' => 'images/covers/honda_cover.jpg',
                 'key_achievements' => json_encode([
                     "World's largest motorcycle manufacturer",
                     "Leader in internal combustion engine production",
@@ -99,7 +99,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/mercedes_logo.png',
                 'motto' => 'The Best or Nothing',
                 'website_url' => 'https://www.mercedes-benz.com/',
-                'cover_image' => 'images/covers/mercedes_cover.png',
+                'cover_image' => 'images/covers/mercedes_cover.jpg',
                 'key_achievements' => json_encode([
                     "Invention of the first automobile (Benz Patent-Motorwagen, 1886)",
                     "Pioneering safety innovations (e.g., crumple zones, ABS, airbags)",
@@ -118,7 +118,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/bmw_logo.png',
                 'motto' => 'The Ultimate Driving Machine',
                 'website_url' => 'https://www.bmw.com/',
-                'cover_image' => 'images/covers/bmw_cover.png',
+                'cover_image' => 'images/covers/bmw_cover.jpg',
                 'key_achievements' => json_encode([
                     "Reputation for creating 'The Ultimate Driving Machine'",
                     "Successful M Performance division with iconic sports cars",
@@ -137,7 +137,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/audi_logo.png',
                 'motto' => 'Advancement through Technology',
                 'website_url' => 'https://www.audi.com/',
-                'cover_image' => 'images/covers/audi_cover.png',
+                'cover_image' => 'images/covers/audi_cover.jpg',
                 'key_achievements' => json_encode([
                     "Pioneering Quattro all-wheel-drive system, revolutionizing rally racing",
                     "Leader in automotive lighting technology (LED, Matrix LED, Laser light)",
@@ -156,7 +156,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/ferrari_logo.png',
                 'motto' => 'We Are the Competition',
                 'website_url' => 'https://www.ferrari.com/',
-                'cover_image' => 'images/covers/ferrari_cover.png',
+                'cover_image' => 'images/covers/ferrari_cover.jpg',
                 'key_achievements' => json_encode([
                     "Most successful team in Formula One history",
                     "Creator of some of the world's most desirable and iconic supercars",
@@ -175,7 +175,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/lamborghini_logo.png',
                 'motto' => 'Expect the Unexpected',
                 'website_url' => 'https://www.lamborghini.com/',
-                'cover_image' => 'images/covers/lamborghini_cover.png',
+                'cover_image' => 'images/covers/lamborghini_cover.jpg',
                 'key_achievements' => json_encode([
                     "Creation of the Miura, often considered the first supercar with a mid-engine V12 layout",
                     "Iconic 'wedge' designs and scissor doors (Countach, Aventador)",
@@ -194,7 +194,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/porsche_logo.png',
                 'motto' => 'There Is No Substitute',
                 'website_url' => 'https://www.porsche.com/',
-                'cover_image' => 'images/covers/porsche_cover.png',
+                'cover_image' => 'images/covers/porsche_cover.jpg',
                 'key_achievements' => json_encode([
                     "The iconic Porsche 911, a continuously evolved sports car legend",
                     "Dominance in motorsport, particularly endurance racing (e.g., 24 Hours of Le Mans)",
@@ -213,7 +213,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/tesla_logo.png',
                 'motto' => 'Accelerating Sustainable Transport',
                 'website_url' => 'https://www.tesla.com/',
-                'cover_image' => 'images/covers/tesla_cover.png',
+                'cover_image' => 'images/covers/tesla_cover.jpg',
                 'key_achievements' => json_encode([
                     "Pioneered the luxury electric sedan market with the Model S",
                     "Significant advancements in battery technology and range (over 370 miles on a single charge)",
@@ -232,7 +232,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/chevrolet_logo.png',
                 'motto' => 'Find New Roads',
                 'website_url' => 'https://www.chevrolet.com/',
-                'cover_image' => 'images/covers/chevrolet_cover.png',
+                'cover_image' => 'images/covers/chevrolet_cover.jpg',
                 'key_achievements' => json_encode([
                     "Corvette: America's sports car with a rich racing heritage",
                     "Silverado: One of the best-selling trucks in America",
@@ -251,7 +251,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/nissan_logo.png',
                 'motto' => 'Innovation That Excites',
                 'website_url' => 'https://www.nissan-global.com/',
-                'cover_image' => 'images/covers/nissan_cover.png',
+                'cover_image' => 'images/covers/nissan_cover.jpg',
                 'key_achievements' => json_encode([
                     "Pioneering electric vehicle technology with the Nissan Leaf",
                     "Strong presence in motorsports with Nismo performance division",
@@ -270,7 +270,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/subaru_logo.png',
                 'motto' => 'Confidence in Motion',
                 'website_url' => 'https://www.subaru.com/',
-                'cover_image' => 'images/covers/subaru_cover.png',
+                'cover_image' => 'images/covers/subaru_cover.jpg',
                 'key_achievements' => json_encode([
                     "Pioneering all-wheel-drive technology in passenger cars",
                     "Strong reputation for safety and reliability",
@@ -289,7 +289,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/volkswagen_logo.png',
                 'motto' => 'Das Auto',
                 'website_url' => 'https://www.volkswagen.com/',
-                'cover_image' => 'images/covers/volkswagen_cover.png',
+                'cover_image' => 'images/covers/volkswagen_cover.jpg',
                 'key_achievements' => json_encode([
                     "Iconic Beetle: One of the best-selling cars of all time",
                     "Golf: A benchmark in the compact car segment",
@@ -308,7 +308,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/mazda_logo.png',
                 'motto' => 'Feel Alive',
                 'website_url' => 'https://www.mazda.com/',
-                'cover_image' => 'images/covers/mazda_cover.png',
+                'cover_image' => 'images/covers/mazda_cover.jpg',
                 'key_achievements' => json_encode([
                     "Pioneering rotary engine technology (Wankel engine)",
                     "MX-5 Miata: The best-selling two-seater sports car in history",
@@ -327,7 +327,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/kia_logo.png',
                 'motto' => 'The Power to Surprise',
                 'website_url' => 'https://www.kia.com/',
-                'cover_image' => 'images/covers/kia_cover.png',
+                'cover_image' => 'images/covers/kia_cover.jpg',
                 'key_achievements' => json_encode([
                     "Rapid improvement in vehicle quality and design",
                     "Strong presence in the SUV market with models like the Sportage and Sorento",
@@ -346,7 +346,7 @@ class BrandSeeder extends Seeder
                 'logo' => 'images/logos/volvo_logo.png',
                 'motto' => 'For Life',
                 'website_url' => 'https://www.volvocars.com/',
-                'cover_image' => 'images/covers/volvo_cover.png',
+                'cover_image' => 'images/covers/volvo_cover.jpg',
                 'key_achievements' => json_encode([
                     "Pioneering automotive safety features (three-point seatbelt)",
                     "Strong commitment to sustainability and electrification (Recharge series)",

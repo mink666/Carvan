@@ -130,6 +130,7 @@
 
             <!-- Products Listing -->
             <div class="products-listing">
+
                 @forelse($preownedCars->where('is_active', true) as $preowned)
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                         <div class="relative">

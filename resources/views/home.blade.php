@@ -188,7 +188,6 @@
 
                             <div class="p-5 md:p-6 flex flex-col flex-grow">
                                 <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
-                                    <span>{{ \Carbon\Carbon::parse($preowned->purchase_date)->format('Y') }}</span>
                                     <span>Milleage: {{ number_format($preowned->mileage, 0, ',', '.') }} KM</span>
                                 </div>
 
@@ -228,12 +227,6 @@
                             </div>
                         </div>
                     @endforeach
-                </div>
-                <div class="text-center mt-10">
-                    <a href="{{ route('preowned.index') }}"
-                        class="inline-block bg-gray-800 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-700 transition-colors duration-300">
-                        View All Pre-Owned Cars
-                    </a>
                 </div>
             </section>
         @endif
@@ -300,11 +293,6 @@
                     class="inline-block bg-white text-red-600 font-bold py-3 px-10 rounded-lg hover:bg-gray-100 text-lg transition-colors duration-300 transform hover:scale-105">
                     Request a Test Drive
                 </a>
-                <span class="mx-3 font-semibold text-white text-lg">or</span>
-                <a href="{{ route('preowned.index') }}"
-                    class="inline-block bg-red-600 text-white font-bold py-3 px-10 rounded-lg hover:bg-red-700 text-lg transition-colors duration-300 transform hover:scale-105">
-                    Explore Pre-Owned Cars
-                </a>
             </div>
         </section>
 
@@ -318,107 +306,65 @@
             </div>
 
             {{-- Danh sách các bài viết --}}
-            <div class="news-items-container rounded-lg shadow-lg overflow-hidden">
-                @php
-                    $sampleNews = [
-                        [
-                            'image' =>
-                                'https://xedoisong.vn/uploads/20221030/xedoisong_debut_new_lamborghini_aventador_lp_780_4_ultimae_coupe_roadster_final_v12_supercar_h1_vedq.jpg',
-                            'date' => \Carbon\Carbon::now()->subDays(2)->format('j M Y'),
-                            'category' => 'Performance Insights',
-                            'title' => 'Unleashing Peak Performance: A New Era for Carvan Test Drives',
-                            'excerpt' =>
-                                'Experience the thrill like never before. Carvan introduces an advanced test drive program focusing on dynamic capabilities and real-world performance metrics for our top models.',
-                            'link' => '#',
-                        ],
-                        [
-                            'image' =>
-                                'https://static-www.adweek.com/wp-content/uploads/files/tesla-hed-2016.png?w=652',
-                            'date' => \Carbon\Carbon::now()->subDays(5)->format('j M Y'),
-                            'category' => 'SUSTAINABILITY',
-                            'title' => 'Carvan Commits to a Greener Future with Expanded EV Lineup',
-                            'excerpt' =>
-                                'Discover our latest initiatives and partnerships aimed at promoting sustainable mobility and reducing environmental impact across our diverse vehicle offerings.',
-                            'link' => '#',
-                        ],
-                        [
-                            'image' =>
-                                'https://media.arcadis.com/-/media/project/arcadiscom/com/blogs/global/david-aimable-lina/2022/how-to-deliver-automotive-manufacturing-for-the-future/how-to-deliver-automotive-manufacturing-for-the-future-header.png?rev=-1',
-                            'date' => \Carbon\Carbon::now()->subDays(8)->format('j M Y'),
-                            'category' => 'Luxury & Design',
-                            'title' => 'Inside Carvan: Craftsmanship and Innovation in Modern Automotive Design',
-                            'excerpt' =>
-                                'A closer look at the meticulous design processes and premium materials that define the luxury experience offered by Carvan’s curated collection of vehicles.',
-                            'link' => '#',
-                        ],
-                        [
-                            'image' => 'https://wallpapers.com/images/hd/1920x1080-ferrari-6474xw68qqc0t4g1.jpg',
-                            'date' => \Carbon\Carbon::now()->subDays(10)->format('j M Y'),
-                            'category' => 'Tech Review',
-                            'title' => 'Next-Gen Infotainment Systems: A Carvan Exclusive',
-                            'excerpt' =>
-                                'Exploring the features and benefits of the latest infotainment technology available in select Carvan models, enhancing your driving pleasure and connectivity.',
-                            'link' => '#',
-                        ],
-                    ];
-                @endphp
+<div class="news-items-container rounded-lg shadow-lg overflow-hidden">
+    {{-- Bỏ đoạn @php $sampleNews = [...]; @endphp --}}
 
-                @foreach ($sampleNews as $index => $newsItem)
-                    {{-- Mỗi article giờ sẽ có padding và màu nền riêng, không còn bo góc và shadow của "card" --}}
-                    <article
-                        class="news-item-full-width group
-                                {{ $loop->index % 2 === 0 ? 'bg-black text-white' : 'bg-white text-gray-800' }}">
-                        <div class="container mx-auto px-4"> {{-- Đưa container vào trong để giới hạn chiều rộng nội dung --}}
-                            <div
-                                class="md:flex md:items-center {{ $loop->index % 2 === 1 ? 'md:flex-row-reverse' : '' }}
-                                    py-10 md:py-16 {{-- Padding dọc cho mỗi item --}}
-                                    md:space-x-reverse md:space-x-8 lg:space-x-12">
-                                {{-- Cột Ảnh --}}
-                                <div class="md:w-1/2 lg:w-3/5 mb-6 md:mb-0">
-                                    <a href="{{ $newsItem['link'] }}"
-                                        class="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                                        <img src="{{ $newsItem['image'] }}" alt="{{ $newsItem['title'] }}"
-                                            class="w-full h-auto object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-105 aspect-[16/9]">
-                                    </a>
-                                </div>
+    @forelse ($latestNews as $newsItem) {{-- Sử dụng biến $latestNews từ controller --}}
+        <article
+            class="news-item-full-width group
+                    {{ $loop->index % 2 === 0 ? 'bg-black text-white' : 'bg-white text-gray-800' }}">
+            <div class="container mx-auto px-4">
+                <div
+                    class="md:flex md:items-center {{ $loop->index % 2 === 1 ? 'md:flex-row-reverse' : '' }}
+                            py-10 md:py-16
+                            md:space-x-reverse md:space-x-8 lg:space-x-12">
+                    {{-- Cột Ảnh --}}
+                    <div class="md:w-1/2 lg:w-3/5 mb-6 md:mb-0">
+                        <a href="{{ route('news.show', ['news' => $newsItem->id]) }}"
+                           class="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                            <img src="{{  asset('images/' . $newsItem->image)  }}" alt="{{ $newsItem->title }}"
+                                 class="w-full h-auto object-contain transform transition-transform duration-500 ease-in-out group-hover:scale-105 aspect-[16/9]">
+                        </a>
+                    </div>
 
-                                {{-- Cột Nội dung Text --}}
-                                <div class="md:w-1/2 lg:w-2/5 flex flex-col justify-center">
-                                    <p
-                                        class="text-xs {{ $loop->index % 2 === 0 ? 'text-gray-400' : 'text-gray-500' }} mb-2">
-                                        <span>{{ $newsItem['date'] }}</span>
-                                    </p>
-                                    @if ($newsItem['category'])
-                                        <p
-                                            class="text-xs font-semibold {{ $loop->index % 2 === 0 ? 'text-red-400' : 'text-red-500' }} uppercase tracking-wider mb-2">
-                                            {{ $newsItem['category'] }}
-                                        </p>
-                                    @endif
-                                    <h3
-                                        class="text-2xl md:text-3xl font-bold {{ $loop->index % 2 === 0 ? 'text-white group-hover:text-red-300' : 'text-gray-900 group-hover:text-red-700' }} mb-3 leading-tight transition-colors">
-                                        <a href="{{ $newsItem['link'] }}">{{ $newsItem['title'] }}</a>
-                                    </h3>
-                                    <p
-                                        class="{{ $loop->index % 2 === 0 ? 'text-gray-300' : 'text-gray-700' }} mb-6 leading-relaxed text-base">
-                                        {{ Str::limit($newsItem['excerpt'], 150) }}
-                                    </p>
-                                    <a href="{{ $newsItem['link'] }}"
-                                        class="self-start inline-block font-semibold py-2.5 px-6 rounded-md text-sm
-                                          @if ($loop->index % 2 === 0) {{-- Nền đen, chữ trắng cho item chẵn --}}
-                                            bg-white text-black hover:bg-gray-400 focus:ring-2 focus:ring-gray-300
-                                          @else {{-- Nền trắng, chữ đen cho item lẻ --}}
-                                            border border-gray-700 text-gray-800 hover:bg-gray-800 hover:text-white hover:border-gray-800 focus:ring-2 focus:ring-gray-600 @endif
-                                          transition-all duration-300">
-                                        READ MORE
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                @endforeach
+                    {{-- Cột Nội dung Text --}}
+                    <div class="md:w-1/2 lg:w-2/5 flex flex-col justify-center">
+                        <p class="text-xs {{ $loop->index % 2 === 0 ? 'text-gray-400' : 'text-gray-500' }} mb-2">
+                            {{-- Định dạng ngày tháng từ đối tượng Carbon --}}
+                            <span>{{ $newsItem->date ? $newsItem->date->format('j M Y') : 'N/A' }}</span>
+                        </p>
+                        <p class="text-xs font-semibold {{ $loop->index % 2 === 0 ? 'text-red-400' : 'text-red-500' }} uppercase tracking-wider mb-2">
+                            LATEST UPDATE </p>
 
-
+                        <h3
+                            class="text-2xl md:text-3xl font-bold {{ $loop->index % 2 === 0 ? 'text-white group-hover:text-red-300' : 'text-gray-900 group-hover:text-red-700' }} mb-3 leading-tight transition-colors">
+                            {{-- Sử dụng route() cho link và thuộc tính title --}}
+                            <a href="{{ route('news.show', ['news' => $newsItem->id]) }}">{{ $newsItem->title }}</a>
+                        </h3>
+                        <p class="{{ $loop->index % 2 === 0 ? 'text-gray-300' : 'text-gray-700' }} mb-6 leading-relaxed text-base">
+                            {{ Str::limit(strip_tags($newsItem->content), 150) }}
+                        </p>
+                        {{-- Sử dụng route() cho link READ MORE --}}
+                        <a href="{{ route('news.show', ['news' => $newsItem->id]) }}"
+                           class="self-start inline-block font-semibold py-2.5 px-6 rounded-md text-sm
+                                @if ($loop->index % 2 === 0) {{-- Nền đen, chữ trắng cho item chẵn --}}
+                                    bg-white text-black hover:bg-gray-400 focus:ring-2 focus:ring-gray-300
+                                @else {{-- Nền trắng, chữ đen cho item lẻ --}}
+                                    border border-gray-700 text-gray-800 hover:bg-gray-800 hover:text-white hover:border-gray-800 focus:ring-2 focus:ring-gray-600
+                                @endif
+                                transition-all duration-300">
+                            READ MORE
+                        </a>
+                    </div>
+                </div>
             </div>
+        </article>
+    @empty
+        <div class="p-10 text-center {{ $loop->index % 2 === 0 ? 'bg-black text-white' : 'bg-white text-gray-800' }}">
+            <p>No news articles available at the moment.</p>
+        </div>
+    @endforelse
+</div>
             <div class="container mx-auto px-4">
                 <div class="text-center pt-10 md:pt-16">
                     <a href="{{ route('news_events.index') }}" "news-events"

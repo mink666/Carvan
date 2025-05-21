@@ -24,12 +24,18 @@ class RangeOfCarController extends Controller
             abort(404);
         }
         $rangeOfCar->load(['carModels' => function ($query) {
-            $query->with(['brand'])
-                  ->withMin('inventories', 'price')
-                  ->orderBy('brand_id')
-                  ->orderBy('year', 'desc')
-                  ->orderBy('name');
-        }]);
-        return view('range_of_car.show', compact('rangeOfCar'));
+        $query->with(['brand']) 
+              ->whereHas('inventories', function ($subQuery) {
+                  $subQuery->where('is_active', true);
+              })
+              ->withMin(['inventories' => function ($subQuery) {
+                  $subQuery->where('is_active', true);
+              }], 'price')
+              ->orderBy('brand_id')
+              ->orderBy('year', 'desc')
+              ->orderBy('name');
+    }]);
+
+    return view('range_of_car.show', compact('rangeOfCar'));
     }
 }

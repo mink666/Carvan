@@ -80,7 +80,7 @@
 
                         @if ($carModel->description)
                             <div class="product-description">
-                                <h3 class="text-lg font-semibold mb-2">Overview</h3>
+                                <h3 class="text-xl font-semibold text-black mb-2">Overview</h3>
                                 <p>{{ Str::limit($carModel->description, 200) }}</p>
                             </div>
                         @endif
@@ -100,7 +100,7 @@
                             @endif
                         @endif
 
-                        <a href="#" class="test-drive-btn">
+                        <a href="{{ route('test_drive.index') }}" class="test-drive-btn">
                             Request a Test Drive
                         </a>
                         <a href="{{ route('products.index') }}" class="black-btn">
@@ -111,7 +111,7 @@
 
                 {{-- Detailed Description & Specifications Section --}}
                 <div class="p-6 md:p-8 border-t border-gray-200">
-                    <h2 class="text-2xl font-semibold mb-6">More Details</h2>
+                    <h1 class="text-2xl font-bold mb-6">More Details</h2>
 
                     @if ($carModel->description)
                         <div class="mb-8">
@@ -125,7 +125,7 @@
                     {{-- Available Inventory --}}
                     @if ($carModel->inventories->count() > 0)
                         <div class="mb-8">
-                            <h3 class="text-xl font-semibold mb-4">Available Options & Pricing</h3>
+                            <h3 class="text-xl font-semibold">Available Options & Pricing</h3>
                             <div class="overflow-x-auto">
                                 <table class="inventory-table">
                                     <thead>

@@ -23,7 +23,7 @@
                 Update Schedule
             </button>
 
-            <a href="{{ route('Admin.TestDriveMgr') }}"
+            <a href="/Admin/TestDriveScheduleMgr?state=list"
                 class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md">
                 Cancel
             </a>

@@ -130,7 +130,7 @@
 
             <!-- Products Listing -->
             <div class="products-listing">
-                @forelse($preownedCars->  as $preowned)
+                @forelse($preownedCars as $preowned)
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                         <div class="relative">
                             <a href="{{ route('preowned.show', $preowned->id) }}">

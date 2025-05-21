@@ -14,7 +14,7 @@ class ProductController extends Controller
     {
         // Chuyển hướng sang trang preowned nếu tìm kiếm xe cũ
         if ($request->filled('type') && $request->type === 'preowned') {
-            return redirect()->route('preowned.index', $request->except('type'));
+            return redirect()->route('preowned.index');
         }
 
         // Chuyển hướng sang trang preowned nếu tìm kiếm có từ khóa liên quan đến xe cũ
@@ -23,7 +23,7 @@ class ProductController extends Controller
             $preownedKeywords = ['used', 'preowned', 'pre-owned', 'second hand'];
             foreach ($preownedKeywords as $keyword) {
                 if (str_contains($searchTerm, $keyword)) {
-                    return redirect()->route('preowned.index', $request->all());
+                    return redirect()->route('preowned.index');
                 }
             }
         }
@@ -134,8 +134,10 @@ class ProductController extends Controller
             $query->where('is_active', true)
                 ->where('is_preowned', false);
         })->distinct()->orderBy('year', 'desc')->pluck('year');
-
-        return view('products.index', compact('products', 'brands', 'ranges', 'origins', 'years'));
+        $allProducts = Inventory::with(['carModel.brand', 'carModel.rangeOfCars'])
+            ->where('is_active', true)
+            ->get();
+        return view('products.index', compact('products', 'brands', 'ranges', 'origins', 'years', 'allProducts'));
     }
 
     public function show($id)

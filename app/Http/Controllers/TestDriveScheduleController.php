@@ -11,7 +11,7 @@ class TestDriveScheduleController extends Controller
 {
     public function index()
     {
-        $schedules = TestDriveSchedule::with('testDriveRequest')->latest()->paginate(10);
+        $schedules = TestDriveSchedule::with(['testDriveRequest', 'user'])->latest()->paginate(10);
         return view('schedules.index', compact('schedules'));
     }
 

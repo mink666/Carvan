@@ -15,7 +15,7 @@
                 <th class="p-3">Driver Info</th>
                 <th class="p-3">Note</th>
                 <th class="p-3">Status</th>
-                <th class="p-3">Schedule</th>
+                <th class="p-3">Schedule By</th>
             </tr>
         </thead>
         <tbody>
@@ -23,23 +23,39 @@
                 <tr class="border-b">
                     <td class="p-3">{{ $request->id }}</td>
                     <td class="p-3">{{ $request->carModel->name ?? 'N/A' }}</td>
-                    <td class="p-3">{{ \Carbon\Carbon::parse($request->request_date)->format('d M Y H:i') }}</td>
+                    <td class="p-3">{{ \Carbon\Carbon::parse($request->request_date)->format('M d Y H:i') }}</td>
                     <td class="p-3">
                         {{ $request->first_name }} {{ $request->last_name }}<br>
                         {{ $request->email_address }}<br>
                         {{ $request->phone_number }}
                     </td>
                     <td class="p-3">{{ $request->note ?? '—' }}</td>
-                    <td class="p-3 capitalize">{{ $request->status ?? 'pending' }}</td>
+                    <td class="p-3 capitalize">
+                        @if ($request->status == 'pending')
+                            <span
+                                class="inline-block px-2 py-1 text-xs font-semibold text-yellow-700 bg-yellow-100 rounded-full">
+                                Pending
+                            </span>
+                        @elseif ($request->status == 'cancelled')
+                            <span
+                                class="inline-block px-2 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full">
+                                Cancelled
+                            </span>
+                        @else
+                            <span
+                                class="inline-block px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">
+                                Processed
+                            </span>
+                        @endif
+                    </td>
                     <td class="p-3">
-                        @if($request->schedule)
+                        @if ($request->schedule)
                             <div>
-                                <strong>{{ \Carbon\Carbon::parse($request->schedule->scheduled_at)->format('d M Y - H:i') }}</strong><br>
-                                {{ $request->schedule->location }}
+                                {{ $request->schedule->user->name ?? 'N/A' }}
                             </div>
                         @else
                             <a href="{{ route('Admin.TestDriveRequestMgr.edit', $request->id) }}"
-                               class="text-blue-600 hover:underline font-semibold">
+                                class="text-blue-600 hover:underline font-semibold">
                                 + Assign Schedule
                             </a>
                         @endif
@@ -48,6 +64,4 @@
             @endforeach
         </tbody>
     </table>
-
 </div>
-

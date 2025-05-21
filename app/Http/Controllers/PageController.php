@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use App\Models\Brand;
 use App\Models\CarModel;
 use App\Models\Preowned;
+use App\Models\News;
 
 class PageController extends Controller
 {
@@ -37,11 +38,16 @@ class PageController extends Controller
             $model->inventories_min_price = $model->displayInventory ? $model->displayInventory->price : 0;
         });
 
-        $featuredPreownedCars = Preowned::inRandomOrder() #where('is_active', true)
-            ->take(3) // Hiển thị 3 xe pre-owned nổi bật
+        $featuredPreownedCars = Preowned::where('is_active', true)
+            ->inRandomOrder()
+            ->take(3)
             ->get();
 
-        return view('home', compact('featuredBrands', 'popularModels', 'featuredPreownedCars'));
+        $latestNews = News::where('is_active', true)
+                         ->orderBy('date', 'desc')
+                         ->take(4)
+                         ->get();
+        return view('home', compact('featuredBrands', 'popularModels', 'featuredPreownedCars', 'latestNews'));
     }
 
     public function about(): View

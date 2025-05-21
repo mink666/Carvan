@@ -44,10 +44,12 @@ class AdminRangeOfCarController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:range_of_cars,name',
             'description' => 'nullable|string',
+            'is_active' => 'required|boolean',
         ]);
         RangeOfCar::create([
             'name' => $request->name,
             'description' => $request->description,
+            'is_active' => $request->is_active,
         ]);
         return redirect()->route('Admin.RangesMgr')->with('success', 'Range of car created successfully.');
     }
@@ -81,8 +83,9 @@ class AdminRangeOfCarController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:range_of_cars,name,' . $id,
             'description' => 'nullable|string',
+            'is_active' => 'required|boolean',
         ]);
-        $data = $request->only(['name', 'description']);
+        $data = $request->only(['name', 'description','is_active']);
         $range->update($data);
         return redirect()->route('Admin.RangesMgr')->with('success', 'Range of car updated successfully.');
     }

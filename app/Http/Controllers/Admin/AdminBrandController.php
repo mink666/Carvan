@@ -53,6 +53,7 @@ class AdminBrandController extends Controller
             'key_achievements' => 'nullable|array',
             'key_achievements.*' => 'nullable|string',
             'location' => 'nullable|string|max:255',
+            'is_active' => 'required|boolean',
         ]);
 
         $data = $request->only([
@@ -115,13 +116,14 @@ class AdminBrandController extends Controller
             'key_achievements.*' => 'nullable|string',
             'location' => 'nullable|string|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'is_active' => 'required|boolean',
         ]);
 
         $brand = Brand::findOrFail($id);
 
         $data = $request->only([
             'name', 'company_full_name', 'year', 'founder', 'description', 'motto',
-            'website_url', 'location'
+            'website_url', 'location','is_active'
         ]);
 
         if ($request->hasFile('logo')) {

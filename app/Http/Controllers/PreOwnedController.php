@@ -60,17 +60,17 @@ class PreOwnedController extends Controller
         // Filter theo số km đã đi
         if ($request->filled('mileage')) {
             switch ($request->mileage) {
-                case 'under_50000':
-                    $query->where('mileage', '<', 50000);
+                case 'under_10000':
+                    $query->where('mileage', '<', 10000);
                     break;
-                case '50000_100000':
-                    $query->whereBetween('mileage', [50000, 100000]);
+                case '10000_30000':
+                    $query->whereBetween('mileage', [10000, 30000]);
                     break;
-                case '100000_150000':
-                    $query->whereBetween('mileage', [100000, 150000]);
+                case '30000_50000':
+                    $query->whereBetween('mileage', [30000, 50000]);
                     break;
-                case 'above_150000':
-                    $query->where('mileage', '>', 150000);
+                case 'above_50000':
+                    $query->where('mileage', '>', 50000);
                     break;
             }
         }
@@ -80,6 +80,9 @@ class PreOwnedController extends Controller
             $year = $request->year;
             $query->where('name', 'LIKE', "%{$year}%");
         }
+
+        // Get all preowned cars for comparison
+        $allPreownedCars = Preowned::where('is_active', true)->get();
 
         $preownedCars = $query->orderBy('created_at', 'desc')->paginate(12)->withQueryString();
 
@@ -105,7 +108,7 @@ class PreOwnedController extends Controller
             ->sort()
             ->values();
 
-        return view('preowned.index', compact('preownedCars', 'brands', 'years'));
+        return view('preowned.index', compact('preownedCars', 'brands', 'years', 'allPreownedCars'));
     }
 
     public function show($id)

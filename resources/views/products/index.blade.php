@@ -59,7 +59,7 @@
                         <a href="?search=BMW" class="suggestion-tag">BMW</a>
                         <a href="?search=SUV" class="suggestion-tag">SUV</a>
                         <a href="?search=Sedan" class="suggestion-tag">Sedan</a>
-                        <a href="?type=preowned" class="suggestion-tag">Pre-owned Cars</a>
+                        <a href="{{ route('preowned.index') }}" class="suggestion-tag">Pre-owned Cars</a>
                     </div>
                 </div>
             </form>
@@ -343,7 +343,7 @@
             <div class="available-cars-section">
                 <h3 class="text-lg font-bold mb-4">Available Vehicles</h3>
                 <div class="available-cars-grid">
-                    @foreach ($products as $product)
+                    @foreach ($allProducts as $product)
                         <div class="available-car-card" id="available-car-{{ $product->id }}">
                             <div class="car-image">
                                 @if ($product->carModel && $product->carModel->image)
@@ -779,12 +779,157 @@
                 `).join('');
             table.appendChild(headerRow);
 
+            // Specifications Groups
+            const specGroups = [{
+                    title: 'Basic Information',
+                    specs: [{
+                            name: 'Brand',
+                            key: 'brand'
+                        },
+                        {
+                            name: 'Model',
+                            key: 'model'
+                        },
+                        {
+                            name: 'Year',
+                            key: 'year'
+                        },
+                        {
+                            name: 'Range',
+                            key: 'range'
+                        },
+                        {
+                            name: 'Price',
+                            key: 'price',
+                            format: (val) => `${new Intl.NumberFormat('vi-VN').format(val)} VND`
+                        }
+                    ]
+                },
+                {
+                    title: 'Colors',
+                    specs: [{
+                            name: 'Exterior Color',
+                            key: 'color'
+                        },
+                        {
+                            name: 'Interior Color',
+                            key: 'interiorColor'
+                        }
+                    ]
+                },
+                {
+                    title: 'Description',
+                    specs: [{
+                        name: 'Vehicle Description',
+                        key: 'description'
+                    }]
+                }
+            ];
+
+            // Add specification rows
+            specGroups.forEach(group => {
+                // Group header
+                const groupRow = document.createElement('tr');
+                groupRow.className = 'spec-group';
+                groupRow.innerHTML = `<td colspan="${selectedCars.length + 1}">${group.title}</td>`;
+                table.appendChild(groupRow);
+
+                // Spec rows
+                group.specs.forEach(spec => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td class="spec-name">${spec.name}</td>` +
+                        selectedCars.map(car => {
+                            let value = car[spec.key] || 'N/A';
+                            if (spec.format && value !== 'N/A') {
+                                value = spec.format(value);
+                            }
+                            return `<td class="spec-value">${value}</td>`;
+                        }).join('');
+                    table.appendChild(row);
+                });
+            });
+
             grid.appendChild(table);
         }
 
         function updateComparisonCounter() {
             document.getElementById('compare-count').textContent = selectedCars.length;
         }
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+            .comparison-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 1rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 1rem;
+                border: 1px solid #e2e8f0;
+                text-align: left;
+            }
+
+            .comparison-table th {
+                background-color: #f8fafc;
+            }
+
+            .car-header {
+                text-align: center;
+            }
+
+            .car-header img {
+                width: 200px;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 4px;
+                margin-bottom: 0.5rem;
+            }
+
+            .car-header h3 {
+                font-size: 1.125rem;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+            }
+
+            .car-header .price {
+                color: #e53e3e;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+            }
+
+            .remove-btn {
+                background-color: #e53e3e;
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 0.375rem;
+                font-size: 0.875rem;
+            }
+
+            .spec-group {
+                background-color: #edf2f7;
+                font-weight: 600;
+            }
+
+            .spec-group td {
+                padding: 0.75rem 1rem;
+            }
+
+            .spec-name {
+                font-weight: 500;
+                width: 200px;
+            }
+
+            .spec-value {
+                color: #4a5568;
+            }
+
+            /* Highlight differences */
+            .spec-value.different {
+                background-color: #fef3c7;
+            }
+        `;
+        document.head.appendChild(styleSheet);
 
         function removeFromComparison(id) {
             const btn = document.querySelector(`#available-car-${id} .select-for-compare-btn`);
@@ -816,6 +961,7 @@
             document.getElementById('comparison-popup').classList.add('hidden');
         }
     </script>
+
 
     @push('scripts')
         <script>

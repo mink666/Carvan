@@ -24,7 +24,7 @@ class PreownedVehicleSeeder extends Seeder
                 'features' => json_encode(['Backup Camera', 'Bluetooth', 'Keyless Entry']),
                 'image' => 'images/preowned/Altis2021.png',
                 'story' => 'Experience refined elegance with this meticulously maintained 2021 Toyota Corolla Altis. This single-owner vehicle boasts a comprehensive service history exclusively at authorized Toyota dealerships. The Silver Metallic exterior paired with the Black Fabric interior creates a timeless aesthetic. With only 45,000 km on the odometer, this Altis delivers Toyota renowned reliability combined with modern features including a backup camera, Bluetooth connectivity, and keyless entry. Perfect for both daily commuting and family trips, offering excellent fuel efficiency and comfortable seating for five.',
-                'is_active' => true,
+                'is_active' => false,
             ],
             [
                 'name' => 'Honda CR-V 2020',
@@ -37,7 +37,7 @@ class PreownedVehicleSeeder extends Seeder
                 'features' => json_encode(['Honda Sensing', 'Apple CarPlay', 'Android Auto']),
                 'image' => 'images/preowned/honda_crv_2020.png',
                 'story' => 'Discover versatility and reliability with this 2020 Honda CR-V. This well-maintained SUV comes equipped with the advanced Honda Sensing safety suite, making every journey safer and more comfortable. The Modern Steel Metallic exterior complements its spacious Gray Leather interior perfectly. With 52,000 km of careful use, this CR-V features seamless smartphone integration through Apple CarPlay and Android Auto. The vehicle has been serviced regularly at authorized Honda dealerships, ensuring optimal performance and reliability. Ideal for families, offering ample cargo space and excellent fuel economy.',
-                'is_active' => true,
+                'is_active' => false,
             ],
             [
                 'name' => 'Ford Ranger 2022',

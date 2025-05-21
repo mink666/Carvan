@@ -130,7 +130,8 @@
 
             <!-- Products Listing -->
             <div class="products-listing">
-                @forelse($preownedCars as $preowned)
+
+                @forelse($preownedCars->where('is_active', true) as $preowned)
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                         <div class="relative">
                             <a href="{{ route('preowned.show', $preowned->id) }}">
@@ -214,7 +215,7 @@
             <div class="available-cars-section">
                 <h3 class="text-lg font-bold mb-4">Available Vehicles</h3>
                 <div class="available-cars-grid">
-                    @foreach ($preownedCars as $car)
+                    @foreach ($allPreownedCars as $car)
                         <div class="available-car-card" id="available-car-{{ $car->id }}">
                             <div class="car-image">
                                 @if ($car->image)

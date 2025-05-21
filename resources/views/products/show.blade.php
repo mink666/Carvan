@@ -100,7 +100,7 @@
                             @endif
                         @endif
 
-                        <a href="#" class="test-drive-btn">
+                        <a href="{{ route('test_drive.index') }}" class="test-drive-btn">
                             Request a Test Drive
                         </a>
                         <a href="{{ route('products.index') }}" class="black-btn">

@@ -26,7 +26,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium mb-1">ID</label>
-                    <input type="text" name="id" value="{{$users->id}}" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300" />
+                    <input type="text" name="id" readonly value="{{$users->id}}" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300" />
                 </div>
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium mb-1">Username</label>

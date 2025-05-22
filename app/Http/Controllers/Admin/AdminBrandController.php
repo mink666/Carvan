@@ -58,15 +58,21 @@ class AdminBrandController extends Controller
 
         $data = $request->only([
             'name', 'company_full_name', 'year', 'founder', 'description', 'motto',
-            'website_url', 'location'
+            'website_url', 'location', 'is_active'
         ]);
 
         if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('brands');
+            $file = $request->file('logo');
+            $filename = $file->getClientOriginalName();
+            $file->storeAs('images/logos', $filename, 'public');
+            $data['logo'] = 'images/logos/' . $filename;
         }
 
         if ($request->hasFile('cover_image')) {
-            $data['cover_image'] = $request->file('cover_image')->store('brands');
+            $file = $request->file('cover_image');
+            $filename = $file->getClientOriginalName();
+            $file->storeAs('images/covers', $filename, 'public');
+            $data['cover_image'] = 'images/covers/' . $filename;
         }
 
         if ($request->has('key_achievements')) {
@@ -127,11 +133,17 @@ class AdminBrandController extends Controller
         ]);
 
         if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('brands');
+            $file = $request->file('logo');
+            $filename = $file->getClientOriginalName();
+            $file->storeAs('images/logos', $filename, 'public');
+            $data['logo'] = 'images/logos/' . $filename;
         }
 
         if ($request->hasFile('cover_image')) {
-            $data['cover_image'] = $request->file('cover_image')->store('brands');
+            $file = $request->file('cover_image');
+            $filename = $file->getClientOriginalName();
+            $file->storeAs('images/covers', $filename, 'public');
+            $data['cover_image'] = 'images/covers/' . $filename;
         }
 
         if ($request->has('key_achievements')) {

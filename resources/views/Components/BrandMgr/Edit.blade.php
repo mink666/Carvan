@@ -14,7 +14,16 @@
                 {{-- Upload Image --}}
                 <div class="w-full">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Upload Brand Image</label>
-                    <input id="imageInput" type="file" name="image" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                    <input id="imageInput" type="file" name="logo" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                </div>
+                <!-- motto -->
+                <div class="w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Motto</label>
+                    <input type="text" value="{{$brand->motto}}" name="motto"  class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div class="w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Website_url</label>
+                    <input type="text" value="{{$brand->website_url}}" name="website_url"  class="w-full px-4 py-2 border border-gray-300 rounded-md">
                 </div>
             </div>
         </div>
@@ -35,15 +44,16 @@
 
             <!-- Form fields -->
             <div class="space-y-4 flex-grow">
-                <!-- Brand ID -->
-                <div>
-                    <label class="block text-base font-medium text-gray-700 mb-1">ID</label>
-                    <input type="text" name="id" readonly value="{{$brand ->id}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
-                </div>
+
                 <!-- Brand name -->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Brand</label>
                     <input type="text" name="name" value="{{$brand ->name}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
+                <!-- Brand name -->
+                <div>
+                    <label class="block text-base font-medium text-gray-700 mb-1">Company name</label>
+                    <input type="text" name="company_full_name" value="{{$brand ->company_full_name}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                 </div>
 
 
@@ -55,12 +65,22 @@
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                     <p id="errorMsg" class="text-red-500 mt-1 text-sm hidden">Please enter a year from 1900 to 2025.</p>
                 </div>
+                <!-- founder -->
+                <div>
+                    <label class="block text-base font-medium text-gray-700 mb-1">Founder</label>
+                    <input type="text" name="founder" value="{{$brand ->founder}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
 
 
                 <!-- Description -->
                 <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Description</label>
                     <textarea name="description"  class="w-full h-36 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black" >{{$brand->description}}</textarea>
+                </div>
+                <!-- Location -->
+                <div>
+                    <label class="block text-base font-medium text-gray-700 mb-1">Location</label>
+                    <input type="text" name="location" value="{{$brand ->location}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Active</label>

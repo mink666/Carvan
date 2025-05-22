@@ -38,9 +38,14 @@
                     <th class="p-3"><input type="checkbox" /></th>
                     <th class="p-3">ID</th>
                     <th class="p-3">Name</th>
+                    <th class="p-3">Company Full Name</th>
                     <th class="p-3">Year</th>
-                    <th class="p-3">Description</th>
+                    <th class="p-3">Founder</th>
+                    {{-- <th class="p-3">Description</th> --}}
                     <th class="p-3">Logo</th>
+                    <th class="p-3">Motto</th>
+                    {{-- <th class="p-3">Website</th> --}}
+                    <th class="p-3">cover</th>
                     <th class="p-3">Location</th>
                     <th class="p-3 ">Action</th>
                     <th class="p-3">Last update</th>
@@ -58,14 +63,32 @@
                             <span class="brand-name">{{ $brand->name }}</span>
                         </td>
                         <td class="p-3">
+                            <span>{{ $brand->company_full_name }}</span>
+                        </td>
+                        <td class="p-3">
                             <span>{{ $brand->year }}</span>
                         </td>
                         <td class="p-3">
+                            <span>{{ $brand->founder }}</span>
+                        </td>
+                        {{-- <td class="p-3">
                             <span>{{ $brand->description }}</span>
+                        </td> --}}
+                        <td class="p-3">
+                                <img src="{{ file_exists(public_path('storage/' . $brand->logo)) ? asset('storage/' . $brand->logo) : asset('' . $brand->logo) }}"
+                                    alt="{{ $brand->name }}"
+                                    class="w-30 h-12 object-contain mx-auto"/>
                         </td>
                         <td class="p-3">
-                            <img src="{{ asset('' . $brand->logo) }}" alt="{{ $brand->name }}"
-                                class="w-30 h-12 object-contain mx-auto">
+                            <span>{{ $brand->motto }}</span>
+                        </td>
+                        {{-- <td class="p-3">
+                            <span>{{ $brand->website_url }}</span>
+                        </td> --}}
+                        <td class="p-3">
+                                <img src="{{ file_exists(public_path('storage/' . $brand->cover_image)) ? asset('storage/' . $brand->cover_image) : asset('' . $brand->cover_image) }}"
+                                    alt="{{ $brand->name }}"
+                                    class="w-30 h-12 object-contain mx-auto"/>
                         </td>
                         <td class="p-3">
                             <span>{{ $brand->location }}</span>

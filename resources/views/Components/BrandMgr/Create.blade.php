@@ -2,7 +2,6 @@
 
     <form action="{{ route('Admin.BrandMgr.store') }}" method="POST" enctype="multipart/form-data" class="flex w-full">
         @csrf
-
         <!-- Bên trái: Upload Image -->
         <div class="w-1/2 p-6 flex flex-col">
             <h2 class="text-lg font-semibold text-gray-700 mb-4">Create Brand</h2>
@@ -14,7 +13,16 @@
                 {{-- Upload Image --}}
                 <div class="w-full">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Upload Brand logo</label>
-                    <input id="imageInput" type="file" name="image" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                    <input id="imageInput" type="file" name="logo" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#f1912b]">
+                </div>
+                <!-- motto -->
+                <div class="w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Motto</label>
+                    <input type="text" name="motto"  class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div class="w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Website_url</label>
+                    <input type="text" name="website_url"  class="w-full px-4 py-2 border border-gray-300 rounded-md">
                 </div>
             </div>
         </div>
@@ -43,8 +51,18 @@
 
                 <!-- Companyfullname -->
                 <div>
+                    <label class="block text-base font-medium text-gray-700 mb-1">Company full name</label>
+                    <input type="text" name="company_full_name"  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
+                <!-- Year -->
+                <div>
                     <label class="block text-base font-medium text-gray-700 mb-1">Year</label>
                     <input type="text" name="year"  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
+                <!-- founder -->
+                <div>
+                    <label class="block text-base font-medium text-gray-700 mb-1">Founder</label>
+                    <input type="text" name="founder"  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                 </div>
                 <!-- Description -->
                 <div>
@@ -56,10 +74,13 @@
                     <label class="block text-base font-medium text-gray-700 mb-1">Location</label>
                     <input name="location" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"></input>
                 </div>
-                <select name="is_active" class="...">
-                    <option value="1" {{ old('is_active', $brand->is_active ?? 1) == 1 ? 'selected' : '' }}>Active</option>
-                    <option value="0" {{ old('is_active', $brand->is_active ?? 1) == 0 ? 'selected' : '' }}>Inactive</option>
-                </select>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Active</label>
+                   <select name="is_active" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                       <option value="1" {{ old('is_active', $brand->is_active ?? 1) == 1 ? 'selected' : '' }}>Active</option>
+                       <option value="0" {{ old('is_active', $brand->is_active ?? 1) == 0 ? 'selected' : '' }}>Inactive</option>
+                   </select>
+                </div>
             </div>
 
             <!-- Buttons -->

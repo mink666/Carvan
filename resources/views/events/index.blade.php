@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Events')
+@section('title', 'Events - Carvan')
 
 @section('content')
     <div class="ne-page">

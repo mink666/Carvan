@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $carModel->brand->name . ' ' . $carModel->name . ($carModel->year ? ' (' . $carModel->year . ')' : '')
-    . ' - Details')
+@section('title', $carModel->brand->name . ' ' . $carModel->name . ($carModel->year ? ' (' . $carModel->year . ')' : '') . ' - Carvan')
 
 @section('content')
     <div class="product-show">

@@ -5,12 +5,11 @@
 @section('content')
 
     {{-- 1. Slideshow Section --}}
-    <section id="#top" class="hero-banner-section"> {{-- Thêm class để bao bọc slider --}}
-        <div class="swiper hero-banner-slider"> {{-- Class cho Swiper và định kiểu banner --}}
+    <section id="#top" class="hero-banner-section">
+        <div class="swiper hero-banner-slider">
             <div class="swiper-wrapper">
-                {{-- Slide 1 --}}
                 <div class="swiper-slide">
-                    <div class="banner-slide"> {{-- Class style cho nội dung slide --}}
+                    <div class="banner-slide">
                         <img src="https://wallpapercat.com/w/full/f/2/6/1452770-1920x1080-desktop-full-hd-vinfast-background.jpg"
                             class="slide-background-image" alt="Company Values">
                         <div class="slide-overlay"></div>
@@ -20,7 +19,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- Slide 2 --}}
                 <div class="swiper-slide">
                     <div class="banner-slide">
                         <img src="https://images6.alphacoders.com/115/1154171.jpg" class="slide-background-image"
@@ -32,20 +30,15 @@
                         </div>
                     </div>
                 </div>
-                {{-- Thêm các slide khác nếu cần --}}
             </div>
-            {{-- Pagination (dấu chấm) --}}
             <div class="swiper-pagination"></div>
-            {{-- Navigation (mũi tên) --}}
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
         </div>
     </section>
 
-    {{-- Container chung cho nội dung bên dưới slideshow --}}
     <div class="container mx-auto px-4 py-6 md:py-8">
-
-        {{-- 2. Welcome Message / Short Introduction --}}
+        {{-- 2. Welcome Message --}}
         <section id="welcome" class="text-center mb-12 md:mb-16">
             <h2 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-4">Welcome to Carvan: Your Journey Begins Here.
             </h2>
@@ -87,19 +80,19 @@
                 </div>
                 <div class="flex flex-col md:flex-row justify-center items-center gap-4 mt-8">
                     <a href="{{ route('brands.index') }}"
-                        class="inline-block bg-red-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-red-700 transition-colors duration-300">
+                        class="inline-block bg-red-400 text-white font-semibold py-3 px-8 rounded-lg hover:bg-red-700 hover:text-white transition-colors duration-300">
                         View All Brands
                     </a>
                     <span class="mx-2 font-semibold text-white">OR</span>
                     <a href="{{ route('range_of_car.index') }}"
-                        class="inline-block bg-red-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-red-700 transition-colors duration-300">
+                        class="inline-block bg-red-400 text-white font-semibold py-3 px-8 rounded-lg hover:bg-red-700 hover:text-white transition-colors duration-300">
                         Explore All Ranges
                     </a>
                 </div>
             </section>
         @endif
 
-        {{-- 6. Popular Models / New Arrivals --}}
+        {{-- 4. Random Featured Models --}}
         @if (isset($popularModels) && $popularModels->count() > 0)
             <section id="popular-models" class="mb-12 md:mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2 text-center">Featured Vehicles</h2>
@@ -154,7 +147,7 @@
 
                                     <div class="mt-auto gap-3">
                                         <a href="{{ route('products.show', $model->id) }}"
-                                            class="block w-full text-center bg-red-500 text-white font-semibold py-3 px-4 rounded-md border border-red-500 hover:bg-white hover:border-black hover:text-black transition-colors duration-300 text-sm">
+                                            class="block w-full text-center bg-white text-black font-semibold py-3 px-4 rounded-md border border-gray-300 hover:border-black hover:bg-black hover:text-white transition-colors duration-300 text-sm">
                                             MORE DETAILS
                                         </a>
                                     </div>
@@ -166,7 +159,7 @@
             </section>
         @endif
 
-        {{-- 7. Featured Pre-Owned Vehicles Section --}}
+        {{-- 5. Featured Pre-Owned Vehicles Section --}}
         @if (isset($featuredPreownedCars) && $featuredPreownedCars->count() > 0)
             <section id="featured-preowned" class="mb-12 md:mb-16 pt-8">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2 text-center">Quality Pre-Owned Vehicles</h2>
@@ -194,12 +187,12 @@
                                 <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-1 truncate"
                                     title="{{ $preowned->name }}">
                                     <a href="{{ route('preowned.show', $preowned->id) }}"
-                                        class="hover:text-green-700 transition-colors">
+                                        class="hover:text-red-700 transition-colors">
                                         {{ strtoupper($preowned->name) }}
                                     </a>
                                 </h3>
 
-                                <p class="text-2xl lg:text-xl font-semibold text-green-600 mb-4">
+                                <p class="text-2xl lg:text-xl font-semibold text-red-500 mb-4">
                                     {{ number_format($preowned->price, 0, ',', '.') }} VND
                                 </p>
 
@@ -305,11 +298,9 @@
                 </div>
             </div>
 
-            {{-- Danh sách các bài viết --}}
 <div class="news-items-container rounded-lg shadow-lg overflow-hidden">
-    {{-- Bỏ đoạn @php $sampleNews = [...]; @endphp --}}
 
-    @forelse ($latestNews as $newsItem) {{-- Sử dụng biến $latestNews từ controller --}}
+    @forelse ($latestNews as $newsItem)
         <article
             class="news-item-full-width group
                     {{ $loop->index % 2 === 0 ? 'bg-black text-white' : 'bg-white text-gray-800' }}">
@@ -318,7 +309,6 @@
                     class="md:flex md:items-center {{ $loop->index % 2 === 1 ? 'md:flex-row-reverse' : '' }}
                             py-10 md:py-16
                             md:space-x-reverse md:space-x-8 lg:space-x-12">
-                    {{-- Cột Ảnh --}}
                     <div class="md:w-1/2 lg:w-3/5 mb-6 md:mb-0">
                         <a href="{{ route('news.show', ['news' => $newsItem->id]) }}"
                            class="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
@@ -327,10 +317,8 @@
                         </a>
                     </div>
 
-                    {{-- Cột Nội dung Text --}}
                     <div class="md:w-1/2 lg:w-2/5 flex flex-col justify-center">
                         <p class="text-xs {{ $loop->index % 2 === 0 ? 'text-gray-400' : 'text-gray-500' }} mb-2">
-                            {{-- Định dạng ngày tháng từ đối tượng Carbon --}}
                             <span>{{ $newsItem->date ? $newsItem->date->format('j M Y') : 'N/A' }}</span>
                         </p>
                         <p class="text-xs font-semibold {{ $loop->index % 2 === 0 ? 'text-red-400' : 'text-red-500' }} uppercase tracking-wider mb-2">
@@ -338,13 +326,11 @@
 
                         <h3
                             class="text-2xl md:text-3xl font-bold {{ $loop->index % 2 === 0 ? 'text-white group-hover:text-red-300' : 'text-gray-900 group-hover:text-red-700' }} mb-3 leading-tight transition-colors">
-                            {{-- Sử dụng route() cho link và thuộc tính title --}}
                             <a href="{{ route('news.show', ['news' => $newsItem->id]) }}">{{ $newsItem->title }}</a>
                         </h3>
                         <p class="{{ $loop->index % 2 === 0 ? 'text-gray-300' : 'text-gray-700' }} mb-6 leading-relaxed text-base">
                             {{ Str::limit(strip_tags($newsItem->content), 150) }}
                         </p>
-                        {{-- Sử dụng route() cho link READ MORE --}}
                         <a href="{{ route('news.show', ['news' => $newsItem->id]) }}"
                            class="self-start inline-block font-semibold py-2.5 px-6 rounded-md text-sm
                                 @if ($loop->index % 2 === 0) {{-- Nền đen, chữ trắng cho item chẵn --}}
@@ -381,5 +367,5 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
             </svg>
         </a>
-    </div> {{-- End of main container --}}
+    </div> 
 @endsection

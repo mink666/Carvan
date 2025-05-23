@@ -4,6 +4,7 @@
     'itemType',
     'activeTabInitial',
     'dropdownId' => \Illuminate\Support\Str::slug($triggerText . '-' . rand()),
+    'range'
 ])
 
 <div class="relative"
@@ -54,6 +55,10 @@
                                         <span class="inline-flex items-center justify-center w-12 h-12 md:w-10 md:h-10 mr-3 flex-shrink-0">
                                             <img src="{{ asset($item->logo) }}" alt="{{ $item->name }} logo"
                                                  class="max-w-full max-h-full object-contain">
+                                        </span>
+                                    @elseif ($itemType === 'range')
+                                        <span class="inline-flex items-center justify-center w-6 h-6 mr-3 flex-shrink-0">
+                                            <x-range-icon :range="$item" class="w-full h-full" />
                                         </span>
                                     @endif
                                     <span class="flex-grow">{{ $item->name }}</span>

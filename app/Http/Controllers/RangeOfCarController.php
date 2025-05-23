@@ -17,14 +17,13 @@ class RangeOfCarController extends Controller
         return view('range_of_car.index', compact('rangesOfCars'));
     }
 
-    // Method show của bạn cho trang chi tiết từng dòng xe
     public function show(RangeOfCar $rangeOfCar): View
     {
         if (!$rangeOfCar->is_active) {
             abort(404);
         }
         $rangeOfCar->load(['carModels' => function ($query) {
-        $query->with(['brand']) 
+        $query->with(['brand'])
               ->whereHas('inventories', function ($subQuery) {
                   $subQuery->where('is_active', true);
               })

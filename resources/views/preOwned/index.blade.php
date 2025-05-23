@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Preowned Products - Carvan')
+
 @section('content')
     <div class="products-page">
         <!-- Banner Section -->
@@ -149,7 +151,7 @@
                                     </div>
                                 @endif
                                 <span
-                                    class="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded">PRE-OWNED</span>
+                                    class="absolute top-3 left-3 bg-yellow-400 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded">PRE-OWNED</span>
                             </a>
                         </div>
                         <div class="p-5">
@@ -265,16 +267,18 @@
 
     <style>
         .compare-btn {
-            background-color: #2c5282;
-            color: white;
+            background-color: white;
+            color: black;
             padding: 0.5rem 1rem;
             border-radius: 0.375rem;
             font-weight: 500;
             transition: background-color 0.2s;
+            border: gray solid 0.5px;
         }
 
         .compare-btn:hover {
-            background-color: #2a4365;
+            background-color: black;
+            color: white;
         }
 
         .compare-btn.selected {
@@ -358,7 +362,7 @@
             padding: 0.5rem 1rem;
             border-radius: 0.375rem;
             font-weight: 500;
-            background-color: #e53e3e;
+            background-color: #eb5656;
             color: white;
         }
 
@@ -430,21 +434,24 @@
         }
 
         .select-for-compare-btn {
-            background-color: #2c5282;
-            color: white;
+            background-color: white;
+            color: black;
             padding: 0.5rem;
             border-radius: 0.375rem;
             width: 100%;
             font-size: 0.875rem;
             transition: background-color 0.2s;
+            border: gray solid 0.5px;
         }
 
         .select-for-compare-btn:hover {
-            background-color: #2a4365;
+            background-color: black;
+            color: white;
         }
 
         .select-for-compare-btn.selected {
-            background-color: #48bb78;
+            background-color: black;
+            color: white;
         }
 
         .comparison-divider {
@@ -645,7 +652,7 @@
             }
 
             .remove-btn {
-                background-color: #e53e3e;
+                background-color: #eb5656;
                 color: white;
                 padding: 0.5rem 1rem;
                 border-radius: 0.375rem;

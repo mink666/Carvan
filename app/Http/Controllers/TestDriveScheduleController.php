@@ -58,7 +58,7 @@ class TestDriveScheduleController extends Controller
 
         // return redirect()->route('Admin.TestDriveMgr')->with('success', 'Schedule updated successfully.');
 
-        return redirect("/Admin/TestDriveScheduleMgr?state=list")->with('success', 'Schedule updated successfully.');
+        return redirect()->route('Admin.TestDriveMgr')->with('success', 'Schedule updated successfully.');
     }
 
     public function cancel(TestDriveSchedule $schedule)

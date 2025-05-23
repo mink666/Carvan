@@ -15,7 +15,10 @@
                 <th class="p-3">Driver Info</th>
                 <th class="p-3">Note</th>
                 <th class="p-3">Status</th>
+                <th class="p-3">Scheduled Date</th>
+                <th class="p-3">Location</th>
                 <th class="p-3">Schedule By</th>
+                <th class="p-3">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -48,11 +51,28 @@
                             </span>
                         @endif
                     </td>
-                    <td class="p-3">
+                    <td class="p-3">{{ $request->schedule->scheduled_date ?? '-' }}</td>
+                    <td class="p-3">{{ $request->schedule->location ?? '-' }}</td>
+                    <td class="p-3">{{ $request->schedule->user->name ?? 'N/A' }}</td>
+                    <td class="p-3 flex gap-2">
                         @if ($request->schedule)
-                            <div>
-                                {{ $request->schedule->user->name ?? 'N/A' }}
-                            </div>
+                            @if ($request->status !== 'cancelled')
+                                <a href="{{ route('Admin.TestDriveScheduleMgr.edit', $request->schedule->id) }}"
+                                    class="text-blue-600 hover:underline">Edit</a>
+                            @else
+                                <span class="text-gray-400 cursor-not-allowed">Edit</span>
+                            @endif
+
+                            @if ($request->status !== 'cancelled')
+                                <form method="POST" action="{{ route('schedules.cancel', $request->schedule->id) }}"
+                                onsubmit="return confirm('Are you sure you want to cancel this schedule?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:underline">Cancel</button>
+                                </form>
+                            @else
+                                <span class="text-gray-400 cursor-not-allowed">Cancel</span>
+                            @endif
                         @else
                             <a href="{{ route('Admin.TestDriveRequestMgr.edit', $request->id) }}"
                                 class="text-blue-600 hover:underline font-semibold">

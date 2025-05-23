@@ -24,7 +24,7 @@ class Brand extends Model
     ];
 
     protected $casts = [
-        'key_achievements' => 'array', // Convert JSON to array but currently doesnt work
+        'key_achievements' => 'array', 
         'year' => 'integer',
     ];
 

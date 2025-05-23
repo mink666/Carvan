@@ -1,16 +1,14 @@
 @extends('layouts.app')
 
-@section('title', $rangeOfCar->name . ' Cars - Discover Our Collection')
+@section('title', $rangeOfCar->name . ' - Carvan')
 
 @section('content')
 <div class="bg-gray-100 min-h-screen">
 
     {{-- 1. Range Hero Section--}}
     <section class="range-hero relative text-white py-20 md:py-32 text-center bg-gray-800">
-        {{-- Ảnh nền --}}
         <div id="randomGradientBackground" class="absolute inset-0 opacity-50">
         </div>
-        {{-- Nội dung trên Banner --}}
         <div class="container mx-auto px-4 relative z-10">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3 filter drop-shadow-lg">{{ $rangeOfCar->name }}</h1>
             @if($rangeOfCar->description)
@@ -82,7 +80,7 @@
                                     </p>
                                 @endif
                                 <a href="{{ route('products.show', $model->id) }}"
-                                   class="mt-auto inline-block w-full text-center bg-red-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors duration-300">
+                                   class="mt-auto inline-block w-full text-center bg-red-400 text-white font-semibold py-3 px-4 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors duration-300">
                                     View Details &rarr;
                                 </a>
                             </div>
@@ -127,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const randomColor1 = getRandomElement(colors);
     let randomColor2 = getRandomElement(colors);
-    while (randomColor2 === randomColor1 && colors.length > 1) { 
+    while (randomColor2 === randomColor1 && colors.length > 1) {
         randomColor2 = getRandomElement(colors);
     }
     const randomDirection = getRandomElement(directions);
@@ -143,12 +141,10 @@ document.addEventListener('DOMContentLoaded', function() {
     .page-hero .drop-shadow-sm {
         filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
     }
-    /* Tùy chỉnh cho card mẫu xe nếu muốn */
-    .range-card:hover .text-sky-600 { /* Màu icon khi hover card */
-        color: #0284c7; /* sky-700 */
+    .range-card:hover .text-sky-600 {
+        color: #0284c7;
     }
     .range-card h2:hover {
-        /* Không cần vì đã có group-hover */
     }
 </style>
 @endpush

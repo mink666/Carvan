@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $preownedCar->name . ' - Pre-Owned Details')
+@section('title', $preownedCar->name . ' - Carvan')
 
 @section('content')
     <div class="product-show">

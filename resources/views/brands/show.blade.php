@@ -1,20 +1,18 @@
 @extends('layouts.app')
 
-@section('title', $brand->name . ' - Brand Profile & Models')
+@section('title', $brand->name . ' - Carvan')
 
 @section('content')
 <div class="bg-gray-100">
 
     {{-- 1. Brand Banner Section --}}
     <section class="brand-banner relative text-white py-20 md:py-32 text-center bg-gray-700">
-        {{-- Cover Image --}}
         @if($brand->cover_image)
             <div class="absolute inset-0 opacity-70">
                 <img src="{{ asset($brand->cover_image) }}" alt="{{ $brand->name }} Cover Image"
-                     class="w-full h-full object-cover opacity-40"> {{-- Điều chỉnh opacity --}}
+                     class="w-full h-full object-cover opacity-40">
             </div>
         @else
-            {{-- Fallback gradient if no cover image --}}
             <div class="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-800 to-gray-900"></div>
         @endif
 
@@ -143,7 +141,6 @@
             @if($brand->carModels && $brand->carModels->count() > 0)
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
                     @foreach($brand->carModels as $model)
-                        {{-- Card mẫu xe (sử dụng code card mẫu xe đã có của bạn) --}}
                         <div class="bg-white rounded-xl shadow-lg overflow-hidden group flex flex-col hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1.5">
                             <a href="{{ route('products.show', $model->id) }}" class="block overflow-hidden">
                                 @if($model->image)
@@ -176,7 +173,7 @@
                                     </p>
                                 @endif
                                 <a href="{{ route('products.show', $model->id) }}"
-                                   class="mt-auto inline-block w-full text-center bg-red-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors duration-300">
+                                   class="mt-auto inline-block w-full text-center bg-red-400 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors duration-300">
                                     View Model Details
                                 </a>
                             </div>
